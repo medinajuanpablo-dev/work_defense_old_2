@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@static/*": [
+        "src/static/*"
+      ],
+      "@state/*": [
+        "src/state/*"
+      ],
+      "@common/*": [
+        "src/common/*"
+      ]
+    }
+  }
+}

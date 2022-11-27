@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+@layer utilities {
+  .without-transition {
+    transition-property: none;
+  }
+
+  .remove {
+    display: none;
+  }
+
+  .visible-1 {
+    visibility: visible;
+  }
+
+  .visible-0 {
+    visibility: hidden;
+  }
+
+  .text-shadow {
+    --text-shadow-depth: 6px;
+    --text-shadow-color: 30;
+    text-shadow: 3px 3px var(--text-shadow-depth)
+      rgb(
+        var(--text-shadow-color),
+        var(--text-shadow-color),
+        var(--text-shadow-color)
+      );
+  }
+
+  .text-very-light {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 300;
+  }
+
+  .text-light {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+  }
+
+  .text-default {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+  }
+
+  .text-strong {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+  }
+
+  .text-stronger {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+  }
+
+  .text-strongest {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
+  }
+
+  .text-italic {
+    font-style: italic;
+  }
+
+  .text-normal {
+    font-style: normal;
+  }
+
+  .lightest {
+    --text-shadow-depth: 20px;
+    --text-shadow-color: 80;
+  }
+  .light {
+    --text-shadow-depth: 16px;
+    --text-shadow-color: 70;
+  }
+  .medium {
+    --text-shadow-depth: 12px;
+    --text-shadow-color: 65;
+  }
+  .strong {
+    --text-shadow-depth: 10px;
+    --text-shadow-color: 45;
+  }
+  .strongest {
+    --text-shadow-depth: 8px;
+    --text-shadow-color: 30;
+  }
+
+  .shadowed-box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  }
+
+  .lightly-shadowed-box {
+    box-shadow: 0 4px 8px 0 rgba(75, 75, 75, 0.2),
+      0 6px 20px 0 rgba(75, 75, 75, 0.19) !important;
+  }
+
+  .inner-shadowed-box {
+    -moz-box-shadow: inset 0 5px 7px rgba(200, 200, 200, 0.5) !important;
+    -webkit-box-shadow: inset 0 5px 7px rgba(200, 200, 200, 0.5) !important;
+    box-shadow: inset 0 5px 7px rgba(200, 200, 200, 0.5) !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .maxer {
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
