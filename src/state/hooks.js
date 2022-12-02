@@ -4,18 +4,39 @@ import { mapValues, isEqual } from "lodash";
 
 import { checkRequiredValues, exists } from "@static/functions";
 
-import moneyActions, { MoneyActions } from "./money/actions";
-import livesActions, { LivesActions } from "./lives/actions";
+import armyActions, { ArmyActions } from "./army/actions";
+import buildingsActions, { BuildingsActions } from "./buildings/actions";
+import equipmentActions, { EquipmentActions } from "./equipment/actions";
+import interfaceActions, { InterfaceActions } from "./interface/actions";
+import invasionActions, { InvasionActions } from "./invasion/actions";
+import miscActions, { MiscellaneousActions } from "./miscellaneous/actions";
+import populationActions, { PopulationActions } from "./population/actions";
+import resourcesActions, { ResourcesActions } from "./resources/actions";
+import techsActions, { TechnologiesActions } from "./technologies/actions";
 
 //Import and add actions of new states here.
 /**
  * @typedef {Object} AllActions
- * @property {MoneyActions} money
- * @property {LivesActions} lives
+ * @property {ArmyActions} armyActions
+ * @property {BuildingsActions} buildingsActions
+ * @property {EquipmentActions} equipmentActions
+ * @property {InterfaceActions} interfaceActions
+ * @property {InvasionActions} invasionActions
+ * @property {MiscellaneousActions} miscActions
+ * @property {PopulationActions} populationActions
+ * @property {ResourcesActions} resourcesActions
+ * @property {TechnologiesActions} techsActions
  */
 const ALL_ACTIONS = {
-  money: moneyActions,
-  lives: livesActions,
+  army: armyActions,
+  buildings: buildingsActions,
+  equipment: equipmentActions,
+  interface: interfaceActions,
+  invasion: invasionActions,
+  miscellaneous: miscActions,
+  population: populationActions,
+  resources: resourcesActions,
+  technologies: techsActions,
 };
 
 /**

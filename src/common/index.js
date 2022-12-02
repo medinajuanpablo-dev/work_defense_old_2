@@ -13,13 +13,18 @@ import c9, {
 
 import g1 from "./general/AsyncMounter";
 
-import w1 from "./general/StdWebElements/NavigationBar";
-import w2 from "./general/StdWebElements/PageContainer";
 import w3 from "./general/StdWebElements/BgContainer";
 import w4 from "./general/StdWebElements/ValidityNotification";
 
 //Your project-specific Components imports.
-import a from "./Navigation";
+import tb1 from "./topbar/Generic";
+import tb2 from "./topbar/Filters";
+import tb3 from "./topbar/Button";
+import tb4 from "./topbar/TwoButtons";
+
+import s1 from "./StageMainScreen";
+import s2 from "./LineTitle";
+import s3 from "./SummaryRow";
 
 //General purpose Components exports. Keep them separated to ease updates.
 export const CuteInput = c1;
@@ -35,10 +40,15 @@ export const useSlidingListState = c9a;
 
 export const AsyncMounter = g1;
 
-export const NavigationBar = w1;
-export const PageContainer = w2;
 export const BgContainer = w3;
 export const ValidityNotification = w4;
 
 //Your project-specific Components exports.
-export const Navigation = a;
+export const GenericTopBar = tb1;
+export const FiltersTopBar = tb2;
+export const TopBarButton = tb3;
+export const TwoButtonsTopBar = tb4;
+
+export const StageMainScreen = s1;
+export const LineTitle = s2;
+export const SummaryRow = s3;

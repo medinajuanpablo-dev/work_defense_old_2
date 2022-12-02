@@ -1,8 +1,9 @@
 import React from "react";
 
 import { checkRequiredValues } from "@static/functions";
-import { BREAKPOINTS_WIDTHS } from "@static/values/config"; //Remove this and import or define your app's breakpoints instead.
-import { BREAKPOINTS as BPK } from "@static/values/keys";
+import { INTERFACE, ITK } from "@static/contexts/interface"; //Remove this and import or define your app's breakpoints instead.
+
+const BPW = INTERFACE.BREAKPOINTS_WIDTHS;
 
 /**
  * Hook to quickly use reactive breakpoints for responsive behaviors.
@@ -27,10 +28,10 @@ function useBreakpoint() {
    * @returns {boolean} The check result.
    */
   function isWiderThan(bpName) {
-    checkRequiredValues([{ bpName, enmr: Object.keys(BREAKPOINTS_WIDTHS) }]);
+    checkRequiredValues([{ bpName, enmr: Object.keys(BPW) }]);
 
-    const deviceWidth = BREAKPOINTS_WIDTHS[currentBpKey];
-    const anotherDeviceWidth = BREAKPOINTS_WIDTHS[bpName];
+    const deviceWidth = BPW[currentBpKey];
+    const anotherDeviceWidth = BPW[bpName];
 
     return deviceWidth > anotherDeviceWidth;
   }
@@ -48,14 +49,13 @@ function useBreakpoint() {
 function getCurrentBP() {
   const width = window.innerWidth;
 
-  for (let bpKey of SORTED_BREAKPOINTS)
-    if (width > BREAKPOINTS_WIDTHS[bpKey]) return bpKey;
+  for (let bpKey of SORTED_BREAKPOINTS) if (width > BPW[bpKey]) return bpKey;
 }
 
-const SORTED_BREAKPOINTS = Object.keys(BREAKPOINTS_WIDTHS).sort(
-  (bp1, bp2) => BREAKPOINTS_WIDTHS[bp2] - BREAKPOINTS_WIDTHS[bp1]
+const SORTED_BREAKPOINTS = Object.keys(BPW).sort(
+  (bp1, bp2) => BPW[bp2] - BPW[bp1]
 );
 
-const LAST_MOBILE_BREAKPOINT = BPK.VERTICAL_TABLET;
+const LAST_MOBILE_BREAKPOINT = ITK.BREAKPOINTS.VERTICAL_TABLET;
 
 export default useBreakpoint;

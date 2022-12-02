@@ -3,12 +3,26 @@ import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 
 import defaultState from "./defaultState";
 
-import moneyReducer from "./money/reducer";
-import livesReducer from "./lives/reducer";
+import armyReducer from "./army/reducer";
+import buildingsReducer from "./buildings/reducer";
+import equipmentReducer from "./equipment/reducer";
+import interfaceReducer from "./interface/reducer";
+import invasionReducer from "./invasion/reducer";
+import miscReducer from "./miscellaneous/reducer";
+import populationReducer from "./population/reducer";
+import resourcesReducer from "./resources/reducer";
+import techsReducer from "./technologies/reducer";
 
 const rootReducer = combineReducers({
-  money: moneyReducer,
-  lives: livesReducer,
+  army: armyReducer,
+  buildings: buildingsReducer,
+  equipment: equipmentReducer,
+  interface: interfaceReducer,
+  invasion: invasionReducer,
+  miscellaneous: miscReducer,
+  population: populationReducer,
+  resources: resourcesReducer,
+  technologies: techsReducer,
 });
 
 export const createComposedStore = () => {
