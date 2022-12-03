@@ -71,11 +71,11 @@ function SummaryRow({
 
 //prettier-ignore
 const DIRECTED_STYLES = {
-  ct: "flex items-center || os<justify-center'mx-auto'p-2'border-1'rounded-md> clg<border-green-500> clr<border-red-500> clb<border-blue-500> clp<border-purple-500> clgr<border-gray-500> cly<border-yellow-600>",
-  icon: "text-opacity-80 w-7 h-7 flex-none || sm<w-6'h-6> lg<w-8'h-8> clg<text-green-500> clr<text-red-500> clb<text-blue-500> clp<text-purple-500> clgr<text-gray-500> cly<text-yellow-600>",
+  ct: "flex items-center || os<justify-center'mx-auto'p-2'border-1'border-dotted'rounded-md> clg<border-green-500> clr<border-red-500> clb<border-blue-500> clp<border-purple-500> clgr<border-gray-500> cly<border-yellow-600>",
+  icon: "text-opacity-80 w-7 h-7 flex-none || sm<w-6'h-6> lg<w-8'h-8> clg<text-green-600> clr<text-red-500> clb<text-blue-500> clp<text-purple-500> clgr<text-gray-500> cly<text-yellow-600>",
   text: "text-light text-gray-700 ml-2 || sm<text-sm> lg<text-lg>",
   label: "text-strong || sm<text-sm> lg<text-lg>",
-  amount: "text-default text-lg mx-1 || sm<text-base> lg<text-xl> clg<text-green-500> clr<text-red-500> clb<text-blue-500> clp<text-purple-500> clgr<text-gray-500> cly<text-yellow-600>",
+  amount: "text-default text-lg mx-1 || sm<text-base> lg<text-xl> clg<text-green-600> clr<text-red-500> clb<text-blue-500> clp<text-purple-500> clgr<text-gray-500> cly<text-yellow-600>",
   notifList: "flex-1 flex justify-end",
 };
 

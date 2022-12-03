@@ -17,15 +17,15 @@ import techsActions, { TechnologiesActions } from "./technologies/actions";
 //Import and add actions of new states here.
 /**
  * @typedef {Object} AllActions
- * @property {ArmyActions} armyActions
- * @property {BuildingsActions} buildingsActions
- * @property {EquipmentActions} equipmentActions
- * @property {InterfaceActions} interfaceActions
- * @property {InvasionActions} invasionActions
- * @property {MiscellaneousActions} miscActions
- * @property {PopulationActions} populationActions
- * @property {ResourcesActions} resourcesActions
- * @property {TechnologiesActions} techsActions
+ * @property {ArmyActions} army
+ * @property {BuildingsActions} buildings
+ * @property {EquipmentActions} equipment
+ * @property {InterfaceActions} interface
+ * @property {InvasionActions} invasion
+ * @property {MiscellaneousActions} misc
+ * @property {PopulationActions} population
+ * @property {ResourcesActions} resources
+ * @property {TechnologiesActions} techs
  */
 const ALL_ACTIONS = {
   army: armyActions,

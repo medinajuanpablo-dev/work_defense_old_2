@@ -46,9 +46,8 @@ function GeneralSection() {
       <LineTitle>General Summary</LineTitle>
       <SummaryRow
         Icon={RiEditCircleFill}
-        label="People Capacity"
         amount={summary.totalPeople + " / " + summary.housingCapacity}
-        text="<L>: <A>."
+        text="People Capacity: <A>."
         customDirSty={STYLES.amount}
         outstand
         color="purple"
@@ -58,7 +57,6 @@ function GeneralSection() {
         text="With a <L> of <A>."
         label="Total Mantainment"
         amount={Math.round(summary.totalMantainment)}
-        outstand
         color="green"
         customDirSty={STYLES.mantainment}
       />
@@ -68,7 +66,7 @@ function GeneralSection() {
 
 const STYLES = {
   amount: { ct: "mt-4" },
-  mantainment: { ct: "mt-2" },
+  mantainment: { ct: "mt-4" },
 
   capacity: { ct: "mt-4" },
 };

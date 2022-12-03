@@ -31,9 +31,9 @@ function LineTitle({ size = "default", children, subtitle, customDirSty }) {
 
 //prettier-ignore
 const DIRECTED_STYLES = {
-  ct: "mt-4 flex items-center || sm<mt-2> lg<mt-6> st<w-3/4'mx-auto>",
+  ct: "mt-6 flex items-center || st<w-3/4'mx-auto>",
   line: "flex-1 h-0 border-t-1 border-gray-700 || st<border-gray-400>",
-  text: "flex-initial text-gray-800 text-opacity-90 px-3 text-xl || sm<text-base> lg<text-2xl>",
+  text: "flex-initial text-light text-gray-500 px-3 text-lg || sm<text-base> lg<text-xl>",
 };
 
 //prettier-ignore

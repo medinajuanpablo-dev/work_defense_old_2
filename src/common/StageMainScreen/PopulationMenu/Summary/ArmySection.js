@@ -1,7 +1,8 @@
 import React from "react";
 import { RiEditCircleFill } from "react-icons/ri";
+import { GiSpears } from "react-icons/gi";
 
-import { LineTitle, SummaryRow } from "@common/index";
+import { LineTitle, SummaryRow, CuteButton } from "@common/index";
 import { useGeneralStateReader } from "@state/hooks";
 
 import { armyOps } from "@static/contexts/army";
@@ -47,10 +48,6 @@ function ArmySectionLayout({ openSubMenu }) {
     };
   }, [gs.army]);
 
-  function viewAllArmy() {
-    openSubMenu("armyList");
-  }
-
   return (
     <>
       <LineTitle>Army Summary</LineTitle>
@@ -68,7 +65,6 @@ function ArmySectionLayout({ openSubMenu }) {
         text="Total <A> <L>."
         label="Army Mantainment"
         amount={Math.round(summary.mantainment)}
-        outstand
         color="green"
         customDirSty={STYLES.mantainment}
       />
@@ -117,9 +113,17 @@ function ArmySectionLayout({ openSubMenu }) {
         color="blue"
         size="smaller"
       />
-      <button onClick={viewAllArmy} className={STYLES.allButton}>
+
+      <CuteButton
+        onClick={() => openSubMenu("armyList")}
+        Icon={GiSpears}
+        color="indigo"
+        transitionSpeed="faster"
+        colorStrength="stronger"
+        customDirSty={{ button: STYLES.button }}
+      >
         View all the Army
-      </button>
+      </CuteButton>
     </>
   );
 }
@@ -127,10 +131,10 @@ function ArmySectionLayout({ openSubMenu }) {
 //prettier-ignore
 const STYLES = {
   power: { ct: "mt-4" },  
-  mantainment: { ct: "mt-2" },
+  mantainment: { ct: "mt-4" },
 
   row: { ct: "mt-4" },
-  allButton: "block text-default mx-auto mt-4 text-sm px-4 py-2 rounded-md bg-indigo-500 text-gray-100 transition-color duration-300 bg-opacity-80 focus:bg-blue-400 hover:bg-blue-400 focus:outline-none | xs:mt-6 xs:px-6 xs:text-lg",
+  button: "mt-8"
 };
 
 export default ArmySectionLayout;

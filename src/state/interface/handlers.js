@@ -13,16 +13,8 @@ function getHandlers(prevState, newState) {
 
     //
 
-    showSummarySection({ sectionKey }) {
-      newState.generalMenus.summaryShowingSections.push(sectionKey);
-      return newState;
-    },
-
-    hideSummarySection({ sectionKey }) {
-      newState.generalMenus.summaryShowingSections.slice(
-        newState.generalMenus.summaryShowingSections.indexOf(sectionKey),
-        1
-      );
+    setSummarySectionVisibility({ menuKey, sectionKey, visible }) {
+      newState.menusShownSummarySections[menuKey][sectionKey] = visible;
       return newState;
     },
   };

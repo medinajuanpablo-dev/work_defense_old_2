@@ -1,32 +1,44 @@
 import React from "react";
 
-import { FiltersTopBar, AsyncMounter } from "@common/index";
-import { useObjectState } from "@static/react";
+import { AsyncMounter, FiltersTopBar } from "@common/index";
+import { useGeneralStateUpdator, useGeneralStateReader } from "@state/hooks";
+
+import { ITK } from "@static/contexts/interface";
 
 import BuildingsSection from "./BuildingsSection";
 import TechsSection from "./TechsSection";
 
 function BuildingsMenuSummary({ closeMenu }) {
-  const [loading, setLoading] = React.useState(0);
-  const filters = useObjectState({ buildings: true, technologies: true });
+  const updateGS = useGeneralStateUpdator("interface");
+  const gs = useGeneralStateReader("interface.menusShownSummarySections");
+
+  function changeSectionVisibility(filterKey, checked) {
+    updateGS.interface.setSummarySectionVisibility(
+      ITK.MENUS.BUILDINGS,
+      filterKey,
+      checked
+    );
+  }
+
+  //prettier-ignore
+  const sectionsVisibility = gs.interface.menusShownSummarySections[ITK.MENUS.BUILDINGS];
 
   return (
     <div className={STYLES.ct}>
       <FiltersTopBar
         closeMenu={closeMenu}
-        filtersState={filters}
-        filtersNames={{ buildings: "Buildings", technologies: "Technologies" }}
+        filtersState={sectionsVisibility}
+        filtersNames={{ buildings: "Buildings", techs: "Technologies" }}
+        onChange={changeSectionVisibility}
       />
 
-      {loading < 2 && <p className={STYLES.loading}>Loading...</p>}
-
-      {filters.get.buildings && (
-        <AsyncMounter onFinish={() => setLoading((prev) => prev + 1)}>
+      {sectionsVisibility.buildings && (
+        <AsyncMounter>
           <BuildingsSection />
         </AsyncMounter>
       )}
-      {filters.get.technologies && (
-        <AsyncMounter onFinish={() => setLoading((prev) => prev + 1)}>
+      {sectionsVisibility.techs && (
+        <AsyncMounter>
           <TechsSection />
         </AsyncMounter>
       )}

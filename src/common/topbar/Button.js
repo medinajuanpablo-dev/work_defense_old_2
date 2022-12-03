@@ -15,9 +15,9 @@ function TopBarButton({ customStyles, Icon, text, ...passProps }) {
 
 //prettier-ignore
 const STYLES = {
-  button: "flex justify-center items-center border-gray-100 py-2 h-10 text-gray-100 focus:bg-opacity-30 focus:outline-none focus:bg-gray-500 | xs:h-12",
+  button: "flex justify-center items-center border-gray-100 py-2 h-12 text-gray-100 focus:bg-opacity-30 focus:outline-none focus:bg-gray-500",
   icon: "w-8 h-full",
-  text: "| xs:text-lg",
+  text: "",
 };
 
 export default TopBarButton;

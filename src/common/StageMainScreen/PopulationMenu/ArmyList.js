@@ -2,7 +2,7 @@ import React from "react";
 import { RiArrowDropDownFill, RiArrowDropUpFill } from "react-icons/ri";
 import { BsArrow90DegLeft } from "react-icons/bs";
 import { CgEnter } from "react-icons/cg";
-import { GiMedal, GiBroadsword, GiChestArmor } from "react-icons/gi";
+import { GiRibbonMedal, GiAxeSword, GiArmorVest } from "react-icons/gi";
 
 import { useGeneralStateReader } from "@state/hooks";
 import { TwoButtonsTopBar, LineTitle } from "@common/index";
@@ -47,7 +47,7 @@ function ArmyList({ closeMenu, closeSubMenu }) {
         case "weaponRank":
           return descendingSort ? s2.weaponRank - s1.weaponRank : s1.weaponRank - s2.weaponRank;
         case "role":
-          return descendingSort ? s2.roleId - s1.roleId : s1.roleId - s2.roleId;
+          return descendingSort ? (s2.roleCode > s1.roleCode ? 1 : -1) : s1.roleCode > s2.roleCode ? 1 : -1;
         default:
           return 0;
       }
@@ -81,47 +81,45 @@ function ArmyList({ closeMenu, closeSubMenu }) {
         }}
       />
 
-      <LineTitle>All Army List</LineTitle>
-
       <div className={STYLES.tableCt}>
         <div className={STYLES.allHeadersCt}>
-          <div
+          <button
             onClick={() => changeSortingCriteria("number")}
             className={STYLES.headerCt + STYLES.numberHeaderCt}
           >
             <p>#</p>
             {sortingBy == "number" && sortArrow}
-          </div>
+          </button>
 
-          <div
+          <button
             onClick={() => changeSortingCriteria("level")}
             className={STYLES.headerCt + STYLES.headerIconCt}
           >
-            <GiMedal className={STYLES.headerIcon} />
+            <GiRibbonMedal className={STYLES.headerIcon} />
             {sortingBy == "level" && sortArrow}
-          </div>
-          <div
+          </button>
+          <button
             onClick={() => changeSortingCriteria("weaponRank")}
             className={STYLES.headerCt + STYLES.headerIconCt}
           >
-            <GiBroadsword className={STYLES.headerIcon} />
+            <GiAxeSword className={STYLES.headerIcon} />
             {sortingBy == "weaponRank" && sortArrow}
-          </div>
-          <div
+          </button>
+          <button
             onClick={() => changeSortingCriteria("armorRank")}
             className={STYLES.headerCt + STYLES.headerIconCt}
           >
-            <GiChestArmor className={STYLES.headerIcon} />
+            <GiArmorVest className={STYLES.headerIcon} />
             {sortingBy == "armorRank" && sortArrow}
-          </div>
+          </button>
 
-          <div
+          <button
             onClick={() => changeSortingCriteria("role")}
             className={STYLES.headerCt + STYLES.roleHeaderCt}
           >
-            <p>Role</p>
+            <p>Current Role</p>
             {sortingBy == "role" && sortArrow}
-          </div>
+          </button>
         </div>
 
         <div className={STYLES.listCt}>
@@ -150,30 +148,30 @@ const STYLES = {
   
   tableCt: "flex-1 select-none mt-4",
 
-  allHeadersCt: "flex rounded-t-md items-stretch text-gray-800 border-2 border-indigo-500 h-14",
-  headerCt: "relative flex items-center justify-center cursor-pointer hover:text-blue-500 ",
+  allHeadersCt: "flex rounded-t-sm items-stretch text-gray-700 border-b-1 border-indigo-500 h-14",
+  headerCt: "relative flex items-center justify-center hover:text-sky-600 ",
 
-  numberHeaderCt: "w-10 mr-2 text-2xl border-r-2 border-indigo-500",
+  numberHeaderCt: "w-10 mr-2 text-2xl ",
   headerIconCt: "flex-1 text-2xl",
   headerIcon: "w-full h-7", 
-  roleHeaderCt: "w-52 text-light text-lg", 
+  roleHeaderCt: "w-46 text-light text-lg", 
   sortArrow: "absolute -bottom-2 left-0 w-full h-8 text-green-500",
 
-  listCt: "flex flex-col h-screen-2/3 overflow-y-scroll mt-2 border-2 border-indigo-500",
-  row: "flex text-gray-700 text-center items-center",
-  numberCell: "w-10 mr-2 text-light text-base text-blue-500 py-2 border-r-2 border-indigo-500",
+  listCt: "flex flex-col h-screen-9/12 overflow-y-scroll mt-2 border-indigo-500",
+  row: "flex text-gray-700 text-center items-center border-b-1 border-slate-300 py-3",
+  numberCell: "w-10 mr-2 text-light text-base text-blue-500 ",
   cell: "flex-1 text-light text-lg",
-  roleCell: "w-52 text-light text-sm pr-2",
+  roleCell: "w-46 text-light text-sm",
 };
 
 function buildRoleDescription(roleCode) {
-  if (roleCode == "free") return "Resting.";
+  if (roleCode == "free") return "Resting";
 
   const [doing, at] = roleCode.split("-");
 
-  if (doing == "def") return `Def. ${MISC.ACTIVE_ZONES[at]} Zone.`;
+  if (doing == "def") return `${MISC.ACTIVE_ZONES[at]} Zone`;
 
-  if (doing == "unit") return `'${at}' Unit Member.`;
+  if (doing == "unit") return `'${at}' Lib. Unit`;
 }
 
 /**@param {import("@static/values/army").SoldierState} soldier*/

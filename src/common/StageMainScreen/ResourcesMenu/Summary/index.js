@@ -1,32 +1,44 @@
 import React from "react";
 
-import { useObjectState } from "@static/react";
 import { AsyncMounter, FiltersTopBar } from "@common/index";
+import { useGeneralStateUpdator, useGeneralStateReader } from "@state/hooks";
+
+import { ITK } from "@static/contexts/interface";
 
 import ResourcesSection from "./ResourcesSection";
 import EquipmentSection from "./EquipmentSection";
 
 function PopulationMenuSummary({ closeMenu, openSubMenu }) {
-  const [loading, setLoading] = React.useState(0);
-  const filters = useObjectState({ resources: true, equipment: true });
+  const updateGS = useGeneralStateUpdator("interface");
+  const gs = useGeneralStateReader("interface.menusShownSummarySections");
+
+  function changeSectionVisibility(filterKey, checked) {
+    updateGS.interface.setSummarySectionVisibility(
+      ITK.MENUS.RESOURCES,
+      filterKey,
+      checked
+    );
+  }
+
+  //prettier-ignore
+  const sectionsVisibility = gs.interface.menusShownSummarySections[ITK.MENUS.RESOURCES];
 
   return (
     <div className={STYLES.ct}>
       <FiltersTopBar
         closeMenu={closeMenu}
-        filtersState={filters}
+        filtersState={sectionsVisibility}
         filtersNames={{ resources: "Resources", equipment: "Equipment" }}
+        onChange={changeSectionVisibility}
       />
 
-      {loading < 2 && <p className={STYLES.loading}>Loading...</p>}
-
-      {filters.get.resources && (
-        <AsyncMounter onFinish={() => setLoading((prev) => prev + 1)}>
+      {sectionsVisibility.resources && (
+        <AsyncMounter>
           <ResourcesSection />
         </AsyncMounter>
       )}
-      {filters.get.equipment && (
-        <AsyncMounter onFinish={() => setLoading((prev) => prev + 1)}>
+      {sectionsVisibility.equipment && (
+        <AsyncMounter>
           <EquipmentSection openSubMenu={openSubMenu} />
         </AsyncMounter>
       )}

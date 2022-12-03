@@ -32,6 +32,12 @@ export const KEYS = {
   },
 };
 
+// export const MENUS_NAMES = {
+//   [KEYS.MENUS.POPULATION]: "Population",
+//   [KEYS.MENUS.BUILDINGS]: "Buildings",
+//   [KEYS.MENUS.RESOURCES]: "Resources",
+// };
+
 /**Width Pixels of each breakpoint */
 export const BREAKPOINTS_WIDTHS = {
   [KEYS.BREAKPOINTS.MONITOR]: 1500,

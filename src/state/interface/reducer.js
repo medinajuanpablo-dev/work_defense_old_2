@@ -13,10 +13,8 @@ export default function reducer(prevState = defaultState.interface, action) {
     case TYPES.DEFAULT_EVERYTHING:
       return handlers.defaultEverything();
 
-    case TYPES.SHOW_SUMMARY_SECTION:
-      return handlers.showSummarySection(action.params);
-    case TYPES.HIDE_SUMMARY_SECTION:
-      return handlers.hideSummarySection(action.params);
+    case TYPES.SET_SUMMARY_SECTION_VISIBILITY:
+      return handlers.setSummarySectionVisibility(action.params);
 
     default:
       throw unhandledActionError(STATE_NAME, action.type);

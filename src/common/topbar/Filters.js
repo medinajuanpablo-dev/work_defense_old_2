@@ -2,15 +2,15 @@ import React from "react";
 import { CgEnter } from "react-icons/cg";
 
 import { CuteCheckbox } from "@common/index";
-import { checkRequiredValues } from "@static/functions";
 
 import GenericTopBar from "./Generic";
 import TopBarButton from "./Button";
 
-function FiltersTopBar({
+function FiltersTopbar({
   closeMenu,
   filtersNames,
   filtersState,
+  onChange,
   customStyles,
 }) {
   return (
@@ -25,8 +25,8 @@ function FiltersTopBar({
           <CuteCheckbox
             customDirSty={STYLES.showCheckbox}
             key={f}
-            checked={filtersState.get[f]}
-            onChange={(checked) => filtersState.merge({ [f]: checked })}
+            checked={filtersState[f]}
+            onChange={(checked) => onChange(f, checked)}
             label={filtersNames[f]}
           />
         ))}
@@ -48,4 +48,4 @@ const STYLES = {
   },
 };
 
-export default FiltersTopBar;
+export default FiltersTopbar;

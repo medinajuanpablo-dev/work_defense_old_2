@@ -10,6 +10,7 @@ import { BUILDINGS, BDK } from "@static/contexts/buildings";
 import { EQK, EQUIPMENT } from "@static/contexts/equipment";
 import { REK, RESOURCES } from "@static/contexts/resources";
 import { PPK, POPULATION } from "@static/contexts/population";
+import { ITK } from "@static/contexts/interface";
 
 /**Error thrown when some actions were defined but not handled by the reducer.
  * @param {string} stateName @param {string} type */
@@ -47,8 +48,10 @@ const DEFAULT_GENERAL_STATE = {
   },
 
   interface: {
-    generalMenus: {
-      summaryShowingSections: [],
+    menusShownSummarySections: {
+      [ITK.MENUS.BUILDINGS]: { buildings: true, techs: true },
+      [ITK.MENUS.POPULATION]: { general: true, army: true, civilians: true },
+      [ITK.MENUS.RESOURCES]: { resources: true, equipment: true },
     },
   },
 
@@ -238,8 +241,7 @@ export default (() => {
 
 /** Interface State types
  * @typedef InterfaceState
- * @property {Object} generalMenus General menus status.
- * @property {Array<string>} generalMenus.summaryShowingSections Currently showing sections of a summary.
+ * @property {{[menuKey: string]: {[sectionKey: string]: boolean}}} menusShownSummarySections The currently shown summary sections of each menu.
  */
 
 /** Invasion State types

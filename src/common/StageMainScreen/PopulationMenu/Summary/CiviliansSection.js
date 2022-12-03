@@ -1,5 +1,5 @@
 import React from "react";
-import { chunk } from "lodash";
+import { chunk, mapValues } from "lodash";
 
 import { RiEditCircleFill } from "react-icons/ri";
 
@@ -13,23 +13,28 @@ function CiviliansSectionLayout() {
   const gs = useGeneralStateReader("population");
 
   const summary = React.useMemo(() => {
-    const byOcc = gs.population.count;
+    var byOcc = mapValues(gs.population.count, (occCount, occ) => ({
+      count: occCount,
+      mantainment: 0,
+    }));
+    var totalMantainment = 0;
+
+    //prettier-ignore
+    for (let occ of POPULATION.CIVILIAN_OCCS_KEYS) {
+      const result = populationOps.civiliansMantainment(occ, gs.population.count[occ]);
+      byOcc[occ].mantainment += result;
+      totalMantainment += result;
+    }
 
     const amount = sumProperties(
       gs.population.count,
       POPULATION.CIVILIAN_OCCS_KEYS
     );
 
-    var mantainment = 0;
-
-    //prettier-ignore
-    for (let occKey of POPULATION.CIVILIAN_OCCS_KEYS)
-      mantainment += populationOps.civiliansMantainment(occKey, gs.population.count[occKey]);
-
     return {
       byOcc,
       amount,
-      mantainment,
+      totalMantainment,
     };
   }, [gs.population]);
 
@@ -51,63 +56,84 @@ function CiviliansSectionLayout() {
         Icon={RiEditCircleFill}
         label="Civilian Mantainment"
         text="Total <A> <L>."
-        amount={Math.round(summary.mantainment)}
+        amount={Math.round(summary.totalMantainment)}
         customDirSty={STYLES.mantainment}
-        outstand
         color="green"
       />
 
-      <LineTitle customDirSty={STYLES.byOccTitle} subtitle smallerFont>
-        By Occupation
-      </LineTitle>
-
-      <div className={STYLES.occsRow}>
-        {Object.keys(POPULATION.WORKER_OCCS).map((occ) => (
+      {Object.keys(POPULATION.WORKER_OCCS).map((occ) => (
+        <div key={occ} className={STYLES.occRow}>
           <SummaryRow
-            key={occ}
             Icon={RiEditCircleFill}
             label={POPULATION.WORKER_OCCS[occ].PLURAL}
-            amount={summary.byOcc[occ]}
+            amount={summary.byOcc[occ].count}
             text="<L>: <A>"
-            customDirSty={STYLES.occupation}
+            customDirSty={STYLES.occCell}
             color="blue"
           />
-        ))}
-      </div>
-      <div className={STYLES.occsRow}>
-        {Object.keys(POPULATION.PROCESS_OCCS).map((occ) => (
           <SummaryRow
-            key={occ}
+            Icon={RiEditCircleFill}
+            amount={summary.byOcc[occ].mantainment}
+            text="Consuming: <A>"
+            customDirSty={STYLES.occCell}
+            color="blue"
+            size="smaller"
+          />
+        </div>
+      ))}
+
+      {Object.keys(POPULATION.PROCESS_OCCS).map((occ) => (
+        <div key={occ} className={STYLES.occRow}>
+          <SummaryRow
             Icon={RiEditCircleFill}
             label={POPULATION.PROCESS_OCCS[occ].PLURAL}
-            amount={summary.byOcc[occ]}
+            amount={summary.byOcc[occ].count}
             text="<L>: <A>"
-            customDirSty={STYLES.occupation}
+            customDirSty={STYLES.occCell}
             color="blue"
           />
-        ))}
+          <SummaryRow
+            Icon={RiEditCircleFill}
+            amount={summary.byOcc[occ].mantainment}
+            text="Consuming: <A>"
+            customDirSty={STYLES.occCell}
+            color="blue"
+            size="smaller"
+          />
+        </div>
+      ))}
+
+      <div className={STYLES.occRow}>
+        <SummaryRow
+          Icon={RiEditCircleFill}
+          label={POPULATION.FREE_OCC.PLURAL}
+          amount={summary.byOcc[PPK.OCCS.FREE].count}
+          text="<L>: <A>"
+          customDirSty={STYLES.occCell}
+          color="blue"
+        />
+        <SummaryRow
+          Icon={RiEditCircleFill}
+          amount={summary.byOcc[PPK.OCCS.FREE].mantainment}
+          text="Consuming: <A>"
+          customDirSty={STYLES.occCell}
+          color="blue"
+          size="smaller"
+        />
       </div>
-      <SummaryRow
-        Icon={RiEditCircleFill}
-        label={POPULATION.FREE_OCC.PLURAL}
-        amount={summary.byOcc[PPK.OCCS.FREE]}
-        text="<L>: <A>"
-        customDirSty={STYLES.occupation}
-        color="blue"
-      />
     </>
   );
 }
 
 const STYLES = {
   title: { ct: "mt-6" },
-  totalCivilians: { ct: "mt-6" },
-  mantainment: { ct: "mt-2" },
+  totalCivilians: { ct: "mt-4" },
+  mantainment: { ct: "my-4" },
 
-  byOccTitle: { ct: "mt-4 text-light" },
-  occsRow: "flex",
-  occupation: {
-    ct: "flex-1 mt-4",
+  occRow:
+    "flex px-2 justify-between border-t-1 border-slate-300 py-2 items-center",
+  occCell: {
+    ct: "mr-4",
     label: "text-default",
     icon: "w-4 h-4 | xs:w-6 xs:h-6",
   },
