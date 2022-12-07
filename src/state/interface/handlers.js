@@ -14,7 +14,7 @@ function getHandlers(prevState, newState) {
     //
 
     setSummarySectionVisibility({ menuKey, sectionKey, visible }) {
-      newState.menusShownSummarySections[menuKey][sectionKey] = visible;
+      newState.shownSummarySections[menuKey][sectionKey] = visible;
       return newState;
     },
   };

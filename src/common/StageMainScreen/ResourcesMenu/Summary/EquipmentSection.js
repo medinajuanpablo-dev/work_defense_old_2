@@ -3,7 +3,7 @@ import { RiEditCircleFill } from "react-icons/ri";
 import { GiBroadsword, GiChestArmor } from "react-icons/gi";
 
 import { useIndicatedStyles } from "@static/tailwind";
-import { SummaryRow, LineTitle } from "@common/index";
+import { SummaryRow, LineTitle, CuteButton } from "@common/index";
 import { useGeneralStateReader } from "@state/hooks";
 import { sumProperties } from "@static/functions";
 
@@ -56,6 +56,7 @@ function EquipmentSection({ openSubMenu }) {
           </div>
           <div className={STYLES.columnStatsCt}>
             <SummaryRow
+              size="smaller"
               Icon={RiEditCircleFill}
               text="<L>Stored: <A>"
               label=""
@@ -64,6 +65,7 @@ function EquipmentSection({ openSubMenu }) {
               customDirSty={STYLES.stat}
             />
             <SummaryRow
+              size="smaller"
               Icon={RiEditCircleFill}
               text="<L>Ranks Sum: <A>"
               label=""
@@ -72,12 +74,16 @@ function EquipmentSection({ openSubMenu }) {
               customDirSty={STYLES.stat}
             />
           </div>
-          <button
+          <CuteButton
+            stylesBehavior="always-filled"
+            color="indigo"
+            colorStrength="lighter"
+            size="smaller"
             onClick={() => openSubMenu(`storedAndOrders-${EQK.TYPES.WEAPON}`)}
-            className={STYLES.viewStorders}
+            customDirSty={{ button: "mt-6" }}
           >
-            View Stored/Orders
-          </button>
+            Stored / Orders
+          </CuteButton>
         </div>
 
         <div className={STYLES.rightColumn}>
@@ -87,6 +93,7 @@ function EquipmentSection({ openSubMenu }) {
           </div>
           <div className={STYLES.columnStatsCt}>
             <SummaryRow
+              size="smaller"
               Icon={RiEditCircleFill}
               text="<L>Stored: <A>"
               label=""
@@ -95,6 +102,7 @@ function EquipmentSection({ openSubMenu }) {
               customDirSty={STYLES.stat}
             />
             <SummaryRow
+              size="smaller"
               Icon={RiEditCircleFill}
               text="<L>Ranks Sum: <A>"
               label=""
@@ -103,12 +111,16 @@ function EquipmentSection({ openSubMenu }) {
               customDirSty={STYLES.stat}
             />
           </div>
-          <button
+          <CuteButton
+            stylesBehavior="always-filled"
+            color="indigo"
+            colorStrength="lighter"
+            size="smaller"
             onClick={() => openSubMenu(`storedAndOrders-${EQK.TYPES.ARMOR}`)}
-            className={STYLES.viewStorders}
+            customDirSty={{ button: "mt-6" }}
           >
-            View Stored/Orders
-          </button>
+            Stored / Orders
+          </CuteButton>
         </div>
       </div>
     </>
@@ -118,16 +130,15 @@ function EquipmentSection({ openSubMenu }) {
 //prettier-ignore
 const STYLES = {
   columnsCt: "mt-6 flex justify-between",
-  leftColumn: "flex-1 text-center pr-3 border-r-1 border-gray-400",
-  rightColumn: "flex-1 text-center pl-3 border-l-1 border-gray-400",
+  leftColumn: "flex-1 text-center pr-3",
+  rightColumn: "flex-1 text-center pl-3 border-l-1 border-gray-300",
 
-  columnTitle: "flex items-center justify-center text-gray-700 text-xl",
-  titleIcon: "mr-2 text-3xl",
+  columnTitle: "flex items-center justify-center text-gray-700 text-lg",
+  titleIcon: "mr-1 text-3xl",
   titleText: "",
 
   columnStatsCt: "mt-4",
   stat: { ct: "my-2", icon: "| xs:w-6 xs:h-6" },
-  viewStorders: "select-auto mt-4 border-1 rounded-md border-blue-500 text-default text-gray-700 py-2 px-3 text-sm transition-color duration-200 hover:bg-blue-500 hover:text-gray-100",
 };
 
 function CapacityBox({ summary }) {
@@ -137,7 +148,7 @@ function CapacityBox({ summary }) {
   const styles = getActiveStyles({ status: summary.capacityStatus });
 
   return (
-    <p className={styles.amountsCt}>
+    <p className={styles.ct}>
       {summary.totalStored} Units Stored <br />
       <span className={styles.capacity}>
         Capacity for{" "}
@@ -149,9 +160,9 @@ function CapacityBox({ summary }) {
 
 //prettier-ignore
 const CAPACITY_BOX_DIRECTED_STYLES = {
-  amountsCt: "mt-4 w-2/3 mx-auto text-gray-700 rounded-md border-blue-300 border-2 border-dashed text-center py-3 text-2xl leading-tight || mx<border-red-500> amx<border-yellow-700> nmx<border-indigo-500>",
-  capacity: "text-lg text-green-500 || mx<text-red-500> amx<text-yellow-700> nmx<text-indigo-500>",
-  capacityNumber: "text-xl",
+  ct: "mt-4 w-2/3 mx-auto text-gray-700 rounded-md border-blue-300 border-1 border-dashed text-center py-3 text-xl leading-tight || mx<border-red-500> amx<border-yellow-700> nmx<border-indigo-500>",
+  capacity: "text-light text-base text-green-500 || mx<text-red-500> amx<text-yellow-700> nmx<text-indigo-500>",
+  capacityNumber: "text-lg",
 }
 
 //prettier-ignore

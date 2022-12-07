@@ -48,7 +48,7 @@ const DEFAULT_GENERAL_STATE = {
   },
 
   interface: {
-    menusShownSummarySections: {
+    shownSummarySections: {
       [ITK.MENUS.BUILDINGS]: { buildings: true, techs: true },
       [ITK.MENUS.POPULATION]: { general: true, army: true, civilians: true },
       [ITK.MENUS.RESOURCES]: { resources: true, equipment: true },
@@ -158,10 +158,17 @@ export default (() => {
   };
 
   //Equipment
-  dgs.equipment.stored = {
-    [EQK.TYPES.WEAPON]: { 1: 10, 3: 10, 4: 12, 6: 3, 8: 10 },
-    [EQK.TYPES.ARMOR]: { 1: 8, 2: 2, 3: 22, 5: 5, 6: 7, 10: 2 },
-  };
+
+  //prettier-ignore
+  for (let i = 1; i <= 10; i++) {
+    dgs.equipment.stored[EQK.TYPES.ARMOR][i] = random(0, 10);
+    dgs.equipment.orders[EQK.TYPES.ARMOR][i] = random(0, 10);
+  }
+  //prettier-ignore
+  for (let i = 1; i <= 10; i++){
+    dgs.equipment.stored[EQK.TYPES.WEAPON][i] = random(0, 10);
+    dgs.equipment.orders[EQK.TYPES.WEAPON][i] = random(0, 10);
+  }
 
   return dgs;
 })();
@@ -241,7 +248,7 @@ export default (() => {
 
 /** Interface State types
  * @typedef InterfaceState
- * @property {{[menuKey: string]: {[sectionKey: string]: boolean}}} menusShownSummarySections The currently shown summary sections of each menu.
+ * @property {{[menuKey: string]: {[sectionKey: string]: boolean}}} shownSummarySections The currently shown summary sections of each menu.
  */
 
 /** Invasion State types

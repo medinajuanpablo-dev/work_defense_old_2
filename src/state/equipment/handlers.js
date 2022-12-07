@@ -71,12 +71,17 @@ function getHandlers(prevState, newState) {
     },
 
     addOrder({ typeKey, rank, amount }) {
-      newState.orders[typeKey][rank] = amount;
+      newState.orders[typeKey][rank] =
+        (newState.orders[typeKey][rank] || 0) + amount;
       return newState;
     },
 
-    cancelOrder({ typeKey, rank }) {
-      delete newState.orders[typeKey][rank];
+    cancelOrder({ typeKey, rank, amount }) {
+      newState.orders[typeKey][rank] -= amount;
+
+      if (newState.orders[typeKey][rank] <= 0)
+        delete newState.orders[typeKey][rank];
+
       return newState;
     },
 

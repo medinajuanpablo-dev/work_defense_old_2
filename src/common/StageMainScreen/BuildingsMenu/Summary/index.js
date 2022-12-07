@@ -10,18 +10,20 @@ import TechsSection from "./TechsSection";
 
 function BuildingsMenuSummary({ closeMenu }) {
   const updateGS = useGeneralStateUpdator("interface");
-  const gs = useGeneralStateReader("interface.menusShownSummarySections");
+  const gs = useGeneralStateReader("interface.shownSummarySections");
 
-  function changeSectionVisibility(filterKey, checked) {
+  const [loading, setLoading] = React.useState(true);
+
+  function changeSectionVisibility(sectionKey, checked) {
     updateGS.interface.setSummarySectionVisibility(
       ITK.MENUS.BUILDINGS,
-      filterKey,
+      sectionKey,
       checked
     );
   }
 
   //prettier-ignore
-  const sectionsVisibility = gs.interface.menusShownSummarySections[ITK.MENUS.BUILDINGS];
+  const sectionsVisibility = gs.interface.shownSummarySections[ITK.MENUS.BUILDINGS];
 
   return (
     <div className={STYLES.ct}>
@@ -32,13 +34,16 @@ function BuildingsMenuSummary({ closeMenu }) {
         onChange={changeSectionVisibility}
       />
 
+      {Object.values(sectionsVisibility).some((visible) => visible) &&
+        loading && <p className={STYLES.loading}>Loading...</p>}
+
       {sectionsVisibility.buildings && (
-        <AsyncMounter>
+        <AsyncMounter onFinish={() => setLoading(false)}>
           <BuildingsSection />
         </AsyncMounter>
       )}
       {sectionsVisibility.techs && (
-        <AsyncMounter>
+        <AsyncMounter onFinish={() => setLoading(false)}>
           <TechsSection />
         </AsyncMounter>
       )}

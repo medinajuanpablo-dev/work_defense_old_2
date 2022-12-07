@@ -15,7 +15,7 @@ import c10 from "./general/Cuties/CuteButton";
 import g1 from "./general/AsyncMounter";
 
 import w3 from "./general/StdWebElements/BgContainer";
-import w4 from "./general/StdWebElements/ValidityNotification";
+import w6 from "./general/StdWebElements/ValidityNotification";
 
 //Your project-specific Components imports.
 import tb1 from "./topbar/Generic";
@@ -26,6 +26,7 @@ import tb4 from "./topbar/TwoButtons";
 import s1 from "./StageMainScreen";
 import s2 from "./LineTitle";
 import s3 from "./SummaryRow";
+import s4 from "./BottomNotif";
 
 //General purpose Components exports. Keep them separated to ease updates.
 export const CuteInput = c1;
@@ -43,7 +44,7 @@ export const CuteButton = c10;
 export const AsyncMounter = g1;
 
 export const BgContainer = w3;
-export const ValidityNotification = w4;
+export const ValidityNotification = w6;
 
 //Your project-specific Components exports.
 export const GenericTopBar = tb1;
@@ -54,3 +55,4 @@ export const TwoButtonsTopBar = tb4;
 export const StageMainScreen = s1;
 export const LineTitle = s2;
 export const SummaryRow = s3;
+export const displayBottomNotif = s4;

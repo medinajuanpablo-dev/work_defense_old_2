@@ -1,8 +1,8 @@
 import React from "react";
 import { IoIosPeople } from "react-icons/io";
-import { BiBuildingHouse, BiRightArrow } from "react-icons/bi";
+import { BiRightArrow } from "react-icons/bi";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { GiShinyApple } from "react-icons/gi";
+import { GiCastle, GiMetalBar } from "react-icons/gi";
 
 import { GenericTopBar, TopBarButton } from "@common/index";
 
@@ -56,12 +56,12 @@ function StageMainScreen({ children, stageKey }) {
           <TopBarButton
             onClick={() => openMenu(ITK.MENUS.BUILDINGS)}
             customStyles={STYLES.middleButton}
-            Icon={BiBuildingHouse}
+            Icon={GiCastle}
           />
           <TopBarButton
             onClick={() => openMenu(ITK.MENUS.RESOURCES)}
             customStyles={STYLES.middleButton}
-            Icon={GiShinyApple}
+            Icon={GiMetalBar}
           />
         </div>
         <TopBarButton

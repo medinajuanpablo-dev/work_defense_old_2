@@ -44,9 +44,9 @@ const ACTION_CREATORS = {
     type: TYPES.ADD_ORDER,
     params: { typeKey, rank, amount },
   }),
-  cancelOrder: (typeKey, rank) => ({
+  cancelOrder: (typeKey, rank, amount) => ({
     type: TYPES.CANCEL_ORDER,
-    params: { typeKey, rank },
+    params: { typeKey, rank, amount },
   }),
   finishOrder: (typeKey, rank) => ({
     type: TYPES.FINISH_ORDER,
@@ -66,7 +66,7 @@ export default ACTION_CREATORS;
  * @property {(typeKey: string, rank: number, amount: number) => any} addToStorage Adds the specified amount to the specified type and rank of stored equipment.
  * @property {(typeKey: string, rank: number, amount: number) => any} removeFromStorage Removes the specified amount from the specified type and rank of stored equipment. If the amount falls to zero, the rank is completely removed.
  * @property {(typeKey: string, rank: number, amount: number) => any} setStored Sets the specified amount of the specified type and rank of stored equipment. If the amount is zero, the rank is completely removed.
- * @property {(typeKey: string, rank: number, amount: number) => any} addOrder Adds a craft order of the specified equipment type and rank, in the specified amount. This replaces any previous order of the same type and rank.
- * @property {(typeKey: string, rank: number) => any} cancelOrder Cancels the craft order of the specified equipment type and rank.
+ * @property {(typeKey: string, rank: number, amount: number) => any} addOrder Adds a craft order of the specified equipment type and rank, in the specified amount.
+ * @property {(typeKey: string, rank: number, amount: number) => any} cancelOrder Cancels the craft order of the specified equipment type and rank, in the specified amount.
  * @property {(typeKey: string, rank: number) => any} finishOrder Removes the craft order of the specified equipment type and rank, and adds the equipment as stored.
  */

@@ -17,6 +17,6 @@ export const KEYS = {
 };
 
 export const TYPES_NAMES = {
-  [KEYS.TYPES.WEAPON]: { singular: "Weapon", plural: "Weapons" },
-  [KEYS.TYPES.ARMOR]: { singular: "Armor", plural: "Armor" },
+  [KEYS.TYPES.WEAPON]: { SINGULAR: "Weapon", PLURAL: "Weapons" },
+  [KEYS.TYPES.ARMOR]: { SINGULAR: "Armor", PLURAL: "Armor" },
 };

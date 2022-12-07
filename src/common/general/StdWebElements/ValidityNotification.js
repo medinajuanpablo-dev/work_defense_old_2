@@ -2,7 +2,7 @@ import React from "react";
 import { IoWarningOutline, IoCheckmark } from "react-icons/io5";
 
 import { CuteActionNotice } from "@common/index";
-import { checkOptionalValues, mustBe } from "@static/functions";
+import { checkOptionalValues } from "@static/functions";
 
 /**
  * An simpler application of `CuteActionNotice` configured to be quickly usable.

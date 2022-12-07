@@ -81,6 +81,8 @@ function ArmyList({ closeMenu, closeSubMenu }) {
         }}
       />
 
+      <LineTitle margin="t-large">Army List</LineTitle>
+
       <div className={STYLES.tableCt}>
         <div className={STYLES.allHeadersCt}>
           <button
@@ -146,7 +148,7 @@ const STYLES = {
   exitButton: { button: "border-r-2 w-1/6" },
   exitButtonIcon: "mx-auto w-full h-full transform flip text-gray-100",
   
-  tableCt: "flex-1 select-none mt-4",
+  tableCt: "select-none",
 
   allHeadersCt: "flex rounded-t-sm items-stretch text-gray-700 border-b-1 border-indigo-500 h-14",
   headerCt: "relative flex items-center justify-center hover:text-sky-600 ",

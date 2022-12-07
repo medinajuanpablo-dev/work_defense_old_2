@@ -1,7 +1,7 @@
 import React from "react";
-import { BsCapslockFill } from "react-icons/bs";
+import { BsCapslockFill, BsQuestionCircle } from "react-icons/bs";
 
-import { LineTitle } from "@common/index";
+import { LineTitle, CuteActionNotice } from "@common/index";
 import { useGeneralStateReader } from "@state/hooks";
 
 import { TECHS, TEK } from "@static/contexts/technologies";
@@ -19,12 +19,22 @@ function TechsSection() {
         <BsCapslockFill className={STYLES.pointsIcon} />
         <p className={STYLES.pointsLabel}>Research Points:</p>
         <p className={STYLES.pointsText}>{gs.technologies.researchPoints}</p>
+        <div className={STYLES.pointsInfo}>
+          <CuteActionNotice
+            title="When can I research?"
+            body="You can spend your research points into new techs only in the Research Stage."
+            ButtonIcon={BsQuestionCircle}
+            customDirSty={{
+              buttonCt: STYLES.pointsInfoButton,
+            }}
+          />
+        </div>
       </div>
 
       <div className={STYLES.techTreeCt}>
         {Object.keys(TECHS.TREE).map((categoryKey) => (
           <React.Fragment key={categoryKey}>
-            <LineTitle subtitle size="smaller">
+            <LineTitle margin="t-small" subtitle size="smaller">
               {CATEGORIES_NAMES[categoryKey]}
             </LineTitle>
             <div className={STYLES.categoryCt}>
@@ -54,15 +64,17 @@ function TechsSection() {
 
 //prettier-ignore
 const STYLES = {
-  pointsCt: "flex justify-center items-center mt-4 border-1 rounded-md p-2 w-3/4 border-indigo-500 mx-auto text-sm | xs:w-2/3 xs:text-base",
-  pointsLabel: "text-gray-700 text-sm | xs:text-base",
-  pointsText: "text-indigo-500 text-strong leading-none ml-2 text-base | xs:text-lg",
-  pointsIcon: "mr-2 h-5 w-5 text-gray-700",
+  pointsCt: "relative flex justify-center items-center mt-4 border-1 border-dotted rounded-md p-2 w-3/4 border-indigo-500 mx-auto text-sm | xs:w-2/3 xs:text-base",
+  pointsLabel: "text-gray-600 text-light text-sm | xs:text-base",
+  pointsText: "text-indigo-500 text-strong leading-none ml-2 text-lg",
+  pointsIcon: "mr-2 mb-2px text-xl text-gray-500",
+  pointsInfo: "absolute -right-8",
+  pointsInfoButton: "text-slate-500 || ho,sh<text-blue-600>",
 
   techTreeCt: "flex flex-col mt-2",
   categoryCt: "flex",
 
-  columnTitle: "text-center text-light my-1 text-sm",
+  columnTitle: "text-center text-light my-2 text-slate-600 text-sm",
   leftCol: "flex-1 flex flex-col text-gray-800 pr-2",
   rightCol: "flex-1 flex flex-col text-gray-800 pl-2",
 };

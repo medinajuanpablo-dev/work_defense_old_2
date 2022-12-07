@@ -10,18 +10,20 @@ import EquipmentSection from "./EquipmentSection";
 
 function PopulationMenuSummary({ closeMenu, openSubMenu }) {
   const updateGS = useGeneralStateUpdator("interface");
-  const gs = useGeneralStateReader("interface.menusShownSummarySections");
+  const gs = useGeneralStateReader("interface.shownSummarySections");
 
-  function changeSectionVisibility(filterKey, checked) {
+  const [loading, setLoading] = React.useState(true);
+
+  function changeSectionVisibility(sectionKey, checked) {
     updateGS.interface.setSummarySectionVisibility(
       ITK.MENUS.RESOURCES,
-      filterKey,
+      sectionKey,
       checked
     );
   }
 
   //prettier-ignore
-  const sectionsVisibility = gs.interface.menusShownSummarySections[ITK.MENUS.RESOURCES];
+  const sectionsVisibility = gs.interface.shownSummarySections[ITK.MENUS.RESOURCES];
 
   return (
     <div className={STYLES.ct}>
@@ -32,13 +34,16 @@ function PopulationMenuSummary({ closeMenu, openSubMenu }) {
         onChange={changeSectionVisibility}
       />
 
+      {Object.values(sectionsVisibility).some((visible) => visible) &&
+        loading && <p className={STYLES.loading}>Loading...</p>}
+
       {sectionsVisibility.resources && (
-        <AsyncMounter>
+        <AsyncMounter onFinish={() => setLoading(false)}>
           <ResourcesSection />
         </AsyncMounter>
       )}
       {sectionsVisibility.equipment && (
-        <AsyncMounter>
+        <AsyncMounter onFinish={() => setLoading(false)}>
           <EquipmentSection openSubMenu={openSubMenu} />
         </AsyncMounter>
       )}

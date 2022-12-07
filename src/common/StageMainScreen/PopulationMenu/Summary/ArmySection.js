@@ -119,7 +119,7 @@ function ArmySectionLayout({ openSubMenu }) {
         Icon={GiSpears}
         color="indigo"
         transitionSpeed="faster"
-        colorStrength="stronger"
+        stylesBehavior="always-filled"
         customDirSty={{ button: STYLES.button }}
       >
         View all the Army

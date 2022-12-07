@@ -100,7 +100,7 @@ function ResourcesSection() {
 
       <div className={STYLES.statsCt}>
         {Object.keys(RESOURCES.NAMES).map((resKey) => (
-          <ResourceWarning
+          <ResourceCapacityWarning
             key={resKey}
             resKey={resKey}
             status={summary[resKey].status}
@@ -108,16 +108,18 @@ function ResourcesSection() {
         ))}
 
         <SummaryRow
-          smaller
+          size="smaller"
           Icon={RiEditCircleFill}
           text="We have Food for <A> <L>."
           label="Tempos"
           amount={summary.temposOfFood.toFixed(1)}
-          color={summary.temposOfFood >= 1 ? "blue" : "red"}
+          color={
+            summary.temposOfFood >= CRITICAL_TEMPOS_OF_FOOD ? "blue" : "red"
+          }
           customDirSty={STYLES.stat}
         />
         <SummaryRow
-          smaller
+          size="smaller"
           Icon={RiEditCircleFill}
           text={
             summary.spentDlogs == 0
@@ -151,22 +153,20 @@ const STYLES = {
   stat: { ct: "mt-2" },
 };
 
-//prettier-ignore
-function ResourceWarning({ resKey, status }) {
-
+function ResourceCapacityWarning({ resKey, status }) {
   var text, color;
 
   switch (status) {
     case MIK.CAPACITY_STATUS.MAXED:
-      text = "URGENT: We can't store any more <L>!!.<A>";
+      text = "URGENT: We can't store any more <L>!!";
       color = "red";
       break;
     case MIK.CAPACITY_STATUS.ALMOST_MAXED:
-      text = `We are at almost full capacity of <L>!<A>`;
+      text = `We are at almost full capacity of <L>!`;
       color = "yellow";
       break;
     case MIK.CAPACITY_STATUS.NEAR_MAX:
-      text = `We are getting close to our <L> capacity.<A>`;
+      text = `We are getting close to our <L> capacity`;
       color = "blue";
       break;
     default:
@@ -175,11 +175,10 @@ function ResourceWarning({ resKey, status }) {
 
   return (
     <SummaryRow
-      smaller
+      size="smaller"
       Icon={RiEditCircleFill}
       label={RESOURCES.NAMES[resKey].PLURAL}
       text={text}
-      amount=""
       color={color}
       customDirSty={STYLES.stat}
     />
@@ -211,7 +210,7 @@ function ResourceBox({ resKey, summary, customDirSty }) {
 }
 
 const RESOURCE_DIRECTED_STYLES = {
-  ct: "w-28 border-1 rounded-md border-gray-400 py-2 text-xl || amx<border-yellow-500> mx<border-red-500>",
+  ct: "w-28 border-1 rounded-md border-dotted border-gray-400 py-2 text-xl || amx<border-yellow-500> mx<border-red-500>",
   amountLine: "flex justify-center items-center text-xl",
   icon: "mr-3 text-2xl",
   amounts: "text-gray-700",
@@ -232,5 +231,7 @@ const RESOURCE_ICON = {
   [REK.NAMES.FOOD]: GiWheat,
   [REK.NAMES.MATERIALS]: GiClayBrick,
 };
+
+const CRITICAL_TEMPOS_OF_FOOD = 1;
 
 export default ResourcesSection;

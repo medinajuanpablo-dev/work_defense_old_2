@@ -11,18 +11,20 @@ import ArmySection from "./ArmySection";
 
 function PopulationMenuSummary({ closeMenu, openSubMenu }) {
   const updateGS = useGeneralStateUpdator("interface");
-  const gs = useGeneralStateReader("interface.menusShownSummarySections");
+  const gs = useGeneralStateReader("interface.shownSummarySections");
 
-  function changeSectionVisibility(filterKey, checked) {
+  const [loading, setLoading] = React.useState(true);
+
+  function changeSectionVisibility(sectionKey, checked) {
     updateGS.interface.setSummarySectionVisibility(
       ITK.MENUS.POPULATION,
-      filterKey,
+      sectionKey,
       checked
     );
   }
 
   //prettier-ignore
-  const sectionsVisibility = gs.interface.menusShownSummarySections[ITK.MENUS.POPULATION];
+  const sectionsVisibility = gs.interface.shownSummarySections[ITK.MENUS.POPULATION];
 
   return (
     <div className={STYLES.ct}>
@@ -37,18 +39,21 @@ function PopulationMenuSummary({ closeMenu, openSubMenu }) {
         onChange={changeSectionVisibility}
       />
 
+      {Object.values(sectionsVisibility).some((visible) => visible) &&
+        loading && <p className={STYLES.loading}>Loading...</p>}
+
       {sectionsVisibility.general && (
-        <AsyncMounter mountDelay={20}>
+        <AsyncMounter mountDelay={20} onFinish={() => setLoading(false)}>
           <GeneralSection />
         </AsyncMounter>
       )}
       {sectionsVisibility.army && (
-        <AsyncMounter mountDelay={20}>
+        <AsyncMounter mountDelay={20} onFinish={() => setLoading(false)}>
           <ArmySection openSubMenu={openSubMenu} />
         </AsyncMounter>
       )}
       {sectionsVisibility.civilians && (
-        <AsyncMounter mountDelay={20}>
+        <AsyncMounter mountDelay={20} onFinish={() => setLoading(false)}>
           <CiviliansSection />
         </AsyncMounter>
       )}
