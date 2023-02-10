@@ -8,12 +8,12 @@ import buildingsReducer from "./buildings/reducer";
 import equipmentReducer from "./equipment/reducer";
 import interfaceReducer from "./interface/reducer";
 import invasionReducer from "./invasion/reducer";
-import miscReducer from "./miscellaneous/reducer";
+import miscReducer, { previousGSReducer } from "./miscellaneous/reducer";
 import populationReducer from "./population/reducer";
 import resourcesReducer from "./resources/reducer";
 import techsReducer from "./technologies/reducer";
 
-const rootReducer = combineReducers({
+const combinedReducers = combineReducers({
   army: armyReducer,
   buildings: buildingsReducer,
   equipment: equipmentReducer,
@@ -24,6 +24,15 @@ const rootReducer = combineReducers({
   resources: resourcesReducer,
   technologies: techsReducer,
 });
+
+function rootReducer(previousGeneralState, action) {
+  const previousState = previousGSReducer(previousGeneralState, action);
+  const newState = combinedReducers(previousState, action);
+
+  // localStorage.setItem("generalState", JSON.stringify(newState));
+
+  return newState;
+}
 
 export const createComposedStore = () => {
   const composeEnhancers =

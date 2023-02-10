@@ -49,14 +49,10 @@ export const KEYS = {
     STAGE: "stage",
     TEMPO: "tempo",
   },
-
-  CAPACITY_STATUS: {
-    FINE: "fine",
-    NEAR_MAX: "nearMax",
-    ALMOST_MAXED: "almostMaxed",
-    MAXED: "maxed",
-  },
 };
+
+/**The amount of previous general states that can be saved recursively. This doesn't include the current gs. */
+export const PREVIOUS_GS_MAX_DEEPNESS = 1;
 
 /**Name of each zone. */
 export const ACTIVE_ZONES = {

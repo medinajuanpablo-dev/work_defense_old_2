@@ -6,6 +6,8 @@ These are general values and keys, meaning they are used in multiple and spread 
 Local-use values and keys are defined where they are used. 
 */
 
+import {} from "../miscellaneous";
+
 export const KEYS = {
   MENUS: {
     POPULATION: "population",
@@ -30,6 +32,13 @@ export const KEYS = {
     FINE: "fine",
     INFO: "info",
   },
+
+  CAPACITY_STATUS: {
+    FINE: "fine",
+    NEAR_MAX: "nearMax",
+    ALMOST_MAXED: "almostMaxed",
+    MAXED: "maxed",
+  },
 };
 
 // export const MENUS_NAMES = {
@@ -51,3 +60,11 @@ export const BREAKPOINTS_WIDTHS = {
 
 /**The amount of miliseconds the scroll to the top lasts when doing it automatically. */
 export const SCROLL_TO_TOP_DURATION = 500;
+
+/**Indicators used in a lot of places to style capacity warnings. */
+//prettier-ignore
+export const CAPACITY_INDICATORS = [
+  { key: "maxed", directive: "mx", condition: p => p.status == KEYS.CAPACITY_STATUS.MAXED },
+  { key: "nearMax", directive: "nmx", condition: p => p.status == KEYS.CAPACITY_STATUS.NEAR_MAX },
+  { key: "almostMaxed", directive: "amx", condition: p => p.status == KEYS.CAPACITY_STATUS.ALMOST_MAXED },
+]

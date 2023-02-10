@@ -8,7 +8,7 @@ import { useGeneralStateReader } from "@state/hooks";
 import { exists as e } from "@static/functions";
 
 import { resourcesOps, REK, RESOURCES } from "@static/contexts/resources";
-import { MIK, miscOps } from "@static/contexts/miscellaneous";
+import { ITK, interfaceOps, INTERFACE } from "@static/contexts/interface";
 import { BDK } from "@static/contexts/buildings";
 import { armyOps } from "@static/contexts/army";
 import { POPULATION, PPK, populationOps } from "@static/contexts/population";
@@ -40,7 +40,7 @@ function ResourcesSection() {
           producerBuildingLevel,
           workersAmount
         ),
-        status: miscOps.capacityStatus(gs.resources.stored[key], capacity),
+        status: interfaceOps.capacityStatus(gs.resources.stored[key], capacity),
       };
     }
 
@@ -157,15 +157,15 @@ function ResourceCapacityWarning({ resKey, status }) {
   var text, color;
 
   switch (status) {
-    case MIK.CAPACITY_STATUS.MAXED:
+    case ITK.CAPACITY_STATUS.MAXED:
       text = "URGENT: We can't store any more <L>!!";
       color = "red";
       break;
-    case MIK.CAPACITY_STATUS.ALMOST_MAXED:
+    case ITK.CAPACITY_STATUS.ALMOST_MAXED:
       text = `We are at almost full capacity of <L>!`;
       color = "yellow";
       break;
-    case MIK.CAPACITY_STATUS.NEAR_MAX:
+    case ITK.CAPACITY_STATUS.NEAR_MAX:
       text = `We are getting close to our <L> capacity`;
       color = "blue";
       break;
@@ -187,7 +187,7 @@ function ResourceCapacityWarning({ resKey, status }) {
 
 //prettier-ignore
 function ResourceBox({ resKey, summary, customDirSty }) {
-  const getActiveStyles = useIndicatedStyles(RESOURCE_INDICATORS, RESOURCE_DIRECTED_STYLES, { customDirSty });
+  const getActiveStyles = useIndicatedStyles(INTERFACE.CAPACITY_INDICATORS, RESOURCE_DIRSTY, { customDirSty });
 
   const { stored, capacity, production, status } = summary[resKey];
   const Icon = RESOURCE_ICON[resKey];
@@ -209,7 +209,7 @@ function ResourceBox({ resKey, summary, customDirSty }) {
   );
 }
 
-const RESOURCE_DIRECTED_STYLES = {
+const RESOURCE_DIRSTY = {
   ct: "w-28 border-1 rounded-md border-dotted border-gray-400 py-2 text-xl || amx<border-yellow-500> mx<border-red-500>",
   amountLine: "flex justify-center items-center text-xl",
   icon: "mr-3 text-2xl",
@@ -218,13 +218,6 @@ const RESOURCE_DIRECTED_STYLES = {
   productionLine: "text-center text-xs text-gray-700",
   production: "text-xl",
 };
-
-//prettier-ignore
-const RESOURCE_INDICATORS = [
-  { key: "nearMax", directive: "nmx", condition: p => p.status == MIK.CAPACITY_STATUS.NEAR_MAX },
-  { key: "almostMaxed", directive: "amx", condition: p => p.status == MIK.CAPACITY_STATUS.ALMOST_MAXED }, 
-  { key: "maxed", directive: "mx", condition: p => p.status == MIK.CAPACITY_STATUS.MAXED },
-]
 
 const RESOURCE_ICON = {
   [REK.NAMES.DLOGS]: GiTwoCoins,

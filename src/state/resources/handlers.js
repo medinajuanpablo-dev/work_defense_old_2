@@ -8,6 +8,9 @@ function getHandlers(prevState, newState) {
       for (let resourceKey in newState.stored) newState.stored[resourceKey] = 0;
       return newState;
     },
+    saveAsPrev() {
+      newState.storedPrevTempo = { ...newState.stored };
+    },
 
     //
 

@@ -136,7 +136,7 @@ function CuteMessage({
  * @property {string} rightButton **CS**. Default Styles: `""`
  */
 const DIRECTED_STYLES = {
-  ct: "flex justify-start items-center text-gray-800 bg-gray-100 rounded-xl z-50 transform transition-all opacity-0 border-1 border-transparent my-1 px-2 py-2 | xs:py-3 | sm:my-2 sm:px-4 | lg:px-6 || ift<-translate-y-10> oft<opacity-0'translate-y-10> ifb<translate-y-10> ofb<opacity-0'-translate-y-10> ff<duration-100> df<duration-200> sf<duration-400> sh<opacity-100'translate-y-0> coc<hover:border-gray-500'hover:cursor-pointer>",
+  ct: "flex justify-start items-center text-gray-800 bg-gray-100 rounded-xl transform transition-all opacity-0 border-1 border-transparent my-1 px-2 py-2 | xs:py-3 | sm:my-2 sm:px-4 | lg:px-6 || ift<-translate-y-10> oft<opacity-0'translate-y-10> ifb<translate-y-10> ofb<opacity-0'-translate-y-10> ff<duration-100> df<duration-200> sf<duration-400> sh<opacity-100'translate-y-0> coc<hover:border-gray-500'hover:cursor-pointer>",
 
   icon: "flex-none text-gray-700 h-6 w-6 | sm:h-8 sm:w-8 | lg:h-10 lg:w-10",
   textCt: "text-left ml-3 | sm:ml-4 | md:ml-6 || 1b<w-2/3> 2b<w-2/3'md:w-8/12>",
@@ -189,7 +189,7 @@ const LIST_OFFSET = -20;
 
 //prettier-ignore
 const LIST_DIRECTED_STYLES = {
-  listCt: "fixed left-0 w-screen flex justify-center || tl<top-0> bl<bottom-0>",
+  listCt: "fixed z-50 left-0 w-screen flex justify-center || tl<top-0> bl<bottom-0>",
 };
 
 //prettier-ignore

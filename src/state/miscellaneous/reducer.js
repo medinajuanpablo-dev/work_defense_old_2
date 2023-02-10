@@ -1,8 +1,26 @@
 import { cloneDeep } from "lodash";
 
 import defaultState, { unhandledActionError } from "../defaultState";
-import { TYPES, STATE_NAME } from "./actions";
-import getHandlers from "./handlers";
+import { TYPES, STATE_NAME, PREVIOUS_GS_TYPES } from "./actions";
+import getHandlers, { getPreviousGSHandlers } from "./handlers";
+
+export function previousGSReducer(prevState = defaultState, action) {
+  if (!Object.values(PREVIOUS_GS_TYPES).includes(action.type)) return prevState;
+
+  const handlers = getPreviousGSHandlers(prevState, cloneDeep(prevState));
+
+  switch (action.type) {
+    case PREVIOUS_GS_TYPES.SAVE:
+      return handlers.saveState();
+    case PREVIOUS_GS_TYPES.LOAD:
+      return handlers.loadState();
+    case PREVIOUS_GS_TYPES.DELETE:
+      return handlers.deleteSavedState();
+
+    default:
+      throw unhandledActionError("PreviousGS", action.type);
+  }
+}
 
 export default function reducer(
   prevState = defaultState.miscellaneous,

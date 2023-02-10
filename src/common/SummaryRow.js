@@ -11,7 +11,7 @@ import { ITK } from "@static/contexts/interface";
  * @param {string} props.label
  * @param {string} props.text
  * @param {string} props.amount
- * @param {"gray" | "green" | "red" | "blue" | "purple" | "yellow"} props.color
+ * @param {"gray" | "green" | "red" | "blue" | "purple" | "yellow" | "orange"} props.color
  * @param {"default" | "smaller" | "larger"} props.size
  * @param {boolean} props.outstand
  * @param {boolean} props.async
@@ -71,11 +71,11 @@ function SummaryRow({
 
 //prettier-ignore
 const DIRECTED_STYLES = {
-  ct: "flex items-center || os<justify-center'mx-auto'p-2'border-1'border-dotted'rounded-md> clg<border-green-500> clr<border-red-500> clb<border-blue-500> clp<border-purple-500> clgr<border-gray-500> cly<border-yellow-600>",
-  icon: "text-opacity-80 w-7 h-7 flex-none || sm<w-6'h-6> lg<w-8'h-8> clg<text-green-600> clr<text-red-500> clb<text-blue-500> clp<text-purple-500> clgr<text-gray-500> cly<text-yellow-600>",
+  ct: "flex items-center || os<justify-center'mx-auto'p-2'border-1'border-dotted'rounded-md> clg<border-green-500> clr<border-red-500> clb<border-blue-500> clp<border-purple-500> clgr<border-gray-500> cly<border-yellow-600> clo<border-orange-600>",
+  icon: "text-opacity-80 w-7 h-7 flex-none || sm<w-6'h-6> lg<w-8'h-8> clg<text-green-600> clr<text-red-500> clb<text-blue-500> clp<text-purple-500> clgr<text-gray-500> cly<text-yellow-600> clo<text-orange-600>",
   text: "text-light text-gray-700 ml-2 || sm<text-sm> lg<text-lg>",
   label: "text-strong || sm<text-sm> lg<text-lg>",
-  amount: "text-default text-lg mx-1 || sm<text-base> lg<text-xl> clg<text-green-600> clr<text-red-500> clb<text-blue-500> clp<text-purple-500> clgr<text-gray-500> cly<text-yellow-600>",
+  amount: "text-default text-lg mx-1 || sm<text-base> lg<text-xl> clg<text-green-600> clr<text-red-500> clb<text-blue-500> clp<text-purple-500> clgr<text-gray-500> cly<text-yellow-600> clo<text-orange-600>",
   notifList: "flex-1 flex justify-end",
 };
 
@@ -88,6 +88,7 @@ const INDICATORS = [
   { key: "color_purple", directive: "clp", condition: (p) => p.color === "purple" },
   { key: "color_gray", directive: "clgr", condition: (p) => p.color === "gray" },
   { key: "color_yellow", directive: "cly", condition: p => p.color == "yellow" },
+  { key: "color_orange", directive: "clo", condition: p => p.color == "orange" },
   { key: "smaller", directive: "sm", condition: p => p.size == "smaller" },
   { key: "larger", directive: "lg", condition: p => p.size == "larger" },
 ];
@@ -96,12 +97,12 @@ const INDICATORS = [
 const NOTIFICATION_CUSTOMIZATION = {
   DIRECTED_STYLES: {
     ct: "ml-1 | xs:ml-2",
-    buttonCt: "|| si<text-gray-500> sf<text-green-400> sw<text-yellow-600> sd<text-yellow-800> se<text-red-500>",
-    noticeCt: "|| si<border-blue-500> sf<border-green-400> sw<border-yellow-600> sd<border-yellow-800> se<border-red-500>",
-    noticeIcon: "|| si<text-blue-500> sf<text-green-400> sw<text-yellow-600> sd<text-yellow-800> se<text-red-500>",
-    noticeTumor: "|| si<border-blue-500> sf<border-green-400> sw<border-yellow-600> sd<border-yellow-800> se<border-red-500>",
+    buttonCt: "|| ti<text-gray-500> tf<text-green-400> tw<text-yellow-600> td<text-orange-600> te<text-red-500>",
+    noticeCt: "|| ti<border-blue-500> tf<border-green-400> tw<border-yellow-600> td<border-orange-600> te<border-red-500>",
+    noticeIcon: "|| ti<text-blue-500> tf<text-green-400> tw<text-yellow-600> td<text-orange-600> te<text-red-500>",
+    noticeTumor: "|| ti<border-blue-500> tf<border-green-400> tw<border-yellow-600> td<border-orange-600> te<border-red-500>",
   },
-  EXTRA_INDICATORS: buildEnumIndicators(ITK.NOTIFICATION_TYPES, "state", { short: true }),
+  EXTRA_INDICATORS: buildEnumIndicators(ITK.NOTIFICATION_TYPES, "type", { short: true }),
 }
 
 function parseText(text) {

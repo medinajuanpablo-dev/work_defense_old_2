@@ -1,3 +1,5 @@
+import { cloneDeep } from "lodash";
+
 import { capped, pickFurtherItem } from "@static/functions";
 
 import { MISC } from "@static/contexts/miscellaneous";
@@ -55,6 +57,44 @@ function getHandlers(prevState, newState) {
       return newState;
     },
   };
+}
+
+/**
+ * @param {import("../defaultState").GeneralState} newGeneralState
+ */
+export function getPreviousGSHandlers(previousGeneralState, newGeneralState) {
+  return {
+    saveState() {
+      const previousGeneralState = cloneDeep(newGeneralState); //Clone the current GeneralState.
+      newGeneralState.miscellaneous.previousGS = previousGeneralState; //Set it as the PreviousGeneralState.
+
+      checkPreviousGSDeepness(newGeneralState.miscellaneous.previousGS, 1); //If deepness is the maximum, remove the deepest previousGS.
+
+      return newGeneralState;
+    },
+
+    loadState() {
+      if (!newGeneralState.miscellaneous.previousGS) return newGeneralState;
+      return newGeneralState.miscellaneous.previousGS;
+    },
+
+    deleteSavedState() {
+      newGeneralState.miscellaneous.previousGS = null;
+      return newGeneralState;
+    },
+  };
+}
+
+function checkPreviousGSDeepness(previousGS, deepness) {
+  //If reached the deepest without reaching the max depth, just return.
+  if (!previousGS) return;
+
+  //If reached the maximum depth, remove the previousGS.
+  if (deepness == MISC.PREVIOUS_GS_MAX_DEEPNESS)
+    previousGS.miscellaneous.previousGS = null;
+  //Else, go deeper.
+  else
+    checkPreviousGSDeepness(previousGS.miscellaneous.previousGS, deepness + 1);
 }
 
 export default getHandlers;

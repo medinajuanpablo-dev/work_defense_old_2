@@ -142,7 +142,7 @@ function Item({ content, saveLength, translation, vertical, customDirSty }) {
  * @property {string} ct **CNR**. Default Styles: `"absolute transition-all duration-500 opacity-100 || vi<opacity-0>"`
  */
 const ITEM_DIRECTED_STYLES = {
-  ct: "absolute transition-all duration-500 opacity-100 || vi<opacity-0>",
+  ct: "absolute z-50 transition-all duration-500 opacity-100 || vi<opacity-0>",
 };
 
 const ITEM_INDICATORS = [

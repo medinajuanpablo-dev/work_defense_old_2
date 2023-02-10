@@ -12,6 +12,8 @@ export default function reducer(prevState = defaultState.resources, action) {
   switch (action.type) {
     case TYPES.EMPTY_ALL:
       return handlers.emptyAll();
+    case TYPES.SAVE_AS_PREV:
+      return handlers.saveAsPrev();
 
     case TYPES.ADD_RESOURCE:
       return handlers.addResource(action.params);

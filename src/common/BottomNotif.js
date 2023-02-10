@@ -2,7 +2,7 @@ import React from "react";
 
 import usgMessagesList from "./general/Cuties/CuteMessagesList";
 
-const displayMessage = usgMessagesList({ maxItems: 3 });
+const displayMessage = usgMessagesList({ maxItems: 2 });
 
 /**
  * @param {Object} params
@@ -28,7 +28,6 @@ function displayBottomNotif({
   }
 
   displayMessage({
-    closeOnClick: true,
     Icon,
     title: title,
     body: <Body body={body} {...config} />,

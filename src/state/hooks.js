@@ -22,7 +22,7 @@ import techsActions, { TechnologiesActions } from "./technologies/actions";
  * @property {EquipmentActions} equipment
  * @property {InterfaceActions} interface
  * @property {InvasionActions} invasion
- * @property {MiscellaneousActions} misc
+ * @property {MiscellaneousActions} miscellaneous
  * @property {PopulationActions} population
  * @property {ResourcesActions} resources
  * @property {TechnologiesActions} techs

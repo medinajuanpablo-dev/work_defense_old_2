@@ -1,21 +1,15 @@
 import React from "react";
-import { CgEnter } from "react-icons/cg";
-import { BsArrow90DegLeft, BsStarFill, BsTrashFill } from "react-icons/bs";
+import { BsStarFill, BsTrashFill } from "react-icons/bs";
 import { RiEditCircleFill } from "react-icons/ri";
 import { GiSwordsEmblem, GiAnvil, GiShatteredSword } from "react-icons/gi";
 import { FiLock, FiUnlock } from "react-icons/fi";
 
-import {
-  TwoButtonsTopBar,
-  LineTitle,
-  CuteButton,
-  displayBottomNotif,
-} from "@common/index";
+import { CuteButton, displayBottomNotif, LineTitle } from "@common/index";
 import { useGeneralStateReader, useGeneralStateUpdator } from "@state/hooks";
 
 import { EQUIPMENT } from "@static/contexts/equipment";
 
-function StoredAndOrders({ type, closeMenu, closeSubMenu }) {
+function StoredAndOrdersSection({ type }) {
   const gs = useGeneralStateReader("equipment");
   const updateGS = useGeneralStateUpdator("equipment");
 
@@ -45,7 +39,10 @@ function StoredAndOrders({ type, closeMenu, closeSubMenu }) {
       body: `Discarded 1 ${
         pile == "stored" ? `stored ${name.SINGULAR}` : `${name.SINGULAR} order`
       } of Rank ${rank}`,
-      onUndo: () => console.log("undone"),
+      onUndo: () => {
+        if (pile == "stored") updateGS.equipment.addToStorage(type, rank, 1);
+        else updateGS.equipment.addOrder(type, rank, 1);
+      },
     });
   }
 
@@ -53,21 +50,7 @@ function StoredAndOrders({ type, closeMenu, closeSubMenu }) {
   const orders = getDisplayEquipmentSet(gs.equipment.orders[type], sortBy);
 
   return (
-    <div className={STYLES.ct}>
-      <TwoButtonsTopBar
-        leftButton={{
-          Icon: CgEnter,
-          text: "Back to Stage",
-          onClick: closeMenu,
-        }}
-        rightButton={{
-          Icon: BsArrow90DegLeft,
-          text: "To Summary",
-          customStyles: { icon: "w-6" },
-          onClick: closeSubMenu,
-        }}
-      />
-
+    <>
       <LineTitle margin="t-large">{`Stored/Ordered ${name.PLURAL}`}</LineTitle>
 
       <div className={STYLES.sortersRow}>
@@ -80,7 +63,7 @@ function StoredAndOrders({ type, closeMenu, closeSubMenu }) {
           color="yellow"
           size="smaller"
           Icon={BsStarFill}
-          customDirSty={{ button: "flex-1 sm<px-2'mr-2>", icon: "mb-2px" }}
+          customDirSty={STYLES.sortByRank}
         >
           Sort by Rank
         </CuteButton>
@@ -89,7 +72,7 @@ function StoredAndOrders({ type, closeMenu, closeSubMenu }) {
             sortBy.includes("amount") ? "always-filled" : "outline-and-filled"
           }
           onClick={() => changeSortBy("amount")}
-          customDirSty={{ button: "flex-1 sm<px-2'ml-2>" }}
+          customDirSty={STYLES.sortByAmount}
           color="indigo"
           Icon={GiSwordsEmblem}
           size="smaller"
@@ -107,7 +90,7 @@ function StoredAndOrders({ type, closeMenu, closeSubMenu }) {
 
           <div className={STYLES.list}>
             {stored.length == 0 ? (
-              <p className={STYLES.empty}>No stored {name.PLURAL}</p>
+              <p className={STYLES.emptyList}>No stored {name.PLURAL}</p>
             ) : (
               stored.map(({ rank, amount }) => (
                 <Row
@@ -127,7 +110,7 @@ function StoredAndOrders({ type, closeMenu, closeSubMenu }) {
 
           <div className={STYLES.list}>
             {orders.length == 0 ? (
-              <p className={STYLES.empty}>No orders</p>
+              <p className={STYLES.emptyList}>No orders</p>
             ) : (
               orders.map(({ rank, amount }) => (
                 <Row
@@ -145,14 +128,14 @@ function StoredAndOrders({ type, closeMenu, closeSubMenu }) {
         color="red"
         stylesBehavior={deletion ? "always-filled" : "outline-and-filled"}
         Icon={deletion ? FiUnlock : FiLock}
-        customDirSty={{ button: "mt-4" }}
+        customDirSty={STYLES.unlockDeletion}
         onClick={() => setDeletion((prev) => !prev)}
         transitionSpeed="instant"
         size="smaller"
       >
         {deletion ? "Deletion unlocked - Click to discard" : "Deletion locked"}
       </CuteButton>
-    </div>
+    </>
   );
 }
 
@@ -166,9 +149,9 @@ function Row({ rank, amount, deletion, onDelete }) {
       className={STYLES.row + (deletion ? STYLES.deletableRow : "")}
       onClick={() => deletion && onDelete()}
     >
-      <span className={STYLES.rank}>Rank {rank}</span>
-      {deletion && hovered && <BsTrashFill className={STYLES.delete} />}
-      <span className={STYLES.units}>
+      <span className={STYLES.rowRank}>Rank {rank}</span>
+      {deletion && hovered && <BsTrashFill className={STYLES.rowDeleteIcon} />}
+      <span className={STYLES.rowUnits}>
         {amount} {amount > 1 ? "units" : "unit"}
       </span>
     </p>
@@ -176,9 +159,9 @@ function Row({ rank, amount, deletion, onDelete }) {
 }
 
 const STYLES = {
-  ct: "",
-
   sortersRow: "flex justify-around mt-4",
+  sortByRank: { button: "flex-1 sm<px-2'mr-2>", icon: "mb-2px" },
+  sortByAmount: { button: "flex-1 sm<px-2'ml-2>" },
 
   columnsCt: "flex mt-6",
   columnTitle:
@@ -188,24 +171,16 @@ const STYLES = {
   storedColumn: "flex-1 text-center border-r-1 border-slate-400 pr-2",
   ordersColumn: "flex-1 text-center pl-2",
 
-  empty: "mt-4 text-light text-slate-500",
+  emptyList: "mt-4 text-light text-slate-500",
 
   list: "mt-2",
   row: "flex justify-between items-center px-2 py-1 text-slate-400 text-light text-left border-b-1 border-slate-300",
+  rowRank: "text-yellow-700",
+  rowUnits: "text-indigo-500",
   deletableRow: " cursor-pointer hover:bg-slate-200",
-  rank: "text-yellow-700",
-  units: "text-indigo-500",
-  delete: "text-red-400",
+  rowDeleteIcon: "text-red-400",
 
-  locked: {
-    ct: "mt-4",
-    label: "text-sm",
-  },
-  unlocked: {
-    ct: "mt-4",
-    label: "text-sm text-red-500",
-    box: "border-red-500",
-  },
+  unlockDeletion: { button: "mt-4" },
 };
 
 /**Turns an EquipmentSet into an array, filters the ranks with 0 units, and sorts it. */
@@ -226,4 +201,4 @@ function getDisplayEquipmentSet(set, sortBy) {
   });
 }
 
-export default StoredAndOrders;
+export default StoredAndOrdersSection;

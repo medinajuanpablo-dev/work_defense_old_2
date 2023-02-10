@@ -1,7 +1,7 @@
 import React from "react";
 
 import Summary from "./Summary";
-import StoredAndOrders from "./StoredAndOrders";
+import EquipmentDetails from "./EquipmentDetails";
 
 function ResourcesMenu({ closeMenu }) {
   const [subMenu, setSubMenu] = React.useState(null);
@@ -14,9 +14,9 @@ function ResourcesMenu({ closeMenu }) {
     setSubMenu(subMenuKey);
   }
 
-  if (subMenu?.includes("storedAndOrders"))
+  if (subMenu?.includes("details"))
     return (
-      <StoredAndOrders
+      <EquipmentDetails
         type={subMenu.split("-")[1]}
         {...{ closeMenu, closeSubMenu }}
       />

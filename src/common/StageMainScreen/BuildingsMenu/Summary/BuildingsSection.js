@@ -73,28 +73,28 @@ const NOTIFICATIONS = {
     Icon: FiCheck,
     title: "Everything is fine.",
     body: "This building is safe and operational.",
-    state: ITK.NOTIFICATION_TYPES.FINE,
+    type: ITK.NOTIFICATION_TYPES.FINE,
   },
   DANGER: {
     ButtonIcon: GiSwordBrandish,
     Icon: GiSwordBrandish,
     title: "Building Zone under attack!",
     body: "This building's zone will soon be attacked. If lost, the building will become not-operational.",
-    state: ITK.NOTIFICATION_TYPES.DANGER,
+    type: ITK.NOTIFICATION_TYPES.DANGER,
   },
   NON_OPERATIONAL: {
     ButtonIcon: IoWarningOutline,
     Icon: IoWarningOutline,
     title: "Not Operational!",
     body: "Zone occupied. Building not operational until the bill is paid or the zone is liberated.",
-    state: ITK.NOTIFICATION_TYPES.EMERGENCY,
+    type: ITK.NOTIFICATION_TYPES.EMERGENCY,
   },
   DESTRUCTION: {
     ButtonIcon: BsExclamationOctagon,
     Icon: RiAlarmWarningLine,
     title: "Destruction!",
     body: "The zone's occupants are destroying the building and lowering it's level!",
-    state: ITK.NOTIFICATION_TYPES.EMERGENCY,
+    type: ITK.NOTIFICATION_TYPES.EMERGENCY,
   },
 };
 

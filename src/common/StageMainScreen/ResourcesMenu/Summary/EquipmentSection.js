@@ -9,7 +9,7 @@ import { sumProperties } from "@static/functions";
 
 import { EQK, equipmentOps } from "@static/contexts/equipment";
 import { BDK } from "@static/contexts/buildings";
-import { miscOps, MIK } from "@static/contexts/miscellaneous";
+import { INTERFACE, interfaceOps } from "@static/contexts/interface";
 
 const { WEAPON: W, ARMOR: A } = EQK.TYPES;
 
@@ -37,7 +37,7 @@ function EquipmentSection({ openSubMenu }) {
     summary.capacity = equipmentOps.storageCapacity(arsenalLevel);
 
     //prettier-ignore
-    summary.capacityStatus = miscOps.capacityStatus(summary.totalStored, summary.capacity);
+    summary.capacityStatus = interfaceOps.capacityStatus(summary.totalStored, summary.capacity);
 
     return summary;
   }, [gs.equipment, gs.buildings]);
@@ -46,7 +46,7 @@ function EquipmentSection({ openSubMenu }) {
     <>
       <LineTitle>Equipment Summary</LineTitle>
 
-      <CapacityBox summary={summary} />
+      <CapacitySummary summary={summary} />
 
       <div className={STYLES.columnsCt}>
         <div className={STYLES.leftColumn}>
@@ -79,7 +79,7 @@ function EquipmentSection({ openSubMenu }) {
             color="indigo"
             colorStrength="lighter"
             size="smaller"
-            onClick={() => openSubMenu(`storedAndOrders-${EQK.TYPES.WEAPON}`)}
+            onClick={() => openSubMenu(`details-${EQK.TYPES.WEAPON}`)}
             customDirSty={{ button: "mt-6" }}
           >
             Stored / Orders
@@ -116,7 +116,7 @@ function EquipmentSection({ openSubMenu }) {
             color="indigo"
             colorStrength="lighter"
             size="smaller"
-            onClick={() => openSubMenu(`storedAndOrders-${EQK.TYPES.ARMOR}`)}
+            onClick={() => openSubMenu(`details-${EQK.TYPES.ARMOR}`)}
             customDirSty={{ button: "mt-6" }}
           >
             Stored / Orders
@@ -141,9 +141,9 @@ const STYLES = {
   stat: { ct: "my-2", icon: "| xs:w-6 xs:h-6" },
 };
 
-function CapacityBox({ summary }) {
+function CapacitySummary({ summary }) {
   //prettier-ignore
-  const getActiveStyles = useIndicatedStyles(CAPACITY_BOX_INDICATORS, CAPACITY_BOX_DIRECTED_STYLES);
+  const getActiveStyles = useIndicatedStyles(INTERFACE.CAPACITY_INDICATORS, CAPACITY_DIR_STY);
 
   const styles = getActiveStyles({ status: summary.capacityStatus });
 
@@ -159,17 +159,10 @@ function CapacityBox({ summary }) {
 }
 
 //prettier-ignore
-const CAPACITY_BOX_DIRECTED_STYLES = {
+const CAPACITY_DIR_STY = {
   ct: "mt-4 w-2/3 mx-auto text-gray-700 rounded-md border-blue-300 border-1 border-dashed text-center py-3 text-xl leading-tight || mx<border-red-500> amx<border-yellow-700> nmx<border-indigo-500>",
   capacity: "text-light text-base text-green-500 || mx<text-red-500> amx<text-yellow-700> nmx<text-indigo-500>",
   capacityNumber: "text-lg",
 }
-
-//prettier-ignore
-const CAPACITY_BOX_INDICATORS = [
-  { key: "maxed", directive: "mx", condition: p => p.status == MIK.CAPACITY_STATUS.MAXED },
-  { key: "almostMaxed", directive: "amx", condition: p => p.status == MIK.CAPACITY_STATUS.ALMOST_MAXED },
-  { key: "nearMax", directive: "nmx", condition: p => p.status == MIK.CAPACITY_STATUS.NEAR_MAX },
-]
 
 export default EquipmentSection;

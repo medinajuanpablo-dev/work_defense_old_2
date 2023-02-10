@@ -67,6 +67,7 @@ const DEFAULT_GENERAL_STATE = {
 
   miscellaneous: {
     stage: MIK.STAGES.DAWN,
+    previousGS: null,
   },
 
   population: {
@@ -276,6 +277,7 @@ export default (() => {
 /** Miscellaneous State types
  * @typedef MiscellaneousState
  * @property {string} stage Current stage of the current tempo.
+ * @property {GeneralState} previousGS The previous GS saved for undo.
  */
 
 /** Population State types
