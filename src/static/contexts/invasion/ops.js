@@ -2,8 +2,9 @@ import { random, cloneDeep, mapValues } from "lodash";
 
 //prettier-ignore
 import { sumItems, capped, pickRandomItem, checkRequiredValues } from "@static/functions";
-import { armyOps, miscellaneousOps as miscOps } from "@static/functions";
 
+import { armyOps } from "../army";
+import { miscOps } from "../miscellaneous";
 import { MISC } from "../miscellaneous";
 
 /**
@@ -116,6 +117,16 @@ export function risksFor(invasionNumber) {
 }
 
 /**
+ * Calculates the base quality of a scouting expedition, which is the quality provided by the
+ * Scouts Guild level (or the same as an expedition without investment).
+ * @param {number} guildLevel
+ */
+export function baseExpeditionQuality(guildLevel) {
+  const BSQ = BASE_SCOUTING_QUALITY;
+  return BSQ.BASE + guildLevel * BSQ.INCREASE;
+}
+
+/**
  * Calculates the quality of a scouting expedition by the specified guild level, with the specified
  * investment, and against the specified enemy force.
  * @param {number} guildLevel
@@ -128,13 +139,12 @@ export function expeditionQuality(guildLevel, investment, enemyForce) {
     { enemyForce, itemsType: "object" },
   ]);
 
-  const BSQ = BASE_SCOUTING_QUALITY;
-  const base = BSQ.BASE + guildLevel * BSQ.INCREASE;
+  const base = baseExpeditionQuality(guildLevel); //Quality given by the guild (without investment)
 
-  const pureQuality = base * (1 + investment * INVESTMENT_DLOG_IMPACT);
+  const pureQuality = base * (1 + investment * INVESTMENT_DLOG_IMPACT); //Quality without menace.
   const menaceFactor = 1 / (enemiesMenace(enemyForce) * MENACE.IMPACT);
 
-  return Math.round(pureQuality * menaceFactor);
+  return Math.round(pureQuality * menaceFactor); //Final quality.
 }
 
 /**

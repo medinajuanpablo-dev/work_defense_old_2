@@ -6,7 +6,7 @@ import { WORKER_OCCS, PROCESS_OCCS, KEYS as PPK } from "./gens";
  * Tells the amount of free people coming from immigration with the specified Immigration Post level.
  * @param {number} postLevel
  */
-export function immigrationPeople(postLevel) {
+export function immigrants(postLevel) {
   checkRequiredValues([{ postLevel, type: "number" }]);
 
   const { BASE, INCREASE_PER_LEVEL } = IMMIGRATION;

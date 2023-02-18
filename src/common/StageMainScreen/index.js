@@ -4,9 +4,8 @@ import { BiRightArrow } from "react-icons/bi";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { GiCastle, GiMetalBar } from "react-icons/gi";
 
-import { GenericTopBar, TopBarButton } from "@common/index";
+import { GenericTopBar, TopBarButton, Screen } from "@common/index";
 
-import { MISC } from "@static/contexts/miscellaneous";
 import { ITK } from "@static/contexts/interface";
 
 import BuildingsMenu from "./BuildingsMenu";
@@ -40,7 +39,7 @@ function StageMainScreen({ children, stageKey }) {
 
   //Else show the Stage's Main Screen...
   return (
-    <div className={STYLES.ct}>
+    <Screen className={STYLES.ct}>
       <GenericTopBar>
         <TopBarButton
           onClick={revert}
@@ -71,15 +70,13 @@ function StageMainScreen({ children, stageKey }) {
         />
       </GenericTopBar>
 
-      <p className={STYLES.title}>{MISC.ORDERED_STAGES[stageKey]}</p>
-
       {children}
-    </div>
+    </Screen>
   );
 }
 
 const STYLES = {
-  ct: "p-2",
+  ct: "py-4 flex flex-col",
   middleButtonsCt: "w-1/2 flex",
   middleButton: { button: "flex-1 mx-auto" },
   revertButton: { button: "py-2 border-r-2 w-1/6" },

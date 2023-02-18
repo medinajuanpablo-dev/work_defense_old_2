@@ -39,7 +39,11 @@ const DEFAULT_GENERAL_STATE = {
   // battle: {},
 
   buildings: mapValues(BUILDINGS.BY_BUILDING, () => {
-    return { level: 0, occupantsBillPaid: false };
+    return {
+      level: 0,
+      upgrading: false,
+      occupantsBillPaid: false,
+    };
   }),
 
   equipment: {
@@ -98,12 +102,22 @@ export default (() => {
   var dgs = DEFAULT_GENERAL_STATE;
 
   //Misc
-  dgs.miscellaneous.stage = MIK.STAGES.IMMIGRATION;
+  dgs.miscellaneous.stage = MIK.STAGES.CONSTRUCTIONS_END;
 
   //Buildings
-  for (let b in dgs.buildings) dgs.buildings[b].level = random(0, 5);
+  for (let b in dgs.buildings) dgs.buildings[b].level = 3;
   dgs.buildings[BDK.NAMES.WAREHOUSE].level = 3;
-  dgs.buildings[BDK.NAMES.ARSENAL].level = 12;
+  dgs.buildings[BDK.NAMES.ARSENAL].level = 3;
+  dgs.buildings[BDK.NAMES.IMMIGRATION_POST].level = 5;
+
+  dgs.buildings[BDK.NAMES.MINES].upgrading = true;
+  dgs.buildings[BDK.NAMES.FARMS].upgrading = true;
+  dgs.buildings[BDK.NAMES.IMMIGRATION_POST].upgrading = true;
+  dgs.buildings[BDK.NAMES.COMMAND_CENTER].upgrading = true;
+
+  //Population
+  dgs.population.count[PPK.OCCS.FREE] = 30;
+  dgs.population.count.total = 30;
 
   //Techs
   dgs.technologies.researchPoints = 5;
@@ -234,6 +248,7 @@ export default (() => {
  *
  * @typedef BuildingState
  * @property {number} level Current level of the building.
+ * @property {boolean} upgrading If the building is currently being upgraded.
  * @property {boolean} occupantsBillPaid Current state of payment of the occupants bill for the use of the building.
  */
 

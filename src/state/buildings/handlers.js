@@ -31,6 +31,11 @@ function getHandlers(prevState, newState) {
       return newState;
     },
 
+    allNotUpgrading() {
+      for (let buildingKey in newState) newState[buildingKey].upgrading = false;
+      return newState;
+    },
+
     //
 
     setLevel({ buildingKey, level }) {
@@ -45,6 +50,11 @@ function getHandlers(prevState, newState) {
 
     levelDown({ buildingKey }) {
       newState[buildingKey].level -= 1;
+      return newState;
+    },
+
+    setUpgrading({ buildingKey, upgrading }) {
+      newState[buildingKey].upgrading = upgrading;
       return newState;
     },
 

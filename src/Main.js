@@ -22,7 +22,7 @@ function Main() {
 }
 
 const STYLES = {
-  ct: "pt-10 pb-4 px-4 bg-gray-100 min-h-screen",
+  ct: "pt-12 pb-4 px-4 bg-gray-100 min-h-screen",
 };
 
 export default Main;

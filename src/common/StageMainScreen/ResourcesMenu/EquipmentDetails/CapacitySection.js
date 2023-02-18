@@ -48,25 +48,21 @@ function CapacitySection() {
     );
 
     //Determine the capacity status after orders are finished.
-    var afterOrdersCapacityStatus;
-    if (afterOrdersTotal < (1 - ARSENAL_MARGIN) * capacity)
-      afterOrdersCapacityStatus = "safelyStorable";
-    else if (afterOrdersTotal < capacity)
-      afterOrdersCapacityStatus = "barelyStorable";
-    else if (afterOrdersTotal < (1 + ARSENAL_MARGIN) * capacity)
-      afterOrdersCapacityStatus = "mostStorable";
-    else afterOrdersCapacityStatus = "notStorable";
+    const afterCapacityStatus = interfaceOps.afterCapacityStatus(
+      afterOrdersTotal,
+      capacity
+    );
 
     return {
       currently,
       afterOrdersTotal,
       capacity,
       capacityStatus,
-      afterOrdersCapacityStatus,
+      afterCapacityStatus,
     };
   }, [gs]);
 
-  const notif = FINISHED_ORDERS_NOTIFICATIONS[status.afterOrdersCapacityStatus];
+  const notif = FINISHED_ORDERS_NOTIFICATIONS[status.afterCapacityStatus];
 
   return (
     <>
@@ -167,34 +163,30 @@ const CAPACITY_NOTIFICATIONS = {
 };
 
 const FINISHED_ORDERS_NOTIFICATIONS = {
-  safelyStorable: {
+  [ITK.AFTER_CAPACITY_STATUS.SAFELY_STORABLE]: {
     color: "green",
     ButtonIcon: BsCheck2,
     body: "We can store all the finished orders with a safe margin.",
     type: ITK.NOTIFICATION_TYPES.FINE,
   },
-  barelyStorable: {
+  [ITK.AFTER_CAPACITY_STATUS.BARELY_STORABLE]: {
     color: "yellow",
     ButtonIcon: BsExclamationTriangle,
     body: "We can store all the finished orders, but we'll be full or almost full.",
     type: ITK.NOTIFICATION_TYPES.WARNING,
   },
-  mostStorable: {
+  [ITK.AFTER_CAPACITY_STATUS.MOST_STORABLE]: {
     color: "orange",
     ButtonIcon: BsExclamationTriangleFill,
     body: "We can't store some of the finished orders! The lowest rank equipment will be automatically discarded in the next Production Stage.",
     type: ITK.NOTIFICATION_TYPES.DANGER,
   },
-  notStorable: {
+  [ITK.AFTER_CAPACITY_STATUS.NOT_STORABLE]: {
     color: "red",
     ButtonIcon: BsExclamationCircleFill,
     body: "We won't be able to store a big portion of the finished orders! The lowest rank equipment will be automatically discarded in the next Production Stage.",
     type: ITK.NOTIFICATION_TYPES.EMERGENCY,
   },
 };
-
-/**The percentage of arsenal capacity left to be considered "safely storable",
- * and also the percentage of overload to be considered "most storable".  */
-const ARSENAL_MARGIN = 0.1; //10%
 
 export default CapacitySection;

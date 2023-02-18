@@ -7,7 +7,7 @@ export const TYPES = mapValues({
   
   //Simple Actions
   ALL_UNRESEARCHED: 0, ALL_RESEARCHED: 0,
-  EMPTY_POINTS: 0, ADD_ONE_POINT: 0, REMOVE_COST_POINTS: 0,
+  EMPTY_POINTS: 0, ADD_COST_POINTS: 0, REMOVE_COST_POINTS: 0,
 
   //Parameterized Actions
   CATEGORY_RESEARCHED: 0, CATEGORY_UNRESEARCHED: 0,
@@ -22,7 +22,7 @@ const ACTION_CREATORS = {
   allUnresearched: () => ({ type: TYPES.ALL_UNRESEARCHED }),
   allResearched: () => ({ type: TYPES.ALL_RESEARCHED }),
   emptyPoints: () => ({ type: TYPES.EMPTY_POINTS }),
-  addOnePoint: () => ({ type: TYPES.ADD_ONE_POINT }),
+  addCostPoints: () => ({ type: TYPES.ADD_COST_POINTS }),
   removeCostPoints: () => ({ type: TYPES.REMOVE_COST_POINTS }),
 
   categoryResearched: (categoryKey) => ({
@@ -70,7 +70,7 @@ export default ACTION_CREATORS;
  * @property {() => any} allUnresearched Set all technologies as researched.
  * @property {() => any} allResearched Set all technologies as unresearched.
  * @property {() => any} emptyPoints Set the remaining research points to zero.
- * @property {() => any} addOnePoint Add one research point.
+ * @property {() => any} addCostPoints Add as much points as one research cost (specified at the techs general values).
  * @property {() => any} removeCostPoints Remove as much points as one research cost (specified at the techs general values).
  * @property {(categoryKey: string) => any} categoryResearched Set all technologies in a category as researched.
  * @property {(categoryKey: string) => any} categoryUnresearched Set all technologies in a category as unresearched.

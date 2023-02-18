@@ -20,6 +20,8 @@ export default function reducer(prevState = defaultState.buildings, action) {
       return handlers.allPaid();
     case TYPES.ALL_UNPAID:
       return handlers.allUnpaid();
+    case TYPES.ALL_NOT_UPGRADING:
+      return handlers.allNotUpgrading();
 
     case TYPES.SET_LEVEL:
       return handlers.setLevel(action.params);
@@ -27,6 +29,8 @@ export default function reducer(prevState = defaultState.buildings, action) {
       return handlers.levelUp(action.params);
     case TYPES.LEVEL_DOWN:
       return handlers.levelDown(action.params);
+    case TYPES.SET_UPGRADING:
+      return handlers.setUpgrading(action.params);
     case TYPES.PAY_BILL:
       return handlers.payBill(action.params);
     case TYPES.UNPAY_BILL:

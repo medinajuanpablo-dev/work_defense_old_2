@@ -6,7 +6,7 @@ import { useGeneralStateUpdator } from "@state/hooks";
 
 import { MIK } from "@static/contexts/miscellaneous";
 
-function BuildStage() {
+function Stage() {
   //prettier-ignore
   const getActiveStyles = useIndicatedStyles(INDICATORS, DIRECTED_STYLES);
   const updateGS = useGeneralStateUpdator("population", "miscellaneous");
@@ -18,8 +18,8 @@ function BuildStage() {
   const styles = getActiveStyles({});
 
   return (
-    <StageMainScreen stageKey={MIK.STAGES.BUILD}>
-      <p className={styles.stageName}>Build Stage</p>
+    <StageMainScreen stageKey={MIK.STAGES.ConstructionsEndStage}>
+      <p className={styles.stageName}>Constructions End Stage</p>
 
       <ContinueButton onClick={endStage} />
 
@@ -48,4 +48,4 @@ const DIRECTED_STYLES = {
 
 const INDICATORS = [];
 
-export default BuildStage;
+export default Stage;

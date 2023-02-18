@@ -17,6 +17,7 @@ import { ITK } from "@static/contexts/interface";
  * @param {boolean} props.async
  * @param {any} props.notificationsConfig
  * @param {any} props.customDirSty
+ * @param {() => void} props.onClick
  */
 function SummaryRow({
   Icon,
@@ -28,6 +29,7 @@ function SummaryRow({
   outstand,
   notificationsConfig,
   customDirSty,
+  onClick,
 }) {
   //prettier-ignore
   const getActiveStyles = useIndicatedStyles(INDICATORS, DIRECTED_STYLES, { customDirSty });
@@ -41,8 +43,8 @@ function SummaryRow({
 
   return (
     <div className={styles.ct}>
-      {Icon && <Icon className={styles.icon} />}
-      <p className={styles.text}>
+      {Icon && <Icon onClick={onClick} className={styles.icon} />}
+      <p onClick={onClick} className={styles.text}>
         {parsedText.left}
         {parsedText.goesFirst === TOKENS.LABEL ? labelElement : amountElement}
         {parsedText.middle}

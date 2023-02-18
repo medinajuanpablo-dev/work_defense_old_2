@@ -1,6 +1,6 @@
 import React from "react";
 
-import { AsyncMounter, FiltersTopBar } from "@common/index";
+import { AsyncMounter, FiltersTopBar, Screen } from "@common/index";
 import { useGeneralStateUpdator, useGeneralStateReader } from "@state/hooks";
 
 import { ITK } from "@static/contexts/interface";
@@ -26,7 +26,7 @@ function PopulationMenuSummary({ closeMenu, openSubMenu }) {
   const sectionsVisibility = gs.interface.shownSummarySections[ITK.MENUS.RESOURCES];
 
   return (
-    <div className={STYLES.ct}>
+    <Screen className={STYLES.ct}>
       <FiltersTopBar
         closeMenu={closeMenu}
         filtersState={sectionsVisibility}
@@ -47,7 +47,7 @@ function PopulationMenuSummary({ closeMenu, openSubMenu }) {
           <EquipmentSection openSubMenu={openSubMenu} />
         </AsyncMounter>
       )}
-    </div>
+    </Screen>
   );
 }
 

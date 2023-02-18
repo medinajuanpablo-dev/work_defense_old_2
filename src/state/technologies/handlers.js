@@ -27,8 +27,8 @@ function getHandlers(prevState, newState) {
       return newState;
     },
 
-    addOnePoint() {
-      newState.researchPoints += 1;
+    addCostPoints() {
+      newState.researchPoints += TECHS.RESEARCH_COST;
       return newState;
     },
 

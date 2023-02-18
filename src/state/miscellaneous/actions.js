@@ -45,8 +45,8 @@ export default ACTION_CREATORS;
 
 /**
  * @typedef MiscellaneousActions
- * @property {() => any} stageBackwards Move to the next stage.
- * @property {() => any} stageForward Move to the previous stage.
+ * @property {() => any} stageBackwards Move to the previous stage.
+ * @property {() => any} stageForward Move to the next stage.
  * @property {() => any} toFirst Move to the first stage.
  * @property {() => any} toLast Move to the last stage.
  * @property {() => any} nothing Does absolutely nothing.

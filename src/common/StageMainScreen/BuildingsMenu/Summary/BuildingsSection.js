@@ -14,11 +14,20 @@ import { BUILDINGS } from "@static/contexts/buildings";
 import { MISC } from "@static/contexts/miscellaneous";
 
 function BuildingsSection() {
+  const [showingDescription, setShowingDescription] = React.useState(null);
   const gs = useGeneralStateReader("buildings");
+
+  function buildingClick(key) {
+    setShowingDescription((prev) => (prev == key ? null : key));
+  }
 
   return (
     <>
       <LineTitle>Buildings</LineTitle>
+
+      <p className={STYLES.message}>
+        (Click a building to see it's description)
+      </p>
 
       <div className={STYLES.buildingsListCt}>
         {Object.keys(BUILDINGS_KEYS_BY_ZONE).map((z) => (
@@ -26,16 +35,24 @@ function BuildingsSection() {
             <p className={STYLES.zoneName}>{MISC.ACTIVE_ZONES[z]} Zone</p>
 
             {BUILDINGS_KEYS_BY_ZONE[z].map((b) => (
-              <SummaryRow
-                key={b}
-                Icon={RiEditCircleFill}
-                text="<L> [<A>]"
-                label={BUILDINGS.BY_BUILDING[b].NAME}
-                amount={gs.buildings[b].level}
-                notificationsConfig={[NOTIFICATIONS.FINE]}
-                customDirSty={STYLES.building}
-                color="blue"
-              />
+              <>
+                <SummaryRow
+                  key={b}
+                  Icon={RiEditCircleFill}
+                  text="<L> [<A>]"
+                  label={BUILDINGS.BY_BUILDING[b].NAME}
+                  amount={gs.buildings[b].level}
+                  notificationsConfig={[NOTIFICATIONS.FINE]}
+                  customDirSty={STYLES.building}
+                  color="blue"
+                  onClick={() => buildingClick(b)}
+                />
+                {showingDescription == b && (
+                  <p className={STYLES.buildingDescription}>
+                    {BUILDINGS.BY_BUILDING[b].DESCRIPTION}
+                  </p>
+                )}
+              </>
             ))}
           </React.Fragment>
         ))}
@@ -45,15 +62,19 @@ function BuildingsSection() {
 }
 
 const STYLES = {
+  message: "mt-2 text-center text-xs text-slate-500 text-light",
+
   buildingsListCt: "flex flex-col mt-2 text-sm | xs:text-base",
 
-  zoneName: "text-light text-xs text-indigo-500 mt-2 | xs:text-sm",
+  zoneName: "text-light text-xs text-indigo-500 mt-3 | xs:text-sm",
 
   building: {
     ct: "my-1",
     label: "text-light mr-1",
     amount: "mx-1",
   },
+  buildingDescription:
+    "mt-1 mb-2 text-slate-600 text-sm p-3 border-1 border-slate-300 text-light",
 };
 
 /**An object of `zoneKey: [...buildingsPlacedThereKeys]` fields */

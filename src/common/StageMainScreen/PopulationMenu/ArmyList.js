@@ -5,7 +5,7 @@ import { CgEnter } from "react-icons/cg";
 import { GiRibbonMedal, GiAxeSword, GiArmorVest } from "react-icons/gi";
 
 import { useGeneralStateReader } from "@state/hooks";
-import { TwoButtonsTopBar, LineTitle } from "@common/index";
+import { TwoButtonsTopBar, LineTitle, Screen } from "@common/index";
 
 import { MISC } from "@static/contexts/miscellaneous";
 
@@ -66,7 +66,7 @@ function ArmyList({ closeMenu, closeSubMenu }) {
   );
 
   return (
-    <div className={STYLES.ct}>
+    <Screen className={STYLES.ct}>
       <TwoButtonsTopBar
         leftButton={{
           Icon: CgEnter,
@@ -138,7 +138,7 @@ function ArmyList({ closeMenu, closeSubMenu }) {
           ))}
         </div>
       </div>
-    </div>
+    </Screen>
   );
 }
 

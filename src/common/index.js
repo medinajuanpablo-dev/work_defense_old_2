@@ -28,6 +28,7 @@ import s2 from "./LineTitle";
 import s3 from "./SummaryRow";
 import s4 from "./BottomNotif";
 import s5 from "./Screen";
+import s6 from "./ContinueButton";
 
 //General purpose Components exports. Keep them separated to ease updates.
 export const CuteInput = c1;
@@ -58,3 +59,4 @@ export const LineTitle = s2;
 export const SummaryRow = s3;
 export const displayBottomNotif = s4;
 export const Screen = s5;
+export const ContinueButton = s6;

@@ -25,7 +25,7 @@ import techsActions, { TechnologiesActions } from "./technologies/actions";
  * @property {MiscellaneousActions} miscellaneous
  * @property {PopulationActions} population
  * @property {ResourcesActions} resources
- * @property {TechnologiesActions} techs
+ * @property {TechnologiesActions} technologies
  */
 const ALL_ACTIONS = {
   army: armyActions,

@@ -16,8 +16,8 @@ export default function reducer(prevState = defaultState.technologies, action) {
       return handlers.allResearched();
     case TYPES.EMPTY_POINTS:
       return handlers.emptyPoints();
-    case TYPES.ADD_ONE_POINT:
-      return handlers.addOnePoint();
+    case TYPES.ADD_COST_POINTS:
+      return handlers.addCostPoints();
     case TYPES.REMOVE_COST_POINTS:
       return handlers.removeCostPoints();
 
