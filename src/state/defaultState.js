@@ -116,8 +116,10 @@ export default (() => {
   dgs.buildings[BDK.NAMES.COMMAND_CENTER].upgrading = true;
 
   //Population
-  dgs.population.count[PPK.OCCS.FREE] = 30;
-  dgs.population.count.total = 30;
+  dgs.population.count[PPK.OCCS.FREE] = 8;
+  dgs.population.count[PPK.OCCS.MINER] = 5;
+  dgs.population.count[PPK.OCCS.FARMER] = 12;
+  dgs.population.count.total = 25;
 
   //Techs
   dgs.technologies.researchPoints = 5;

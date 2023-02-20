@@ -3,7 +3,6 @@ import { RiEditCircleFill } from "react-icons/ri";
 import { BsQuestionCircle } from "react-icons/bs";
 
 import { StageMainScreen, ContinueButton, SummaryRow } from "@common/index";
-import { useIndicatedStyles } from "@static/tailwind";
 import { useGeneralStateReader, useGeneralStateUpdator } from "@state/hooks";
 
 import { MIK } from "@static/contexts/miscellaneous";
@@ -16,8 +15,6 @@ import { populationOps } from "@static/contexts/population";
 import { invasionOps } from "@static/contexts/invasion";
 
 function ConstructionsEndStage() {
-  //prettier-ignore
-  const getActiveStyles = useIndicatedStyles(INDICATORS, DIRECTED_STYLES);
   const gs = useGeneralStateReader("buildings");
   const updateGS = useGeneralStateUpdator(
     "miscellaneous",
@@ -40,14 +37,12 @@ function ConstructionsEndStage() {
     updateGS.miscellaneous.stageForward();
   }
 
-  const styles = getActiveStyles({});
-
   return (
     <StageMainScreen stageKey={MIK.STAGES.CONSTRUCTIONS_END}>
-      <p className={styles.stageName}>Constructions End Stage</p>
+      <p className={STYLES.stageName}>Constructions End Stage</p>
 
-      <p className={styles.summary}>
-        <span className={styles.summaryTitle}>Construction Foreman</span>
+      <p className={STYLES.summary}>
+        <span className={STYLES.summaryTitle}>Construction Foreman</span>
         We worked without issues and successfully completed the ordered
         projects.
       </p>
@@ -60,7 +55,7 @@ function ConstructionsEndStage() {
           label={BUILDINGS.BY_BUILDING[b].NAME}
           amount={gs.buildings[b].level + 1}
           color="blue"
-          customDirSty={ROW_STYLES}
+          customDirSty={STYLES.row}
           size="smaller"
           notificationsConfig={[
             {
@@ -81,17 +76,15 @@ function ConstructionsEndStage() {
 }
 
 //prettier-ignore
-const DIRECTED_STYLES = {
+const STYLES = {
   stageName: "text-center text-xl text-slate-700 text-light pb-1 border-slate-400 border-b-1 w-9/12 mx-auto",
 
   summary: "relative mb-2 text-xs text-light px-3 pt-4 pb-3 border-1 border-sky-200 mt-8 text-slate-600",
   summaryTitle: "absolute -top-2 left-1 px-2 bg-slate-100 text-sky-600",
-};
 
-const INDICATORS = [];
-
-const ROW_STYLES = {
-  ct: "mt-4",
+  row: {
+    ct: "mt-4"
+  }
 };
 
 function buildNewEffectDescription(buildingKey, newLevel) {
