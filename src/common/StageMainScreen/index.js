@@ -1,18 +1,20 @@
 import React from "react";
 import { IoIosPeople } from "react-icons/io";
-import { BiRightArrow } from "react-icons/bi";
+import { BsInfoCircle } from "react-icons/bs";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { GiCastle, GiMetalBar } from "react-icons/gi";
 
-import { GenericTopBar, TopBarButton, Screen } from "@common/index";
+import { GenericTopBar, TopBarButton, Screen, CuteModal } from "@common/index";
 
 import { ITK } from "@static/contexts/interface";
 
 import BuildingsMenu from "./BuildingsMenu";
 import PopulationMenu from "./PopulationMenu";
 import ResourcesMenu from "./ResourcesMenu";
+import Tutorial from "./Tutorial";
 
-function StageMainScreen({ children, stageKey }) {
+function StageMainScreen({ children, stageKey, onUndo }) {
+  const [showTutorial, setShowTutorial] = React.useState(false);
   const [menu, setMenu] = React.useState(null);
 
   function closeMenu() {
@@ -23,12 +25,8 @@ function StageMainScreen({ children, stageKey }) {
     setMenu(menuKey);
   }
 
-  function revert() {
-    console.log("Clicked Revert");
-  }
-
-  function forward() {
-    console.log("Clicked Forward");
+  function undoAll() {
+    if (onUndo) onUndo();
   }
 
   //If Menu selected, render it.
@@ -42,7 +40,7 @@ function StageMainScreen({ children, stageKey }) {
     <Screen className={STYLES.ct}>
       <GenericTopBar>
         <TopBarButton
-          onClick={revert}
+          onClick={undoAll}
           customStyles={STYLES.revertButton}
           Icon={RiArrowGoBackFill}
         />
@@ -64,13 +62,20 @@ function StageMainScreen({ children, stageKey }) {
           />
         </div>
         <TopBarButton
-          onClick={forward}
+          onClick={() => setShowTutorial(true)}
           customStyles={STYLES.nextButton}
-          Icon={BiRightArrow}
+          Icon={BsInfoCircle}
         />
       </GenericTopBar>
 
       {children}
+
+      <CuteModal
+        visible={showTutorial}
+        onClose={(finished) => finished && setShowTutorial(false)}
+      >
+        <Tutorial stageKey={stageKey} />
+      </CuteModal>
     </Screen>
   );
 }
@@ -79,8 +84,8 @@ const STYLES = {
   ct: "py-4 flex flex-col",
   middleButtonsCt: "w-1/2 flex",
   middleButton: { button: "flex-1 mx-auto" },
-  revertButton: { button: "py-2 border-r-2 w-1/6" },
-  nextButton: { button: "py-2 border-l-2 w-1/6" },
+  revertButton: { button: "py-2 border-r-2 w-1/6", icon: "w-6" },
+  nextButton: { button: "py-2 border-l-2 w-1/6", icon: "w-6" },
 };
 
 const MENUES = {

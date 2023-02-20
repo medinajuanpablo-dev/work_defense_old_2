@@ -105,7 +105,7 @@ function EmploymentStage() {
   const styles = getActiveStyles(tempState.get);
 
   return (
-    <StageMainScreen stageKey={MIK.STAGES.EMPLOYMENT}>
+    <StageMainScreen onUndo={setInitialValues} stageKey={MIK.STAGES.EMPLOYMENT}>
       <p className={styles.stageName}>Employment Stage</p>
 
       <div className={styles.row}>
@@ -113,28 +113,12 @@ function EmploymentStage() {
           <RiEditCircleFill className={styles.freeIcon} /> Free People:{" "}
           <span className={styles.freeAmount}>{tempState.get[OCK.FREE]}</span>
         </p>
-        <div className={styles.freeInfo}>
-          <CuteActionNotice
-            ButtonIcon={BsQuestionCircle}
-            customDirSty={INFO_STYLES}
-            position="right"
-            body="Free people can be assigned to any work with immediate effect. Consider that free people consume considerably less food than workers though."
-          />
-        </div>
-
         <p className={styles.reassigned}>
           <RiEditCircleFill className={styles.reassignedIcon} /> Reassigned:{" "}
           <span className={styles.reassignedAmount}>
             {tempState.get[OCK.REASSIGNED]}
           </span>
         </p>
-        <div className={styles.reassignedInfo}>
-          <CuteActionNotice
-            ButtonIcon={BsQuestionCircle}
-            customDirSty={INFO_STYLES}
-            body='Removing people from a job turns them into "Reassigned", which do nothing and turn into Free again the next Immigration Stage. Reassigned people consume more than free people though.'
-          />
-        </div>
       </div>
 
       <div className={styles.row + styles.resourcesRow}>
@@ -194,7 +178,7 @@ function EmploymentStage() {
         </div>
       </div>
 
-      <div className={styles.row}>
+      {/* <div className={styles.row}>
         <CuteButton
           onClick={setInitialValues}
           Icon={RiArrowGoBackFill}
@@ -203,7 +187,7 @@ function EmploymentStage() {
         >
           Undo All Changes
         </CuteButton>
-      </div>
+      </div> */}
 
       <div className={styles.summaries}>
         <SummaryRow
@@ -223,20 +207,18 @@ function EmploymentStage() {
 
 //prettier-ignore
 const DIRECTED_STYLES = {
-  stageName: "text-center text-xl text-slate-700 text-light pb-1 border-slate-400 border-b-1 w-9/12 mx-auto mb-4",
+  stageName: "text-center text-xl text-slate-700 text-light pb-1 border-slate-400 border-b-1 w-9/12 mx-auto",
 
   row: "relative mt-6 flex justify-center items-center",
-  resourcesRow: " -mx-2",
+  resourcesRow: "-mx-1",
 
-  free: "flex items-center mr-2px text-sm justify-center text-light text-slate-600 w-11/24 border-1 py-2 border-sky-300 rounded-md",
+  free: "flex items-center mr-1 text-sm justify-center text-light text-slate-600 w-11/24 border-1 py-2 border-sky-300 rounded-md",
   freeIcon: "mr-1 text-xl",
   freeAmount: "ml-2 text-base text-default text-sky-600 || nfr<text-slate-500>",
-  freeInfo: "absolute -left-2",
 
-  reassigned: "flex items-center text-sm ml-2px justify-center text-light text-slate-600 w-5/12 border-1 py-2 border-orange-300 rounded-md",
+  reassigned: "flex items-center text-sm ml-1 justify-center text-light text-slate-600 w-11/24 border-1 py-2 border-orange-300 rounded-md",
   reassignedIcon: "mr-1 text-xl",
   reassignedAmount: "ml-2 text-base text-default text-yellow-600 || nr<text-slate-500>",
-  reassignedInfo: "absolute -right-2",
 
   resourceBox: "w-6/12 mx-1 border-1 border-opacity-50 rounded-md py-4 px-2 flex",
   resourceInfo: "mr-1 grow",
