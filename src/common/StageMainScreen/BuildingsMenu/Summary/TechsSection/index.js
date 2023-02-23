@@ -35,7 +35,7 @@ function TechsSection() {
         {Object.keys(TECHS.TREE).map((categoryKey) => (
           <React.Fragment key={categoryKey}>
             <LineTitle margin="t-small" subtitle size="smaller">
-              {CATEGORIES_NAMES[categoryKey]}
+              {TECHS.CATEGORIES_NAMES[categoryKey]}
             </LineTitle>
             <div className={STYLES.categoryCt}>
               {Object.keys(TECHS.TREE[categoryKey]).map((columnKey, index) => (
@@ -77,12 +77,6 @@ const STYLES = {
   columnTitle: "text-center text-light my-2 text-slate-600 text-sm",
   leftCol: "flex-1 flex flex-col text-gray-800 pr-2",
   rightCol: "flex-1 flex flex-col text-gray-800 pl-2",
-};
-
-/**Name of each technology category. */
-const CATEGORIES_NAMES = {
-  [TEK.CATEGORIES.ECONOMIC]: "Economic",
-  [TEK.CATEGORIES.MILITARY]: "Military",
 };
 
 export default TechsSection;

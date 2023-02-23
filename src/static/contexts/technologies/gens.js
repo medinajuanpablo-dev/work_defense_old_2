@@ -34,6 +34,12 @@ export const COLUMNS = {
   [KEYS.COLUMNS.WAR]: { NAME: "War", CATEGORY_KEY: "Military" },
 };
 
+/**Name of each technology category. */
+export const CATEGORIES_NAMES = {
+  [KEYS.CATEGORIES.ECONOMIC]: "Economic",
+  [KEYS.CATEGORIES.MILITARY]: "Military",
+};
+
 /**Tree of technologies by category and then by column. Although the categories and columns are referred by key,
  * the technologies themselves are accessed by index within their column. */
 //prettier-ignore

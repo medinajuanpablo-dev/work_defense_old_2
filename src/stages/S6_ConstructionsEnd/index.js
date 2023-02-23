@@ -27,11 +27,14 @@ function ConstructionsEndStage() {
   );
 
   function endStage() {
+    //Level up upgraded buildings (for now).
+    upgradedBuildings.forEach((b) => updateGS.buildings.levelUp(b));
+
     //Add one research point for the command center upgrade. This is the only upgrade with an immediate effect like this.
     if (upgradedBuildings.includes(BDK.NAMES.COMMAND_CENTER))
       updateGS.technologies.addPoints(1);
 
-    //Set all buildings as not upgrading.
+    //Set all buildings as not upgrading (for now).
     updateGS.buildings.allNotUpgrading();
 
     updateGS.miscellaneous.stageForward();
@@ -68,7 +71,11 @@ function ConstructionsEndStage() {
       ))}
 
       <ContinueButton
-        subMessage="The upgraded buildings effects will apply immediately."
+        subMessage={
+          upgradedBuildings.length > 0
+            ? "The upgraded buildings effects will apply immediately."
+            : ""
+        }
         onClick={endStage}
       />
     </StageMainScreen>

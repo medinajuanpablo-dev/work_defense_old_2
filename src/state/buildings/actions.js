@@ -60,7 +60,7 @@ export default ACTION_CREATORS;
  * @property {(buildingKey: string, level: number) => any} setLevel Set the specified level to the specified building.
  * @property {(buildingKey: string) => any} levelUp Increase one level to the specified building.
  * @property {(buildingKey: string) => any} levelDown Decrease one level to the specified building.
- * @property {(buildingKey: string) => any} setUpgrading Set the building as currently being upgraded.
+ * @property {(buildingKey: string, upgrading: boolean) => any} setUpgrading Set the building as currently being upgraded.
  * @property {(buildingKey: string) => any} payBill Set the specified building bill as paid.
  * @property {(buildingKey: string) => any} unpayBill Set the specified building bill as unpaid.
  */

@@ -39,6 +39,8 @@ export default function reducer(prevState = defaultState.technologies, action) {
       return handlers.removePoints(action.params);
     case TYPES.SET_POINTS:
       return handlers.setPoints(action.params);
+    case TYPES.SET_TREE:
+      return handlers.setTree(action.params);
 
     default:
       throw unhandledActionError(STATE_NAME, action.type);

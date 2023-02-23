@@ -29,6 +29,10 @@ export function remainingTemposForDestruction(elapsedTempos) {
   return TEMPOS_UNTIL_DESTRUCTION - elapsedTempos;
 }
 
+// export function buildiersExperience(completedUpgrades) {}
+
+// export function calculateSetback() {}
+
 //========================================================================================================
 //------------------------------------ Local values used in the ops only ---------------------------------
 //========================================================================================================
@@ -36,4 +40,4 @@ export function remainingTemposForDestruction(elapsedTempos) {
 /**Number of tempos until a building is destroyed by occupant enemies. */
 const TEMPOS_UNTIL_DESTRUCTION = 3;
 
-/**@typedef {import("@static/contexts/resources").Cost} Cost */
+/**@typedef {import("@static/contexts/resources/gens").Cost} Cost */

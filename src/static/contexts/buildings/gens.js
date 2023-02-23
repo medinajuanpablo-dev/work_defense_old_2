@@ -21,6 +21,10 @@ export const KEYS = {
     MARKET: "market",
     SCOUTS_GUILD: "scoutsGuild",
   },
+  // SETBACKS: {
+  //   LOADED: "loaded",
+  //   ACCIDENT: "accident",
+  // },
 };
 
 /**By-building values.

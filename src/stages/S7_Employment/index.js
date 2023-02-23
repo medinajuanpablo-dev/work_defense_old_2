@@ -46,9 +46,7 @@ function EmploymentStage() {
     );
   }
 
-  React.useEffect(() => {
-    setInitialValues();
-  }, []);
+  React.useEffect(setInitialValues, []);
 
   function endStage() {
     //Save the changes.
@@ -99,7 +97,11 @@ function EmploymentStage() {
         tempState.get[occ]
       );
 
-    return { newProduction, newMantainment };
+    const someNewWorkers =
+      gs.population.count[PPK.OCCS.FARMER] < tempState.get[PPK.OCCS.FARMER] ||
+      gs.population.count[PPK.OCCS.MINER] < tempState.get[PPK.OCCS.MINER];
+
+    return { newProduction, newMantainment, someNewWorkers };
   }, [tempState.get]);
 
   const styles = getActiveStyles(tempState.get);
@@ -178,17 +180,6 @@ function EmploymentStage() {
         </div>
       </div>
 
-      {/* <div className={styles.row}>
-        <CuteButton
-          onClick={setInitialValues}
-          Icon={RiArrowGoBackFill}
-          size="smaller"
-          color="indigo"
-        >
-          Undo All Changes
-        </CuteButton>
-      </div> */}
-
       <div className={styles.summaries}>
         <SummaryRow
           Icon={RiEditCircleFill}
@@ -200,7 +191,17 @@ function EmploymentStage() {
         />
       </div>
 
-      <ContinueButton onClick={endStage} />
+      <ContinueButton
+        subMessage={
+          (summary.someNewWorkers
+            ? "Newly assigned workers will start immediately and their production will be seen in the next Production Stage. "
+            : "") +
+          (tempState.get[PPK.OCCS.REASSIGNED] > 0
+            ? "Reassigned people will stop working immediately and produce nothing from now on."
+            : "")
+        }
+        onClick={endStage}
+      />
     </StageMainScreen>
   );
 }

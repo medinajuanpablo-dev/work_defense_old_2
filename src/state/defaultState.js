@@ -102,7 +102,7 @@ export default (() => {
   var dgs = DEFAULT_GENERAL_STATE;
 
   //Misc
-  dgs.miscellaneous.stage = MIK.STAGES.EMPLOYMENT;
+  dgs.miscellaneous.stage = MIK.STAGES.RESEARCH;
 
   //Buildings
   for (let b in dgs.buildings) dgs.buildings[b].level = 3;
@@ -119,10 +119,11 @@ export default (() => {
   dgs.population.count[PPK.OCCS.FREE] = 8;
   dgs.population.count[PPK.OCCS.MINER] = 5;
   dgs.population.count[PPK.OCCS.FARMER] = 12;
-  dgs.population.count.total = 25;
+  dgs.population.count[PPK.OCCS.RECRUIT] = 3;
+  dgs.population.count.total = 28;
 
   //Techs
-  dgs.technologies.researchPoints = 5;
+  dgs.technologies.researchPoints = 1;
 
   //Army
   const randomConstruct = true;
@@ -164,14 +165,14 @@ export default (() => {
 
   //Resources
   dgs.resources.storedPrevTempo = {
-    [REK.NAMES.DLOGS]: 15,
+    [REK.NAMES.DLOGS]: 45,
     [REK.NAMES.FOOD]: 35,
     [REK.NAMES.MATERIALS]: 30,
   };
   dgs.resources.stored = {
-    [REK.NAMES.DLOGS]: 5,
+    [REK.NAMES.DLOGS]: 30,
     [REK.NAMES.FOOD]: 35,
-    [REK.NAMES.MATERIALS]: 30,
+    [REK.NAMES.MATERIALS]: 18,
   };
 
   //Equipment

@@ -2,12 +2,17 @@ import React from "react";
 import { FiCheckCircle, FiLock, FiUnlock } from "react-icons/fi";
 
 import { useIndicatedStyles } from "@static/tailwind";
-import { useGeneralStateReader } from "@state/hooks";
 
 import { TECHS, techsOps, TEK } from "@static/contexts/technologies";
 
-function TechBox({ categoryKey, columnKey, index }) {
-  const gs = useGeneralStateReader("technologies.tree");
+function TechBox({
+  categoryKey,
+  columnKey,
+  index,
+  tempState,
+  onResearch,
+  canResearch,
+}) {
   const getActiveStyles = useIndicatedStyles(INDICATORS, DIRECTED_STYLES);
 
   const [hovered, setHovered] = React.useState(false);
@@ -29,9 +34,9 @@ function TechBox({ categoryKey, columnKey, index }) {
   }
 
   const statusKey = React.useMemo(() => {
-    const gsTechsColumn = gs.technologies.tree[categoryKey][columnKey];
-    return techsOps.getStatus(gsTechsColumn, index);
-  }, [categoryKey, columnKey, index, gs.technologies.tree]);
+    const tempColumn = tempState[categoryKey][columnKey];
+    return techsOps.getStatus(tempColumn, index);
+  }, [categoryKey, columnKey, index, tempState]);
 
   const tech = TECHS.TREE[categoryKey][columnKey][index];
   const status = STATUS_DISPLAY[statusKey];
@@ -53,7 +58,17 @@ function TechBox({ categoryKey, columnKey, index }) {
       {expanded && (
         <>
           <p className={styles.description}>{tech.DESCRIPTION}</p>
-          <p className={styles.statusName}>{status.name}</p>
+          {statusKey == TEK.STATUS.AVAILABLE ? (
+            <button
+              disabled={!canResearch}
+              onClick={onResearch}
+              className={styles.researchButton}
+            >
+              Research
+            </button>
+          ) : (
+            <p className={styles.statusName}>{status.name}</p>
+          )}
         </>
       )}
     </div>
@@ -68,6 +83,7 @@ const DIRECTED_STYLES = {
   description: "mt-2 text-light",
   statusIcon: "flex-none stroke-3 ml-1 || re<text-green-500> av<text-blue-500> lo<text-gray-400>",
   statusName: "mt-3 border-t-1 pt-1 text-center text-light || re<border-emerald-500'text-emerald-700'text-opacity-90> av<border-blue-400'text-blue-500> lo<border-gray-400'text-gray-500>",
+  researchButton: "mt-3 w-full py-1 mb-1 text-center text-light text-slate-100 rounded-md bg-indigo-500 disabled:bg-slate-400",
 };
 
 //prettier-ignore

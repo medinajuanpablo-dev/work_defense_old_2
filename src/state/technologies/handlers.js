@@ -111,6 +111,11 @@ function getHandlers(prevState, newState) {
       newState.researchPoints = points;
       return newState;
     },
+
+    setTree({ techsTree }) {
+      newState.tree = techsTree;
+      return newState;
+    },
   };
 }
 
