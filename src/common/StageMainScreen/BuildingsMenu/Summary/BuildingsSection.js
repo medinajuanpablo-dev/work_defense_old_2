@@ -35,9 +35,8 @@ function BuildingsSection() {
             <p className={STYLES.zoneName}>{MISC.ACTIVE_ZONES[z]} Zone</p>
 
             {BUILDINGS_KEYS_BY_ZONE[z].map((b) => (
-              <>
+              <React.Fragment key={b}>
                 <SummaryRow
-                  key={b}
                   Icon={RiEditCircleFill}
                   text="<L> [<A>]"
                   label={BUILDINGS.BY_BUILDING[b].NAME}
@@ -52,7 +51,7 @@ function BuildingsSection() {
                     {BUILDINGS.BY_BUILDING[b].DESCRIPTION}
                   </p>
                 )}
-              </>
+              </React.Fragment>
             ))}
           </React.Fragment>
         ))}

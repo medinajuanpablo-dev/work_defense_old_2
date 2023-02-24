@@ -12,6 +12,8 @@ export default function reducer(prevState = defaultState.population, action) {
   switch (action.type) {
     case TYPES.ANIHILATION:
       return handlers.anihilation();
+    case TYPES.CLEAR_RECRUITS_LEVELS:
+      return handlers.clearRecruitsLevels();
 
     case TYPES.ADD_OCCUPATION_PEOPLE:
       return handlers.addOccupationPeople(action.params);
@@ -19,6 +21,8 @@ export default function reducer(prevState = defaultState.population, action) {
       return handlers.removeOccupationPeople(action.params);
     case TYPES.SET_OCCUPATION_PEOPLE:
       return handlers.setOccupationPeople(action.params);
+    case TYPES.SET_RECRUITS_LEVELS:
+      return handlers.setRecruitsLevels(action.params);
 
     default:
       throw unhandledActionError(STATE_NAME, action.type);

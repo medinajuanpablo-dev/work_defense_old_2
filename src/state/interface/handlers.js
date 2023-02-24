@@ -17,6 +17,15 @@ function getHandlers(prevState, newState) {
       newState.shownSummarySections[menuKey][sectionKey] = visible;
       return newState;
     },
+
+    setVisibleMenu({ menuKey }) {
+      newState.visibleMenu = { menu: menuKey, subMenu: null };
+      return newState;
+    },
+    setVisibleSubMenu({ subMenuKey }) {
+      newState.visibleMenu.subMenu = subMenuKey;
+      return newState;
+    },
   };
 }
 

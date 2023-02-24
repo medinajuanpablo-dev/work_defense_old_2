@@ -15,6 +15,12 @@ export const KEYS = {
     RESOURCES: "resources",
   },
 
+  SUB_MENUS: {
+    ARMY_LIST: "armyList",
+    ARMOR_DETAILS: "armorDetails",
+    WEAPONS_DETAILS: "weaponsDetails",
+  },
+
   BREAKPOINTS: {
     MONITOR: "monitor",
     WIDE_LAPTOP: "wideLaptop",
@@ -49,12 +55,6 @@ export const KEYS = {
     NOT_STORABLE: "notStorable",
   },
 };
-
-// export const MENUS_NAMES = {
-//   [KEYS.MENUS.POPULATION]: "Population",
-//   [KEYS.MENUS.BUILDINGS]: "Buildings",
-//   [KEYS.MENUS.RESOURCES]: "Resources",
-// };
 
 /**Width Pixels of each breakpoint */
 export const BREAKPOINTS_WIDTHS = {

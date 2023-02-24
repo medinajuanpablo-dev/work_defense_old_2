@@ -13,14 +13,9 @@ import { sumProperties, checkRequiredValues, checkOptionalValues } from "@static
  * @returns {SoldierState} The created soldier.
  */
 export function createSoldier({ number, level, weaponRank, armorRank }) {
-  checkOptionalValues([
-    { number, req: true, type: "number" },
-    [{ level, weaponRank, armorRank }, "n", "n", "n"],
-  ]);
-
   var soldier = cloneDeep(BLANK_SOLDIER);
 
-  soldier.number = number;
+  soldier.number = number || 0;
   if (level) soldier.ce.level = level;
   if (weaponRank) soldier.gear.weaponRank = weaponRank;
   if (armorRank) soldier.gear.armorRank = armorRank;
@@ -42,22 +37,20 @@ export function maxGraduationCE(academyLevel) {
 }
 
 /**
- * Creates a graduated soldier of the specified level from an academy of the specified level.
- * If the graduation level is higher than allowed by the academy, an error is thrown.
- * @param {number} ofLevel The level of the graduated soldier.
- * @param {number} academyLevel The current level of the academy.
- * @returns {SoldierState} The graduated soldier.
- */
-export function createGraduatedSoldier(ofLevel, academyLevel) {
-  checkRequiredValues([[{ ofLevel, academyLevel }, "n", "n"]]);
+//  * Creates a graduated soldier of the specified level from an academy of the specified level.
+//  * If the graduation level is higher than allowed by the academy, an error is thrown.
+//  * @param {number} ofLevel The level of the graduated soldier.
+//  * @param {number} academyLevel The current level of the academy.
+//  * @returns {SoldierState} The graduated soldier.
+//  */
+// export function createGraduatedSoldier(ofLevel, academyLevel) {
+//   if (academyLevel && ofLevel > maxGraduationCE(academyLevel))
+//     throw Error(
+//       `Can't graduate a soldier of level ${ofLevel} from an academy of level ${academyLevel}.`
+//     );
 
-  if (ofLevel > maxGraduationCE(academyLevel))
-    throw Error(
-      `Can't graduate a soldier of level ${ofLevel} from an academy of level ${academyLevel}.`
-    );
-
-  return createSoldier({ level: ofLevel });
-}
+//   return createSoldier({ number: 0, level: ofLevel }); //The '0' is for fresh soldiers.
+// }
 
 /**
  * Tells the amount of Dlogs to recruit a soldier of the specified level.

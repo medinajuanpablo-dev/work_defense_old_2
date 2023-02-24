@@ -1,20 +1,25 @@
 import React from "react";
 
+import { useGeneralStateReader, useGeneralStateUpdator } from "@state/hooks";
+
+import { ITK } from "@static/contexts/interface";
+
 import Summary from "./Summary";
 import ArmyList from "./ArmyList";
 
 function PopulationMenu({ closeMenu }) {
-  const [subMenu, setSubMenu] = React.useState(null);
+  const gs = useGeneralStateReader("interface.visibleMenu");
+  const updateGS = useGeneralStateUpdator("interface");
 
   function closeSubMenu() {
-    setSubMenu(null);
+    updateGS.interface.setVisibleSubMenu(null);
   }
 
   function openSubMenu(subMenuKey) {
-    setSubMenu(subMenuKey);
+    updateGS.interface.setVisibleSubMenu(subMenuKey);
   }
 
-  if (subMenu === "armyList")
+  if (gs.interface.visibleMenu.subMenu === ITK.SUB_MENUS.ARMY_LIST)
     return <ArmyList {...{ closeMenu, closeSubMenu }} />;
 
   return <Summary {...{ closeMenu, openSubMenu }} />;

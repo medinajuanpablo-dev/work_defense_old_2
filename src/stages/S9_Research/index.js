@@ -103,7 +103,10 @@ function ResearchStage() {
         ))}
       </div>
 
-      <ContinueButton onClick={endStage} />
+      <ContinueButton
+        subMessage="New techs will have immediate effect."
+        onClick={endStage}
+      />
     </StageMainScreen>
   );
 }

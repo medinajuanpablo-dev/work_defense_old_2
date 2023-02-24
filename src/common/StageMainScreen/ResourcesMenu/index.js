@@ -1,23 +1,32 @@
 import React from "react";
 
+import { useGeneralStateReader, useGeneralStateUpdator } from "@state/hooks";
+
+import { ITK } from "@static/contexts/interface";
+
 import Summary from "./Summary";
 import EquipmentDetails from "./EquipmentDetails";
 
 function ResourcesMenu({ closeMenu }) {
-  const [subMenu, setSubMenu] = React.useState(null);
+  const gs = useGeneralStateReader("interface.visibleMenu");
+  const updateGS = useGeneralStateUpdator("interface");
 
   function closeSubMenu() {
-    setSubMenu(null);
+    updateGS.interface.setVisibleSubMenu(null);
   }
 
   function openSubMenu(subMenuKey) {
-    setSubMenu(subMenuKey);
+    updateGS.interface.setVisibleSubMenu(subMenuKey);
   }
 
-  if (subMenu?.includes("details"))
+  if (
+    [ITK.SUB_MENUS.ARMOR_DETAILS, ITK.SUB_MENUS.WEAPONS_DETAILS].includes(
+      gs.interface.visibleMenu.subMenu
+    )
+  )
     return (
       <EquipmentDetails
-        type={subMenu.split("-")[1]}
+        type={gs.interface.visibleMenu.subMenu.split("-")[1]}
         {...{ closeMenu, closeSubMenu }}
       />
     );

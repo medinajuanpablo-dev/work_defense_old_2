@@ -5,12 +5,13 @@ export const STATE_NAME = "Army";
 //prettier-ignore
 export const TYPES = mapValues({ 
     
-  EMPTY_ALL_FORCES: 0, NULL_ALL_PROTOCOLS: 0, ALL_TO_FREE: 0, NEW_SOLDIER_CREATED: 0, //Simple Actions
+  EMPTY_ALL_FORCES: 0, NULL_ALL_PROTOCOLS: 0, ALL_TO_FREE: 0, //Simple Actions
 
   //Parameterized Actions
-  ADD_FREE_FORCE: 0, REMOVE_FREE_FORCE: 0, SET_FREE_FORCE: 0, //Free Force Actions.
+  ADD_FREE_FORCE: 0, REMOVE_FREE_FORCE: 0, SET_FREE_FORCE: 0, ADD_FRESH_SOLDIERS: 0, //Free Force Actions.
   ADD_DEFENSE_FORCE: 0, REMOVE_DEFENSE_FORCE: 0, SET_DEFENSE_FORCE: 0, SET_DEFENSE_PROTOCOL: 0, REASSIGN_DEFENSE: 0, //Defense actions.
   FORM_UNIT: 0, DISSOLVE_UNIT: 0, ADD_UNIT_FORCE: 0, REMOVE_UNIT_FORCE: 0, SET_UNIT_FORCE: 0, ASSIGN_FORCE_TO_UNIT: 0, REASSIGN_FORCE_FROM_UNIT: 0, SET_UNIT_PROTOCOL: 0, //Units actions.
+  
 
 }, (v, k) => `${STATE_NAME.toUpperCase()}_${k}` );
 
@@ -32,6 +33,10 @@ const ACTION_CREATORS = {
   setFreeForce: (force) => ({
     type: TYPES.SET_FREE_FORCE,
     params: { force },
+  }),
+  addFreshSoldiers: (freshForce) => ({
+    type: TYPES.ADD_FRESH_SOLDIERS,
+    params: { freshForce },
   }),
   addDefenseForce: (zoneKey, force) => ({
     type: TYPES.ADD_DEFENSE_FORCE,
@@ -98,6 +103,7 @@ export default ACTION_CREATORS;
  * @property {(force: SoldierState[]) => any} addFreeForce Adds the specified force to the (end of the) Free Force.
  * @property {(soldiersIndexes: number[]) => any} removeFreeForce Removes the soldiers at the specified indexes from the Free Force.
  * @property {(force: SoldierState[]) => any} setFreeForce Sets the Free Force.
+ * @property {(freshForce: SoldierState[]) => any} addFreshSoldiers Adds the specified force of fresh soldiers to the army, adding them to the (end of the) Free Force.
  * @property {(zoneKey: string, force: SoldierState[]) => any} addDefenseForce Adds the specified force to the (end of the) specified zone's Defense force.
  * @property {(zoneKey: string, soldiersIndexes: number[]) => any} removeDefenseForce Removes the soldiers at the specified indexes from the specified zone's Defense force.
  * @property {(zoneKey: string, force: SoldierState[]) => any} setDefenseForce Sets the force of the specified zone's Defense.

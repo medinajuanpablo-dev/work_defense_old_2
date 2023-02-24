@@ -57,6 +57,7 @@ const DEFAULT_GENERAL_STATE = {
       [ITK.MENUS.POPULATION]: { general: true, army: true, civilians: true },
       [ITK.MENUS.RESOURCES]: { resources: true, equipment: true },
     },
+    visibleMenu: { menu: null, subMenu: null },
   },
 
   invasion: {
@@ -82,6 +83,7 @@ const DEFAULT_GENERAL_STATE = {
       [PPK.OCCS.FREE]: 0,
       total: 0,
     },
+    recruitsLevels: {},
   },
 
   resources: {
@@ -102,7 +104,7 @@ export default (() => {
   var dgs = DEFAULT_GENERAL_STATE;
 
   //Misc
-  dgs.miscellaneous.stage = MIK.STAGES.RESEARCH;
+  dgs.miscellaneous.stage = MIK.STAGES.ENLISTMENT;
 
   //Buildings
   for (let b in dgs.buildings) dgs.buildings[b].level = 3;
@@ -119,8 +121,10 @@ export default (() => {
   dgs.population.count[PPK.OCCS.FREE] = 8;
   dgs.population.count[PPK.OCCS.MINER] = 5;
   dgs.population.count[PPK.OCCS.FARMER] = 12;
-  dgs.population.count[PPK.OCCS.RECRUIT] = 3;
-  dgs.population.count.total = 28;
+  dgs.population.count[PPK.OCCS.RECRUIT] = 6;
+  dgs.population.recruitsLevels = { 1: 3, 2: 2, 3: 1 };
+
+  dgs.population.count.total = 31;
 
   //Techs
   dgs.technologies.researchPoints = 1;
@@ -134,7 +138,7 @@ export default (() => {
       .fill(true)
       .map((v, i) =>
         armyOps.createSoldier({
-          number: dgs.army.soldierCreationCounter++,
+          number: ++dgs.army.soldierCreationCounter,
           level: randomConstruct ? random(1, constructLevel) : constructLevel,
           weaponRank: randomConstruct
             ? random(1, constructLevel)
@@ -267,6 +271,7 @@ export default (() => {
 
 /** Interface State types
  * @typedef InterfaceState
+ * @property {{menu: string, subMenu: string}} visibleMenu Currently shown menu and subMenu, if any.
  * @property {{[menuKey: string]: {[sectionKey: string]: boolean}}} shownSummarySections The currently shown summary sections of each menu.
  */
 
@@ -301,6 +306,7 @@ export default (() => {
 /** Population State types
  * @typedef PopulationState
  * @property {{ [occupationKey: string]: number, total: number }} count Current amount of people of each occupation and the total.
+ * @property {{ [level: string]: number }} recruitsLevels The ordered levels of the recruits.
  */
 
 /** Resources State types

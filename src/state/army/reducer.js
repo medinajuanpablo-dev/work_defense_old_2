@@ -25,6 +25,8 @@ export default function reducer(prevState = defaultState.army, action) {
       return handlers.removeFreeForce(action.params);
     case TYPES.SET_FREE_FORCE:
       return handlers.setFreeForce(action.params);
+    case TYPES.ADD_FRESH_SOLDIERS:
+      return handlers.addFreshSoldiers(action.params);
     case TYPES.ADD_DEFENSE_FORCE:
       return handlers.addDefenseForce(action.params);
     case TYPES.REMOVE_DEFENSE_FORCE:

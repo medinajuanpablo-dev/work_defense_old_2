@@ -5,6 +5,7 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 import { GiCastle, GiMetalBar } from "react-icons/gi";
 
 import { GenericTopBar, TopBarButton, Screen, CuteModal } from "@common/index";
+import { useGeneralStateReader, useGeneralStateUpdator } from "@state/hooks";
 
 import { ITK } from "@static/contexts/interface";
 
@@ -15,14 +16,15 @@ import Tutorial from "./Tutorial";
 
 function StageMainScreen({ children, stageKey, onUndo }) {
   const [showTutorial, setShowTutorial] = React.useState(false);
-  const [menu, setMenu] = React.useState(null);
+  const gs = useGeneralStateReader("interface.visibleMenu");
+  const updateGS = useGeneralStateUpdator("interface");
 
   function closeMenu() {
-    setMenu(null);
+    updateGS.interface.setVisibleMenu(null);
   }
 
   function openMenu(menuKey) {
-    setMenu(menuKey);
+    updateGS.interface.setVisibleMenu(menuKey);
   }
 
   function undoAll() {
@@ -30,8 +32,8 @@ function StageMainScreen({ children, stageKey, onUndo }) {
   }
 
   //If Menu selected, render it.
-  if (menu) {
-    const Menu = MENUES[menu];
+  if (gs.interface.visibleMenu.menu) {
+    const Menu = MENUES[gs.interface.visibleMenu.menu];
     return <Menu closeMenu={closeMenu} />;
   }
 

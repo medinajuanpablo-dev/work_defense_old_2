@@ -127,6 +127,19 @@ function getHandlers(prevState, newState) {
       return newState;
     },
 
+    addFreshSoldiers({ freshForce }) {
+      //Assign numbers to the fresh soldiers.
+      var number = newState.soldierCreationCounter;
+      const newForce = freshForce.map((soldier) => ({
+        ...soldier,
+        number: ++number,
+      }));
+
+      common.addForceTo(ZNK.FREE_ZONE, newForce);
+      newState.soldierCreationCounter = number;
+      return newState;
+    },
+
     addDefenseForce({ zoneKey, force }) {
       common.addForceTo(zoneKey, force);
       return newState;

@@ -9,6 +9,11 @@ function getHandlers(prevState, newState) {
       return newState;
     },
 
+    clearRecruitsLevels() {
+      newState.recruitsLevels = {};
+      return newState;
+    },
+
     //
 
     addOccupationPeople({ occupationKey, amount }) {
@@ -28,6 +33,11 @@ function getHandlers(prevState, newState) {
 
       newState.count[occupationKey] = amount;
       newState.count.total += difference;
+      return newState;
+    },
+
+    setRecruitsLevels({ recruitsLevels }) {
+      newState.recruitsLevels = recruitsLevels;
       return newState;
     },
   };

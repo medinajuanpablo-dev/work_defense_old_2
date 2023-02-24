@@ -67,4 +67,14 @@ export default {
       body: "Each upgrade of the Command Center automatically confers 1 Research Point, which can be stacked and saved for as long as wanted. A point spent can't be recovered and the Command Center is an expensive building to upgrade, so choose wisely.",
     },
   ],
+  [MIK.STAGES.ENLISTMENT]: [
+    {
+      title: "Basics",
+      body: "In this Stage the recruits ordered in the last Recruitment Stage turn into soldiers of the ordered CE levels.",
+    },
+    {
+      title: "Resting and Unequiped",
+      body: "Fresh soldiers are automatically sent to rest, where they have minimal mantainment. Also they have no gear on them. You can equip soldiers in the Equipment Stage and move them between zones in the Reassignation Stage.",
+    },
+  ],
 };

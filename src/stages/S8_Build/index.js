@@ -19,6 +19,7 @@ function BuildStage() {
   const updateGS = useGeneralStateUpdator("buildings", "resources", "miscellaneous");
   const gs = useGeneralStateReader("buildings", "resources");
 
+  const [hasUpgraded, setHasUpgraded] = React.useState(false);
   const showing = useObjectState({ prevUpgrading: false });
 
   const tempState = useObjectState({
@@ -63,6 +64,7 @@ function BuildStage() {
 
       return prev;
     });
+    setHasUpgraded(true);
   }
 
   const buildingsList = React.useMemo(() =>
@@ -112,7 +114,14 @@ function BuildStage() {
         ))}
       </div>
 
-      <ContinueButton onClick={endStage} />
+      <ContinueButton
+        subMessage={
+          hasUpgraded
+            ? "The upgraded buildings should be finished by the next Constructions End Stage, given there are no setbacks..."
+            : ""
+        }
+        onClick={endStage}
+      />
     </StageMainScreen>
   );
 }
