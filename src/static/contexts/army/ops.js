@@ -3,6 +3,8 @@ import { cloneDeep, random } from "lodash";
 //prettier-ignore
 import { sumProperties, checkRequiredValues, checkOptionalValues } from "@static/functions";
 
+import { MISC } from "@static/contexts/miscellaneous";
+
 /**
  * Creates a brand new soldier (fully new object) with customized stats.
  * @param {Object} params
@@ -36,21 +38,48 @@ export function maxGraduationCE(academyLevel) {
   );
 }
 
-/**
-//  * Creates a graduated soldier of the specified level from an academy of the specified level.
-//  * If the graduation level is higher than allowed by the academy, an error is thrown.
-//  * @param {number} ofLevel The level of the graduated soldier.
-//  * @param {number} academyLevel The current level of the academy.
-//  * @returns {SoldierState} The graduated soldier.
-//  */
-// export function createGraduatedSoldier(ofLevel, academyLevel) {
-//   if (academyLevel && ofLevel > maxGraduationCE(academyLevel))
-//     throw Error(
-//       `Can't graduate a soldier of level ${ofLevel} from an academy of level ${academyLevel}.`
-//     );
+/**Transforms the forces in the three categories of army in a single list of soldiers where each
+ * includes it's role indicated by a `roleCode`
+ * @param {import("@state/defaultState").ArmyState} armyState
+ * @returns {Array<CompleteSoldierState}*/
+export function getAllArmyForce(armyState) {
+  const { freeZone, zonesDefense, liberationUnits } = armyState;
 
-//   return createSoldier({ number: 0, level: ofLevel }); //The '0' is for fresh soldiers.
-// }
+  var allArmy = freeZone.force.map((s) => ({ ...s, roleCode: "free" }));
+
+  for (let z in zonesDefense)
+    allArmy = allArmy.concat(
+      zonesDefense[z].force.map((s) => ({ ...s, roleCode: `def-${z}` }))
+    );
+
+  for (let unitKey in liberationUnits)
+    allArmy = allArmy.concat(
+      liberationUnits[unitKey].force.map((s) => ({
+        ...s,
+        roleCode: `unit-${liberationUnits[unitKey].name}`,
+      }))
+    );
+
+  return allArmy;
+}
+
+/** Get a displayable string describing the role of a soldier.
+ * @param {string} roleCode
+ * @param {boolean} long Build a longer description
+ */
+export function buildRoleDescription(roleCode, long) {
+  if (roleCode == "free") return long ? "Resting at the barracks" : "Resting";
+
+  const [doing, at] = roleCode.split("-");
+
+  if (doing == "def")
+    return long
+      ? `Defending the ${MISC.ACTIVE_ZONES[at]} Zone`
+      : `${MISC.ACTIVE_ZONES[at]} Zone`;
+
+  if (doing == "unit")
+    return long ? `Member of the '${at}' Lib. Unit` : `'${at}' Lib. Unit`;
+}
 
 /**
  * Tells the amount of Dlogs to recruit a soldier of the specified level.
@@ -239,6 +268,14 @@ const MANTAINMENT = {
 
 /**
  * @typedef {import("@state/defaultState").SoldierState} SoldierState
+ * @typedef {import("@state/defaultState").SoldierGear} SoldierGear
+ * @typedef {import("@state/defaultState").SoldierCombatExperience} SoldierCombatExperience
+ *
+ * @typedef CompleteSoldierState
+ * @property {number} number The soldier indentifier.
+ * @property {SoldierCombatExperience} ce The current combat experience level and progress of the soldier.
+ * @property {SoldierGear} gear The ranks of the weapon and armor currently equipped by the soldier.
+ * @property {string} roleCode A string that identifies the soldier's role.
  */
 
 // //Level up log.

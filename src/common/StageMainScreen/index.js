@@ -1,10 +1,17 @@
 import React from "react";
 import { IoIosPeople } from "react-icons/io";
+import { IoWarning } from "react-icons/io5";
 import { BsInfoCircle } from "react-icons/bs";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { GiCastle, GiMetalBar } from "react-icons/gi";
 
-import { GenericTopBar, TopBarButton, Screen, CuteModal } from "@common/index";
+import {
+  GenericTopBar,
+  TopBarButton,
+  Screen,
+  CuteModal,
+  displayCuteAlert,
+} from "@common/index";
 import { useGeneralStateReader, useGeneralStateUpdator } from "@state/hooks";
 
 import { ITK } from "@static/contexts/interface";
@@ -28,7 +35,25 @@ function StageMainScreen({ children, stageKey, onUndo }) {
   }
 
   function undoAll() {
-    if (onUndo) onUndo();
+    if (onUndo)
+      displayCuteAlert({
+        Icon: IoWarning,
+        title: "Undo Stage?",
+        body: "This will undo all changes done this stage so far and start it again.",
+        button: {
+          text: "Undo Stage",
+          onClick: (closeAlert) => {
+            onUndo();
+            closeAlert();
+          },
+        },
+        secondButton: { text: "Cancel" },
+        customStyles: {
+          title: "text-red-600",
+          icon: "text-red-600",
+          leftButton: "border-red-600 text-red-600 hover:bg-red-600",
+        },
+      });
   }
 
   //If Menu selected, render it.
@@ -95,5 +120,7 @@ const MENUES = {
   [ITK.MENUS.POPULATION]: PopulationMenu,
   [ITK.MENUS.RESOURCES]: ResourcesMenu,
 };
+
+const ALERT_STYLES = {};
 
 export default StageMainScreen;

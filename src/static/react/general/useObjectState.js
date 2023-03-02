@@ -65,6 +65,7 @@ function useObjectState(initialState = null) {
   }
 
   return {
+    /**@type {T} */
     get: state,
     replace,
     merge,

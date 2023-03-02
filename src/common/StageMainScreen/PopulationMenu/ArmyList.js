@@ -8,6 +8,7 @@ import { useGeneralStateReader } from "@state/hooks";
 import { TwoButtonsTopBar, LineTitle, Screen } from "@common/index";
 
 import { MISC } from "@static/contexts/miscellaneous";
+import { armyOps } from "@static/contexts/army";
 
 function ArmyList({ closeMenu, closeSubMenu }) {
   const gs = useGeneralStateReader("army");
@@ -16,27 +17,11 @@ function ArmyList({ closeMenu, closeSubMenu }) {
   const [descendingSort, setDescendingSort] = React.useState(false);
 
   //prettier-ignore
-  const soldiersSummary = React.useMemo(() => {
-    var ss = gs.army.freeZone.force.map((s) => getSoldierSummary(s, "free"));
-
-    for (let z in gs.army.zonesDefense)
-      ss = ss.concat(
-        gs.army.zonesDefense[z].force.map((s) => getSoldierSummary(s, `def-${z}`))
-      );
-
-    for (let unitKey in gs.army.liberationUnits)
-      ss = ss.concat(
-        gs.army.liberationUnits[unitKey].force.map((s) =>
-          getSoldierSummary(s, `unit-${gs.army.liberationUnits[unitKey].name}`)
-        )
-      );
-
-    return ss;
-  }, [gs.army]);
+  const allArmy = React.useMemo(() => armyOps.getAllArmyForce(gs.army), [gs.army]);
 
   //prettier-ignore
-  const sortedSummary = React.useMemo(() => {
-    return soldiersSummary.sort((s1, s2) => {
+  const sortedArmy = React.useMemo(() => {
+    return allArmy.sort((s1, s2) => {
       switch (sortingBy) {
         case "number":
           return descendingSort ? s2.number - s1.number : s1.number - s2.number;
@@ -52,7 +37,7 @@ function ArmyList({ closeMenu, closeSubMenu }) {
           return 0;
       }
     });
-  }, [soldiersSummary, sortingBy, descendingSort]);
+  }, [allArmy, sortingBy, descendingSort]);
 
   function changeSortingCriteria(sortKey) {
     if (sortingBy === sortKey) setDescendingSort(!descendingSort);
@@ -125,14 +110,14 @@ function ArmyList({ closeMenu, closeSubMenu }) {
         </div>
 
         <div className={STYLES.listCt}>
-          {sortedSummary.map((soldierSummary) => (
-            <div key={soldierSummary.number} className={STYLES.row}>
-              <p className={STYLES.numberCell}>{soldierSummary.number}</p>
-              <p className={STYLES.cell}>{soldierSummary.level}</p>
-              <p className={STYLES.cell}>{soldierSummary.weaponRank}</p>
-              <p className={STYLES.cell}>{soldierSummary.armorRank}</p>
+          {sortedArmy.map((soldier) => (
+            <div key={soldier.number} className={STYLES.row}>
+              <p className={STYLES.numberCell}>{soldier.number}</p>
+              <p className={STYLES.cell}>{soldier.ce.level}</p>
+              <p className={STYLES.cell}>{soldier.gear.weaponRank}</p>
+              <p className={STYLES.cell}>{soldier.gear.armorRank}</p>
               <p className={STYLES.roleCell}>
-                {buildRoleDescription(soldierSummary.roleCode)}
+                {buildRoleDescription(soldier.roleCode)}
               </p>
             </div>
           ))}
@@ -150,7 +135,7 @@ const STYLES = {
   
   tableCt: "select-none",
 
-  allHeadersCt: "flex rounded-t-sm items-stretch text-gray-700 border-b-1 border-indigo-500 h-14",
+  allHeadersCt: "flex rounded-t-sm items-stretch text-gray-700 h-14",
   headerCt: "relative flex items-center justify-center hover:text-sky-600 ",
 
   numberHeaderCt: "w-10 mr-2 text-2xl ",
@@ -159,7 +144,7 @@ const STYLES = {
   roleHeaderCt: "w-46 text-light text-lg", 
   sortArrow: "absolute -bottom-2 left-0 w-full h-8 text-green-500",
 
-  listCt: "flex flex-col h-screen-9/12 overflow-y-scroll mt-2 border-indigo-500",
+  listCt: "flex flex-col h-screen-9/12 overflow-y-scroll border-indigo-400 border-1 rounded-md",
   row: "flex text-gray-700 text-center items-center border-b-1 border-slate-300 py-3",
   numberCell: "w-10 mr-2 text-light text-base text-blue-500 ",
   cell: "flex-1 text-light text-lg",

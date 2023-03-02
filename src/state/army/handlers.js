@@ -214,6 +214,33 @@ function getHandlers(prevState, newState) {
       );
       return newState;
     },
+
+    setSoldiers({ completeSoldiers }) {
+      var force;
+
+      for (let { roleCode, ...soldier } of completeSoldiers) {
+        //Find force the soldier belongs to.
+        if (roleCode == "free") force = newState.freeZone.force;
+        else {
+          const [doing, at] = roleCode.split("-");
+
+          if (doing == "def" && newState.zonesDefense[at])
+            force = newState.zonesDefense[at].force;
+          else if (doing == "unit" && newState.liberationUnits[camelCase(at)])
+            //'at' is the unit name, and the unitKey is always the name in camelCase by definition.
+            force = newState.liberationUnits[camelCase(at)].force;
+          else
+            throw Error(
+              `Unrecognizable roleCode '${roleCode}' when setting army.`
+            );
+        }
+
+        //Find and replace the soldier in it's force.
+        force[force.findIndex((s) => s.number == soldier.number)] = soldier;
+      }
+
+      return newState;
+    },
   };
 }
 

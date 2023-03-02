@@ -27,7 +27,7 @@ function Tutorial({ stageKey }) {
 
 //prettier-ignore
 const STYLES = {
-  ct: "flex flex-col items-center relative p-2 h-screen-9/12 overflow-y-scroll pr-4",
+  ct: "flex flex-col items-center relative py-2 -mr-4 h-screen-9/12 overflow-y-scroll pl-2 pr-8",
   title: "text-indigo-700 border-b-1 border-indigo-700 border-opacity-30 pb-1 text-center text-light text-lg",
 
   sectionTitle: "mt-8 w-full",

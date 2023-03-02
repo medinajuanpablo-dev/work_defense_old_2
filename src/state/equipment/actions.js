@@ -11,6 +11,7 @@ export const TYPES = mapValues({
   EMPTY_TYPE: 0, CANCEL_TYPE_ORDERS: 0,
   ADD_TO_STORAGE: 0, REMOVE_FROM_STORAGE: 0, SET_STORED: 0,
   ADD_ORDER: 0, CANCEL_ORDER: 0, FINISH_ORDER: 0,
+  SET_ALL_STORED: 0, SET_ALL_ORDERS: 0,
 
 }, (v, k) => `${STATE_NAME.toUpperCase()}_${k}` );
 
@@ -52,6 +53,14 @@ const ACTION_CREATORS = {
     type: TYPES.FINISH_ORDER,
     params: { typeKey, rank },
   }),
+  setAllStored: (newStoredEquipment) => ({
+    type: TYPES.SET_ALL_STORED,
+    params: { newStoredEquipment },
+  }),
+  setAllOrders: (newOrderedEquipment) => ({
+    type: TYPES.SET_ALL_ORDERS,
+    params: { newOrderedEquipment },
+  }),
 };
 
 export default ACTION_CREATORS;
@@ -69,4 +78,6 @@ export default ACTION_CREATORS;
  * @property {(typeKey: string, rank: number, amount: number) => any} addOrder Adds a craft order of the specified equipment type and rank, in the specified amount.
  * @property {(typeKey: string, rank: number, amount: number) => any} cancelOrder Cancels the craft order of the specified equipment type and rank, in the specified amount.
  * @property {(typeKey: string, rank: number) => any} finishOrder Removes the craft order of the specified equipment type and rank, and adds the equipment as stored.
+ * @property {(newStoredEquipment: import("../defaultState").OrderedEquipmentState) => any} setAllStored Set all stored equipment.
+ * @property {(newOrderedEquipment: import("../defaultState").OrderedEquipmentState) => any} setAllOrders Set all ordered equipment.
  */

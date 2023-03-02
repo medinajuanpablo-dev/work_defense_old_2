@@ -33,6 +33,10 @@ export default function reducer(prevState = defaultState.equipment, action) {
       return handlers.cancelOrder(action.params);
     case TYPES.FINISH_ORDER:
       return handlers.finishOrder(action.params);
+    case TYPES.SET_ALL_STORED:
+      return handlers.setAllOrders(action.params);
+    case TYPES.SET_ALL_ORDERS:
+      return handlers.setAllOrders(action.params);
 
     default:
       throw unhandledActionError(STATE_NAME, action.type);

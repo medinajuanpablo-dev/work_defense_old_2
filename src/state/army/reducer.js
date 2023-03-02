@@ -49,6 +49,8 @@ export default function reducer(prevState = defaultState.army, action) {
       return handlers.setUnitProtocol(action.params);
     case TYPES.REASSIGN_DEFENSE:
       return handlers.reassignDefense(action.params);
+    case TYPES.SET_SOLDIERS:
+      return handlers.setSoldiers(action.params);
 
     default:
       throw unhandledActionError(STATE_NAME, action.type);

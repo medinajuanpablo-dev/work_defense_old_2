@@ -91,6 +91,16 @@ function getHandlers(prevState, newState) {
       delete newState.orders[typeKey][rank];
       return newState;
     },
+
+    setAllStored({ newStoredEquipment }) {
+      newState.stored = newStoredEquipment;
+      return newState;
+    },
+
+    setAllOrders({ newOrderedEquipment }) {
+      newState.orders = newOrderedEquipment;
+      return newState;
+    },
   };
 }
 

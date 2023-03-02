@@ -104,7 +104,7 @@ export default (() => {
   var dgs = DEFAULT_GENERAL_STATE;
 
   //Misc
-  dgs.miscellaneous.stage = MIK.STAGES.ENLISTMENT;
+  dgs.miscellaneous.stage = MIK.STAGES.EQUIPMENT;
 
   //Buildings
   for (let b in dgs.buildings) dgs.buildings[b].level = 3;
@@ -181,7 +181,10 @@ export default (() => {
 
   //Equipment
 
-  //prettier-ignore
+  // dgs.equipment.stored[EQK.TYPES.WEAPON]["1"] = 3;
+  // dgs.equipment.stored[EQK.TYPES.ARMOR]["1"] = 3;
+
+  // prettier-ignore
   for (let i = 1; i <= 10; i++) {
     dgs.equipment.stored[EQK.TYPES.ARMOR][i] = random(0, 10);
     dgs.equipment.orders[EQK.TYPES.ARMOR][i] = random(0, 10);
@@ -221,7 +224,7 @@ export default (() => {
  * @property {RetreatProtocolState} protocol Current battle protocol of the defense force of the zone.
  *
  * @typedef LiberationUnitState
- * @property {string} name Current name of the unit.
+ * @property {string} name Current name of the unit. The `unitKey` is always this in camelCase.
  * @property {Array<SoldierState>} force Current force of the unit.
  * @property {RetreatProtocolState} protocol Current battle protocol of the unit.
  *

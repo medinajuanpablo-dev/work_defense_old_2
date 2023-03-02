@@ -11,6 +11,7 @@ export const TYPES = mapValues({
   ADD_FREE_FORCE: 0, REMOVE_FREE_FORCE: 0, SET_FREE_FORCE: 0, ADD_FRESH_SOLDIERS: 0, //Free Force Actions.
   ADD_DEFENSE_FORCE: 0, REMOVE_DEFENSE_FORCE: 0, SET_DEFENSE_FORCE: 0, SET_DEFENSE_PROTOCOL: 0, REASSIGN_DEFENSE: 0, //Defense actions.
   FORM_UNIT: 0, DISSOLVE_UNIT: 0, ADD_UNIT_FORCE: 0, REMOVE_UNIT_FORCE: 0, SET_UNIT_FORCE: 0, ASSIGN_FORCE_TO_UNIT: 0, REASSIGN_FORCE_FROM_UNIT: 0, SET_UNIT_PROTOCOL: 0, //Units actions.
+  SET_SOLDIERS: 0,
   
 
 }, (v, k) => `${STATE_NAME.toUpperCase()}_${k}` );
@@ -90,6 +91,10 @@ const ACTION_CREATORS = {
     type: TYPES.REASSIGN_DEFENSE,
     params: { originZoneKey, destinationZoneKey, soldiersIndexes },
   }),
+  setSoldiers: (completeSoldiers) => ({
+    type: TYPES.SET_SOLDIERS,
+    params: { completeSoldiers },
+  }),
 };
 
 export default ACTION_CREATORS;
@@ -117,9 +122,11 @@ export default ACTION_CREATORS;
  * @property {(zoneKey: string, protocol: RetreatProtocolState) => any} setDefenseProtocol Sets the battle protocol of the specified zone's Defense.
  * @property {(unitKey: string, protocol: RetreatProtocolState) => any} setUnitProtocol Sets the battle protocol of the Liberation Unit at the specified index.
  * @property {(originZoneKey: string, destinationZoneKey: string, soldiersIndexes: number[]) => any} reassignDefense Moves the soldiers at the specified indexes from the origin zone defense force to the destination zone defense force.
+ * @property {(completeSoldiers: CompleteSoldierState[]) => any} setSoldiers Sets the specified complete soldiers to their corresponding soldier state.
  */
 
 /**
  * @typedef {import("@state/defaultState").SoldierState} SoldierState
  * @typedef {import("@state/defaultState").RetreatProtocolState} RetreatProtocolState
+ * @typedef {import("@static/contexts/army/ops").CompleteSoldierState} CompleteSoldierState
  */

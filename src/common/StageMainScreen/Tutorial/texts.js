@@ -77,4 +77,22 @@ export default {
       body: "Fresh soldiers are automatically sent to rest, where they have minimal mantainment. Also they have no gear on them. You can equip soldiers in the Equipment Stage and move them between zones in the Reassignation Stage.",
     },
   ],
+  [MIK.STAGES.EQUIPMENT]: [
+    {
+      title: "Basics",
+      body: "Assign equipment to all needed soldiers in this Stage: resting ones, defending ones and those in liberation units if any. Check before continuing; this is the only stage where soldiers can be equipped. Unused equipment is automatically stored back.",
+    },
+    {
+      title: "No Level Requirements",
+      body: "You can equip any rank of weapon or armor to any soldier; there's no level requirement.",
+    },
+    {
+      title: "About soldiers Gear",
+      body: "Gear improves the limits of a soldier's combat ability, but doesn't grant it. A soldier with better gear has the capacity to fight better, but not necessarily will. This works with the soldier's CE Level (read next stage fundamentals).",
+    },
+    {
+      title: "More specifically",
+      body: "The Weapon determines the maximum amount of damage a soldier can deal in an attack. Armor determines the maximum amount of defense a soldier can put when receiving an attack. ",
+    },
+  ],
 };

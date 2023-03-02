@@ -7,7 +7,20 @@ import { useIndicatedStyles } from "@static/tailwind";
 /**
  * Displays a cute, fixed and screen-centered container with a background dim and default customizable behavior.
  *
- * _This Component is designed to be controlled, so the `visible` and `onClose` props must be specified. Otherwise it would be confusing and limited._
+ * ### LIMITATIONS.
+ *
+ * Some things must be understood and considered when using the Component. To avoid this annoyance and just be happy, the `useModalState` hook is recommended, which is also more intuitive and readable.
+ *
+ * **Must be controlled**:
+ *
+ * This Component is designed to be controlled, so the `visible` and `onClose` props must be specified. Otherwise it would be confusing and limited.
+ *
+ * **Needs a props buffer**:
+ *
+ * Deleting the state used for the stuff displayed in the Modal while it's opened will naturally ERROR even if closing
+ * it because the close process is not instant. Handling it to avoid rendering the non-existing stuff just looks ugly while it closes.
+ * The best solution is to use a props buffer: save the props in a `Ref` within the child component of CuteModal.
+ *
  * @param {Object} props
  * @param {boolean} props.visible **REQUIRED**. Controls the Modal's visibility.
  * @param {(finished: boolean, reason: "default" | "external") => void} props.onClose **REQUIRED**. Callback to execute when the Modal closing animation starts and finishes. Receives a `finished` boolean param and a 2nd `reason` param with the reason of the close. This callback should update the `visible` state on the parent Component.

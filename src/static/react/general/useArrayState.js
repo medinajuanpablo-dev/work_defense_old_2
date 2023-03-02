@@ -112,7 +112,7 @@ function useArrayState(initialState = null) {
 
   return {
     /** The current array state.
-     * @type {T} */
+     * @type {Array<T>} */
     get: array,
     /**Whole-array management functions. */
     wholeArray: {

@@ -1,5 +1,5 @@
 import React from "react";
-import { mapValues } from "lodash";
+import { cloneDeep } from "lodash";
 import { BsCapslockFill } from "react-icons/bs";
 
 import { StageMainScreen, ContinueButton, LineTitle } from "@common/index";
@@ -19,23 +19,15 @@ function ResearchStage() {
   const gs = useGeneralStateReader("technologies");
 
   const tempState = useObjectState({
-    tree: mapValues(TECHS.TREE, (ctg) =>
-      mapValues(ctg, (col) => col.map(() => ({ researched: false })))
-    ),
+    tree: cloneDeep(gs.technologies.tree),
     points: 0,
   });
 
   function setInitialValues() {
-    tempState.replace((prev) => ({
-      tree: mapValues(prev.tree, (category, ctg) =>
-        mapValues(category, (column, col) =>
-          column.map(
-            (_, techIndex) => gs.technologies.tree[ctg][col][techIndex]
-          )
-        )
-      ),
+    tempState.replace({
+      tree: cloneDeep(gs.technologies.tree),
       points: gs.technologies.researchPoints,
-    }));
+    });
   }
 
   React.useEffect(setInitialValues, []);
