@@ -24,10 +24,16 @@ function EquipmentSection({ openSubMenu }) {
       [W]: {
         stored: sumProperties(gs.equipment.stored[W]),
         ranksSum: equipmentOps.ranksSum(gs.equipment.stored[W]),
+        get average() {
+          return this.ranksSum / this.stored;
+        },
       },
       [A]: {
         stored: sumProperties(gs.equipment.stored[A]),
         ranksSum: equipmentOps.ranksSum(gs.equipment.stored[A]),
+        get average() {
+          return this.ranksSum / this.stored;
+        },
       },
     };
 
@@ -58,8 +64,7 @@ function EquipmentSection({ openSubMenu }) {
             <SummaryRow
               size="smaller"
               Icon={RiEditCircleFill}
-              text="<L>Stored: <A>"
-              label=""
+              text="Stored: <A>"
               amount={summary[EQK.TYPES.WEAPON].stored}
               color="blue"
               customDirSty={STYLES.stat}
@@ -67,9 +72,16 @@ function EquipmentSection({ openSubMenu }) {
             <SummaryRow
               size="smaller"
               Icon={RiEditCircleFill}
-              text="<L>Ranks Sum: <A>"
-              label=""
+              text="Ranks Sum: <A>"
               amount={summary[EQK.TYPES.WEAPON].ranksSum}
+              color="blue"
+              customDirSty={STYLES.stat}
+            />
+            <SummaryRow
+              size="smaller"
+              Icon={RiEditCircleFill}
+              text="Avg. Rank: <A>"
+              amount={summary[EQK.TYPES.ARMOR].average}
               color="blue"
               customDirSty={STYLES.stat}
             />
@@ -82,7 +94,7 @@ function EquipmentSection({ openSubMenu }) {
             onClick={() => openSubMenu(`details-${EQK.TYPES.WEAPON}`)}
             customDirSty={{ button: "mt-6" }}
           >
-            Stored / Orders
+            See Details
           </CuteButton>
         </div>
 
@@ -95,18 +107,24 @@ function EquipmentSection({ openSubMenu }) {
             <SummaryRow
               size="smaller"
               Icon={RiEditCircleFill}
-              text="<L>Stored: <A>"
-              label=""
-              amount={summary[EQK.TYPES.ARMOR].stored}
+              text="Stored: <A>"
+              amount={summary[EQK.TYPES.ARMOR].stored.toFixed(0)}
               color="blue"
               customDirSty={STYLES.stat}
             />
             <SummaryRow
               size="smaller"
               Icon={RiEditCircleFill}
-              text="<L>Ranks Sum: <A>"
-              label=""
-              amount={summary[EQK.TYPES.ARMOR].ranksSum}
+              text="Ranks Sum: <A>"
+              amount={summary[EQK.TYPES.ARMOR].ranksSum.toFixed(0)}
+              color="blue"
+              customDirSty={STYLES.stat}
+            />
+            <SummaryRow
+              size="smaller"
+              Icon={RiEditCircleFill}
+              text="Avg. Rank: <A>"
+              amount={summary[EQK.TYPES.ARMOR].average.toFixed(1)}
               color="blue"
               customDirSty={STYLES.stat}
             />
@@ -119,7 +137,7 @@ function EquipmentSection({ openSubMenu }) {
             onClick={() => openSubMenu(`details-${EQK.TYPES.ARMOR}`)}
             customDirSty={{ button: "mt-6" }}
           >
-            Stored / Orders
+            See Details
           </CuteButton>
         </div>
       </div>
@@ -161,7 +179,7 @@ function CapacitySummary({ summary }) {
 //prettier-ignore
 const CAPACITY_DIR_STY = {
   ct: "mt-4 w-2/3 mx-auto text-gray-700 rounded-md border-blue-300 border-1 border-dashed text-center py-3 text-xl leading-tight || mx<border-red-500> amx<border-yellow-700> nmx<border-indigo-500>",
-  capacity: "text-light text-base text-green-500 || mx<text-red-500> amx<text-yellow-700> nmx<text-indigo-500>",
+  capacity: "text-light text-base text-green-600 || mx<text-red-500> amx<text-yellow-700> nmx<text-indigo-500>",
   capacityNumber: "text-lg",
 }
 

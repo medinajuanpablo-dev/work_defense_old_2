@@ -26,11 +26,11 @@ function ArmyList({ closeMenu, closeSubMenu }) {
         case "number":
           return descendingSort ? s2.number - s1.number : s1.number - s2.number;
         case "level":
-          return descendingSort ? s2.level - s1.level : s1.level - s2.level;
+          return descendingSort ? s2.ce.level - s1.ce.level : s1.ce.level - s2.ce.level;
         case "armorRank":
-          return descendingSort ? s2.armorRank - s1.armorRank : s1.armorRank - s2.armorRank;
+          return descendingSort ? s2.gear.armorRank - s1.gear.armorRank : s1.gear.armorRank - s2.gear.armorRank;
         case "weaponRank":
-          return descendingSort ? s2.weaponRank - s1.weaponRank : s1.weaponRank - s2.weaponRank;
+          return descendingSort ? s2.gear.weaponRank - s1.gear.weaponRank : s1.gear.weaponRank - s2.gear.weaponRank;
         case "role":
           return descendingSort ? (s2.roleCode > s1.roleCode ? 1 : -1) : s1.roleCode > s2.roleCode ? 1 : -1;
         default:
@@ -66,7 +66,7 @@ function ArmyList({ closeMenu, closeSubMenu }) {
         }}
       />
 
-      <LineTitle margin="t-large">Army List</LineTitle>
+      <LineTitle margin="t-large">List of all Soldiers</LineTitle>
 
       <div className={STYLES.tableCt}>
         <div className={STYLES.allHeadersCt}>

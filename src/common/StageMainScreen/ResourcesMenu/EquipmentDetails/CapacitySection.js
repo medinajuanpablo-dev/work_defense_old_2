@@ -48,10 +48,10 @@ function CapacitySection() {
     );
 
     //Determine the capacity status after orders are finished.
-    const afterCapacityStatus = interfaceOps.afterCapacityStatus(
-      afterOrdersTotal,
-      capacity
-    );
+    const afterCapacityStatus =
+      afterOrdersTotal == sumProperties(currently)
+        ? "equal"
+        : interfaceOps.afterCapacityStatus(afterOrdersTotal, capacity);
 
     return {
       currently,
@@ -70,7 +70,7 @@ function CapacitySection() {
 
       <Total {...status} />
 
-      {status.afterOrdersTotal > 0 && (
+      {status.afterCapacityStatus != "equal" && (
         <SummaryRow
           customDirSty={STYLES.afterFinished}
           Icon={RiEditCircleFill}

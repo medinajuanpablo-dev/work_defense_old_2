@@ -8,6 +8,7 @@ import a6 from "./general/arrays/countItems";
 import a7 from "./general/arrays/sliceByIndexes";
 import a8 from "./general/arrays/sumItems";
 import a9 from "./general/arrays/divide";
+import a10 from "./general/arrays/filterAndKeep";
 
 import c2 from "./general/control/exists";
 import {
@@ -41,6 +42,7 @@ export const countItems = a6;
 export const sliceByIndexes = a7;
 export const sumItems = a8;
 export const divide = a9;
+export const filterAndKeep = a10;
 
 export const exists = c2;
 export const checkOptionalValues = c6;

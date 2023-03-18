@@ -104,13 +104,14 @@ export default (() => {
   var dgs = DEFAULT_GENERAL_STATE;
 
   //Misc
-  dgs.miscellaneous.stage = MIK.STAGES.EQUIPMENT;
+  dgs.miscellaneous.stage = MIK.STAGES.RECRUITMENT;
 
   //Buildings
   for (let b in dgs.buildings) dgs.buildings[b].level = 3;
   dgs.buildings[BDK.NAMES.WAREHOUSE].level = 3;
   dgs.buildings[BDK.NAMES.ARSENAL].level = 3;
   dgs.buildings[BDK.NAMES.IMMIGRATION_POST].level = 5;
+  dgs.buildings[BDK.NAMES.ACADEMY].level = 0;
 
   dgs.buildings[BDK.NAMES.MINES].upgrading = true;
   dgs.buildings[BDK.NAMES.FARMS].upgrading = true;
@@ -122,7 +123,7 @@ export default (() => {
   dgs.population.count[PPK.OCCS.MINER] = 5;
   dgs.population.count[PPK.OCCS.FARMER] = 12;
   dgs.population.count[PPK.OCCS.RECRUIT] = 6;
-  dgs.population.recruitsLevels = { 1: 3, 2: 2, 3: 1 };
+  dgs.population.recruitsLevels = { 1: 3, 2: 1, 3: 2 };
 
   dgs.population.count.total = 31;
 
@@ -136,7 +137,7 @@ export default (() => {
   function constructForce() {
     return Array(2)
       .fill(true)
-      .map((v, i) =>
+      .map(() =>
         armyOps.createSoldier({
           number: ++dgs.army.soldierCreationCounter,
           level: randomConstruct ? random(1, constructLevel) : constructLevel,
@@ -174,9 +175,9 @@ export default (() => {
     [REK.NAMES.MATERIALS]: 30,
   };
   dgs.resources.stored = {
-    [REK.NAMES.DLOGS]: 30,
+    [REK.NAMES.DLOGS]: 35,
     [REK.NAMES.FOOD]: 35,
-    [REK.NAMES.MATERIALS]: 18,
+    [REK.NAMES.MATERIALS]: 20,
   };
 
   //Equipment
@@ -186,13 +187,13 @@ export default (() => {
 
   // prettier-ignore
   for (let i = 1; i <= 10; i++) {
-    dgs.equipment.stored[EQK.TYPES.ARMOR][i] = random(0, 10);
-    dgs.equipment.orders[EQK.TYPES.ARMOR][i] = random(0, 10);
+    dgs.equipment.stored[EQK.TYPES.ARMOR][i] = random(0, 2);
+    // dgs.equipment.orders[EQK.TYPES.ARMOR][i] = random(0, 10);
   }
   //prettier-ignore
   for (let i = 1; i <= 10; i++){
-    dgs.equipment.stored[EQK.TYPES.WEAPON][i] = random(0, 10);
-    dgs.equipment.orders[EQK.TYPES.WEAPON][i] = random(0, 10);
+    dgs.equipment.stored[EQK.TYPES.WEAPON][i] = random(0, 2);
+    // dgs.equipment.orders[EQK.TYPES.WEAPON][i] = random(0, 10);
   }
 
   return dgs;

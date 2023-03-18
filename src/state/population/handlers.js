@@ -1,3 +1,5 @@
+import { PPK } from "@static/contexts/population";
+
 /**
  * @param {import("../defaultState").PopulationState} prevState
  * @param {import("../defaultState").PopulationState} newState
@@ -9,8 +11,9 @@ function getHandlers(prevState, newState) {
       return newState;
     },
 
-    clearRecruitsLevels() {
+    clearRecruits() {
       newState.recruitsLevels = {};
+      newState.count[PPK.OCCS.RECRUIT] = 0;
       return newState;
     },
 
@@ -36,8 +39,15 @@ function getHandlers(prevState, newState) {
       return newState;
     },
 
-    setRecruitsLevels({ recruitsLevels }) {
+    setRecruits({ recruitsLevels }) {
+      const newCount = Object.values(recruitsLevels).reduce(
+        (acc, inLevel) => acc + inLevel
+      );
+      const difference = newCount - newState.count[PPK.OCCS.RECRUIT];
+
       newState.recruitsLevels = recruitsLevels;
+      newState.count[PPK.OCCS.RECRUIT] = newCount;
+      newState.count.total += difference;
       return newState;
     },
   };

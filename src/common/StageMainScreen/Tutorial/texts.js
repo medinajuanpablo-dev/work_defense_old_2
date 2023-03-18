@@ -70,7 +70,7 @@ export default {
   [MIK.STAGES.ENLISTMENT]: [
     {
       title: "Basics",
-      body: "In this Stage the recruits ordered in the last Recruitment Stage turn into soldiers of the ordered CE levels.",
+      body: "In this Stage the recruits assigned in the last Recruitment Stage turn into soldiers of the ordered CE levels.",
     },
     {
       title: "Resting and Unequiped",
@@ -93,6 +93,42 @@ export default {
     {
       title: "More specifically",
       body: "The Weapon determines the maximum amount of damage a soldier can deal in an attack. Armor determines the maximum amount of defense a soldier can put when receiving an attack. ",
+    },
+  ],
+  [MIK.STAGES.FABRICATION]: [
+    {
+      title: "Basics",
+      body: "Order new weapons and armor from the Weaponsmith and Armorsmith. Ordered equipment will be finished by the next Production Stage.",
+    },
+    {
+      title: "Crafting Capacity (CC)",
+      body: "Each type of equipment, weapon or armor, is crafted by a different artisan: weaponsmith or armorsmith. Each has a certain Crafting Capacity (adressed as 'CC') that limits the amount and quality of equipment that can be ordered to craft each tempo. The CC is improved by upgrading the artisans buildings.",
+    },
+    {
+      title: "Ranks",
+      body: "Equipment quality is divided in Ranks. Higher ranks are simply better equipment, but also cost more and take more CC to be made. All ranks can be ordered since tempo 1; there are no requirements.",
+    },
+  ],
+  [MIK.STAGES.RECRUITMENT]: [
+    {
+      title: "Basics",
+      body: "Send free people to training to turn them into recruits, which will turn into soldiers by the next Enlistment Stage.",
+    },
+    {
+      title: "Recruits",
+      body: "Similar to Reassigned people, recruits do nothing and consume a bit more than free people but less than workers.",
+    },
+    {
+      title: "Combat Experience (CE)",
+      body: "Soldiers gain experience when thriving (and surviving) in battles. The level of CE is extremely important: a higher CE level soldier will simply fight better, although better skill serves for nothing without quality gear to keep up with it.",
+    },
+    {
+      title: "Ordering higher initial CE levels",
+      body: "Initially, all soldiers graduate with CE level 1. You may order soldiers that will graduate with a higher CE level by upgrading the Academy. This costs more resources per soldier though, but all soldiers are trained in 1 tempo no matter the ordered level.",
+    },
+    {
+      title: "More specifically",
+      body: "The CE level determines both the minimum amount of damage the soldier can deal in an attack and the minimum defense the soldier can put when receiving an attack. However, this minimum can NOT be higher that the maximum provided by the soldier's gear.",
     },
   ],
 };

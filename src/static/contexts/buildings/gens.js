@@ -73,7 +73,7 @@ export const BY_BUILDING = {
       INCREASE: { [REK.NAMES.DLOGS]: 25, [REK.NAMES.MATERIALS]: 15 },
     },
     DESCRIPTION:
-      "The Weaponsmith both crafts and upgrades all the weaponry needed to keep our defense able to destroy the enemy. Losing this building blocks all weapon crafting until recovered. Each upgrade allows to order a higher maximum weapon rank.",
+      "The Weaponsmith both crafts and upgrades all the weaponry needed to keep our defense able to destroy the enemy. Losing this building blocks all weapon crafting until recovered. Each upgrade allows to order a higher maximum weapon rank and also improves the weapons ordering capacity.",
   },
   [KEYS.NAMES.ARMORSMITH]: {
     PLACEMENT_ZONE: MIK.ZONES.ARMAMENT,
@@ -84,7 +84,7 @@ export const BY_BUILDING = {
       INCREASE: { [REK.NAMES.DLOGS]: 25, [REK.NAMES.MATERIALS]: 15 },
     },
     DESCRIPTION:
-      "The Armorsmith both crafts and updgrades all the body-protection our defense need to destroy the enemy and survive the process. Losing this building blocks all armor crafting until recovered. Each upgrade allows to order a higher maximum armor rank.",
+      "The Armorsmith both crafts and updgrades all the body-protection our defense need to destroy the enemy and survive the process. Losing this building blocks all armor crafting until recovered. Each upgrade allows to order a higher maximum armor rank and also improves the armor ordering capacity.",
   },
   [KEYS.NAMES.MINES]: {
     PLACEMENT_ZONE: MIK.ZONES.MINING,

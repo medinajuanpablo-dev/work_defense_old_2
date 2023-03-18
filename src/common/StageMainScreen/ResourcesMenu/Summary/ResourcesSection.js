@@ -203,20 +203,21 @@ function ResourceBox({ resKey, summary, customDirSty }) {
         </p>
       </div>
       {e(production) && <p className={styles.productionLine}>
-        <span className={styles.production}>+{production}</span> per tempo
+        <span className={styles.production}>+{production.toFixed(1)}</span> /tempo
       </p>}
     </div>
   );
 }
 
 const RESOURCE_DIRSTY = {
-  ct: "w-28 border-1 rounded-md border-dotted border-gray-400 py-2 text-xl || amx<border-yellow-500> mx<border-red-500>",
-  amountLine: "flex justify-center items-center text-xl",
-  icon: "mr-3 text-2xl",
-  amounts: "text-gray-700",
-  capacity: "text-base text-light || mx<text-red-500> amx,nmx<text-yellow-600>",
-  productionLine: "text-center text-xs text-gray-700",
-  production: "text-xl",
+  ct: "w-28 border-1 rounded-md border-dotted text-slate-700 border-gray-400 py-2 || amx<border-yellow-500> mx<border-red-500>",
+  amountLine: "flex justify-center",
+  icon: "mr-2 text-2xl",
+  amounts: "text-lg",
+  capacity:
+    "text-sm ml-1 text-light text-gray-500 || mx<text-red-500> amx,nmx<text-yellow-600>",
+  productionLine: "mt-1 text-center text-xs text-light text-gray-500",
+  production: "text-base mr-1 text-default text-slate-700",
 };
 
 const RESOURCE_ICON = {

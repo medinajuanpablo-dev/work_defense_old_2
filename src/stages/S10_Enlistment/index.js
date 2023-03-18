@@ -35,6 +35,9 @@ function EnlistmentStage() {
     //Add fresh force.
     updateGS.army.addFreshSoldiers(freshSoldiers);
 
+    //Clear recruits that graduated.
+    updateGS.population.clearRecruits();
+
     updateGS.miscellaneous.stageForward();
   }
 

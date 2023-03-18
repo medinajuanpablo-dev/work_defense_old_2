@@ -5,32 +5,28 @@ import { sumProperties, clean, checkRequiredValues } from "@static/functions";
 import { REK } from "../resources";
 
 /**
- * Tells the maximum rank that can be produced by the crafter building of the specified level.
- * @param {number} crafterBuildingLevel
- * @returns {number} The maximum craftable rank.
+ * Tells the crafting requirements (cost and Crafting Capacity) of the specified amount of equipment
+ * of the specified rank.
+ * @param {number} rank The rank of the crafting equipment.
+ * @param {number} amount The amount to craft of that rank.
+ * @returns {{cost: Cost, cc: number}} The crafting cost.
  */
-export function maxCraftableRank(crafterBuildingLevel) {
-  checkRequiredValues([[{ crafterBuildingLevel }, "n"]]);
+export function craftRequirements(rank, amount) {
+  var cost = {};
+  for (let resKey in REQUIREMENTS_PER_RANK.RESOURCES)
+    cost[resKey] = REQUIREMENTS_PER_RANK.RESOURCES[resKey] * rank * amount;
 
-  const { BASE, PER_BUILDING_LEVEL } = CRAFT_RANK;
-  return BASE + crafterBuildingLevel * PER_BUILDING_LEVEL;
+  const cc = REQUIREMENTS_PER_RANK.CRAFTING_CAPACITY * rank * amount;
+
+  return { cost, cc };
 }
 
 /**
- * Tells the crafting cost of the specified amount of equipment of the specified rank.
- * @param {number} rank The rank of the crafting equipment.
- * @param {number} amount The amount to craft of that rank.
- * @returns {Cost} The crafting cost.
+ * Tells the maximum artisan crafting capacity based on it's building level.
+ * @param {number} crafterBuildingLevel
  */
-export function craftCost(rank, amount) {
-  checkRequiredValues([[{ rank, amount }, "n", "n"]]);
-
-  const cost = {};
-
-  for (let resKey in COST_PER_RANK)
-    cost[resKey] = COST_PER_RANK[resKey] * rank * amount;
-
-  return cost;
+export function maximumCraftingCapacity(crafterBuildingLevel) {
+  return CRAFTING_CAPACITY_PER_LEVEL * crafterBuildingLevel;
 }
 
 /**
@@ -179,24 +175,22 @@ const CAPACITY = {
   INCRASE_PER_LEVEL: 7,
 };
 
-/**Equipment cost for each rank. */
-const COST_PER_RANK = {
-  [REK.NAMES.DLOGS]: 1,
-  [REK.NAMES.MATERIALS]: 1,
+/**Equipment needed Resources and Crafting Capacity for each rank. */
+const REQUIREMENTS_PER_RANK = {
+  CRAFTING_CAPACITY: 1,
+  RESOURCES: {
+    [REK.NAMES.DLOGS]: 1.75,
+    [REK.NAMES.MATERIALS]: 0.75,
+  },
 };
 
-/**Values to calculate the rank of crafted equipment */
-const CRAFT_RANK = {
-  /**Crafted equipment base rank. */
-  BASE: 1,
-  /**Crafted equipment rank for each level of the building that crafts it. */
-  PER_BUILDING_LEVEL: 1,
-};
+/**The maximum crafting capacity of an artisan per level of it's building. */
+const CRAFTING_CAPACITY_PER_LEVEL = 10;
 
 const CODE_OF_LETTER_A = 65;
 const CODE_OF_LETTER_Z = 90;
 
 /**
  * @typedef {import("@state/defaultState").EquipmentSet} EquipmentSet
- * @typedef {import("@static/contexts/resources").Cost} Cost
+ * @typedef {import("@static/contexts/resources/gens").Cost} Cost
  */

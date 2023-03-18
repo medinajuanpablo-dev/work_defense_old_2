@@ -70,6 +70,7 @@ function CiviliansSectionLayout() {
             text="<L>: <A>"
             customDirSty={STYLES.occCell}
             color="blue"
+            size="smaller"
           />
           <SummaryRow
             Icon={RiEditCircleFill}
@@ -91,6 +92,7 @@ function CiviliansSectionLayout() {
             text="<L>: <A>"
             customDirSty={STYLES.occCell}
             color="blue"
+            size="smaller"
           />
           <SummaryRow
             Icon={RiEditCircleFill}
@@ -111,6 +113,7 @@ function CiviliansSectionLayout() {
           text="<L>: <A>"
           customDirSty={STYLES.occCell}
           color="blue"
+          size="smaller"
         />
         <SummaryRow
           Icon={RiEditCircleFill}
@@ -130,10 +133,9 @@ const STYLES = {
   totalCivilians: { ct: "mt-4" },
   mantainment: { ct: "my-4" },
 
-  occRow:
-    "flex px-2 justify-between border-t-1 border-slate-300 py-2 items-center",
+  occRow: "flex border-t-1 border-slate-300 py-2 items-center",
   occCell: {
-    ct: "mr-4",
+    ct: "flex-1 shrink-0 ",
     label: "text-default",
     icon: "w-4 h-4 | xs:w-6 xs:h-6",
   },

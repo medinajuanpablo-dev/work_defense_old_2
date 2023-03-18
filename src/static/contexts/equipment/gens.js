@@ -20,3 +20,6 @@ export const TYPES_NAMES = {
   [KEYS.TYPES.WEAPON]: { SINGULAR: "Weapon", PLURAL: "Weapons" },
   [KEYS.TYPES.ARMOR]: { SINGULAR: "Armor", PLURAL: "Armor" },
 };
+
+/**The maximum rank for both equipment types. */
+export const MAX_RANK = 10;

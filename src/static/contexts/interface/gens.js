@@ -6,7 +6,7 @@ These are general values and keys, meaning they are used in multiple and spread 
 Local-use values and keys are defined where they are used. 
 */
 
-import {} from "../miscellaneous";
+import { EQK } from "../equipment";
 
 export const KEYS = {
   MENUS: {
@@ -17,8 +17,8 @@ export const KEYS = {
 
   SUB_MENUS: {
     ARMY_LIST: "armyList",
-    ARMOR_DETAILS: "armorDetails",
-    WEAPONS_DETAILS: "weaponsDetails",
+    ARMOR_DETAILS: `details-${EQK.TYPES.ARMOR}`,
+    WEAPONS_DETAILS: `details-${EQK.TYPES.WEAPON}`,
   },
 
   BREAKPOINTS: {
