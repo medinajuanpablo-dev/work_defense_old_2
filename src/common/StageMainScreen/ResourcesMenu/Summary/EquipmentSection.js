@@ -65,7 +65,7 @@ function EquipmentSection({ openSubMenu }) {
               size="smaller"
               Icon={RiEditCircleFill}
               text="Stored: <A>"
-              amount={summary[EQK.TYPES.WEAPON].stored}
+              amount={summary[EQK.TYPES.WEAPON].stored.toFixed(0)}
               color="blue"
               customDirSty={STYLES.stat}
             />
@@ -73,7 +73,7 @@ function EquipmentSection({ openSubMenu }) {
               size="smaller"
               Icon={RiEditCircleFill}
               text="Ranks Sum: <A>"
-              amount={summary[EQK.TYPES.WEAPON].ranksSum}
+              amount={summary[EQK.TYPES.WEAPON].ranksSum.toFixed(0)}
               color="blue"
               customDirSty={STYLES.stat}
             />
@@ -81,7 +81,7 @@ function EquipmentSection({ openSubMenu }) {
               size="smaller"
               Icon={RiEditCircleFill}
               text="Avg. Rank: <A>"
-              amount={summary[EQK.TYPES.ARMOR].average}
+              amount={summary[EQK.TYPES.ARMOR].average.toFixed(1)}
               color="blue"
               customDirSty={STYLES.stat}
             />

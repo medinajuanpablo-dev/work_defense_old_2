@@ -4,10 +4,10 @@ import { BsBoxArrowRight } from "react-icons/bs";
 
 import { useIndicatedStyles } from "@static/tailwind";
 
-function ContinueButton({ subMessage, onClick, customDirSty }) {
+function ContinueButton({ subMessage, unlocked, onClick, customDirSty }) {
   //prettier-ignore
   const getActiveStyles = useIndicatedStyles(INDICATORS, DIRECTED_STYLES, { customDirSty });
-  const [locked, setLocked] = React.useState(true);
+  const [locked, setLocked] = React.useState(!unlocked);
 
   const styles = getActiveStyles({ locked });
 
@@ -16,9 +16,11 @@ function ContinueButton({ subMessage, onClick, customDirSty }) {
   return (
     <>
       <div className={styles.ct}>
-        <button onClick={() => setLocked(!locked)} className={styles.lock}>
-          <LockIcon className={styles.lockIcon} />
-        </button>
+        {!unlocked && (
+          <button onClick={() => setLocked(!locked)} className={styles.lock}>
+            <LockIcon className={styles.lockIcon} />
+          </button>
+        )}
         <button onClick={onClick} disabled={locked} className={styles.continue}>
           Save and Proceed
           <BsBoxArrowRight className={styles.continueIcon} />

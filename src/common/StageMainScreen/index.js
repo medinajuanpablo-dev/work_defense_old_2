@@ -1,7 +1,7 @@
 import React from "react";
 import { IoIosPeople } from "react-icons/io";
 import { IoWarning } from "react-icons/io5";
-import { BsInfoCircle } from "react-icons/bs";
+import { BsInfoCircle, BsQuestionCircle } from "react-icons/bs";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { GiCastle, GiMetalBar } from "react-icons/gi";
 
@@ -52,6 +52,18 @@ function StageMainScreen({ children, stageKey, onUndo }) {
           title: "text-red-600",
           icon: "text-red-600",
           leftButton: "border-red-600 text-red-600 hover:bg-red-600",
+        },
+      });
+    else
+      displayCuteAlert({
+        Icon: BsInfoCircle,
+        title: "Review-only Stage",
+        body: "No actions can be performed in this Stage, so there's nothing to Undo.",
+        button: { text: "Understood" },
+        customStyles: {
+          title: "text-slate-600",
+          icon: "text-slate-600",
+          leftButton: "border-slate-600 text-slate-600 hover:bg-slate-600",
         },
       });
   }

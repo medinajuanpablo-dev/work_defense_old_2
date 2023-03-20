@@ -104,7 +104,7 @@ export default (() => {
   var dgs = DEFAULT_GENERAL_STATE;
 
   //Misc
-  dgs.miscellaneous.stage = MIK.STAGES.RECRUITMENT;
+  dgs.miscellaneous.stage = MIK.STAGES.SIGHTING;
 
   //Buildings
   for (let b in dgs.buildings) dgs.buildings[b].level = 3;

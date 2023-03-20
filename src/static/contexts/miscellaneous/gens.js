@@ -56,11 +56,11 @@ export const PREVIOUS_GS_MAX_DEEPNESS = 1;
 
 /**Name of each zone. */
 export const ACTIVE_ZONES = {
-  [KEYS.ZONES.COMMAND]: "Command",
   [KEYS.ZONES.COMMERCE]: "Commerce",
   [KEYS.ZONES.EXPEDITION]: "Expedition",
   [KEYS.ZONES.FARMING]: "Farming",
   [KEYS.ZONES.MINING]: "Mining",
+  [KEYS.ZONES.COMMAND]: "Command",
   [KEYS.ZONES.RECRUITMENT]: "Recruitment",
   [KEYS.ZONES.RESIDENTIAL]: "Residential",
   [KEYS.ZONES.STORAGE]: "Storage",
@@ -73,10 +73,10 @@ export const FREE_ZONE_NAME = "Free Zone";
  * WARNING: MUST be ordered chronologically.
  */
 export const ORDERED_STAGES = {
-  // [KEYS.STAGES.DAWN]: "Dawn",
-  // [KEYS.STAGES.PRODUCTION]: "Production",
-  // [KEYS.STAGES.MANTAINMENT]: "Mantainment",
-  // [KEYS.STAGES.DESTRUCTION]: "Destruction",
+  [KEYS.STAGES.DAWN]: "Dawn",
+  [KEYS.STAGES.PRODUCTION]: "Production",
+  [KEYS.STAGES.MANTAINMENT]: "Mantainment",
+  [KEYS.STAGES.OCCUPATIONS]: "Occupations",
   [KEYS.STAGES.IMMIGRATION]: "Immigration",
   [KEYS.STAGES.CONSTRUCTIONS_END]: "Constructions End",
   [KEYS.STAGES.EMPLOYMENT]: "Employment",
@@ -86,16 +86,16 @@ export const ORDERED_STAGES = {
   [KEYS.STAGES.EQUIPMENT]: "Equipment",
   [KEYS.STAGES.FABRICATION]: "Fabrication",
   [KEYS.STAGES.RECRUITMENT]: "Recruitment",
-  // [KEYS.STAGES.SIGHTING]: "Sighting",
-  // [KEYS.STAGES.SCOUTING]: "Scouting",
-  // [KEYS.STAGES.REASSIGNATION]: "Reassignation",
-  // [KEYS.STAGES.OFFENSIVE]: "Offensive",
-  // [KEYS.STAGES.ALARM]: "Alarm",
-  // [KEYS.STAGES.DEFENSE]: "Defense",
-  // [KEYS.STAGES.LIBERATION]: "Liberation",
-  // [KEYS.STAGES.DEFENSE_RESULTS]: "Defense Results",
-  // [KEYS.STAGES.LIBERATION_RESULTS]: "Liberation Results",
-  // [KEYS.STAGES.LEARNING]: "Learning",
+  [KEYS.STAGES.SIGHTING]: "Sighting",
+  [KEYS.STAGES.SCOUTING]: "Scouting",
+  [KEYS.STAGES.REASSIGNATION]: "Reassignation",
+  [KEYS.STAGES.OFFENSIVE]: "Offensive",
+  [KEYS.STAGES.ALARM]: "Alarm",
+  [KEYS.STAGES.DEFENSE]: "Defense",
+  [KEYS.STAGES.LIBERATION]: "Liberation",
+  [KEYS.STAGES.DEFENSE_RESULTS]: "Defense Results",
+  [KEYS.STAGES.LIBERATION_RESULTS]: "Liberation Results",
+  [KEYS.STAGES.LEARNING]: "Learning",
 };
 
 /**Numbers of the zones adjacent to a certain zone. Each zone is a row. */
