@@ -1,6 +1,7 @@
-import { cloneDeep } from "lodash";
+import { cloneDeep, merge, isEqual } from "lodash";
 
 import { capped, pickFurtherItem } from "@static/functions";
+import defaultState from "@state/defaultState";
 
 import { MISC } from "@static/contexts/miscellaneous";
 
@@ -28,6 +29,9 @@ function getHandlers(prevState, newState) {
         max: OSKL.length - 1,
       });
       newState.stage = OSKL[nextStageIndex];
+
+      this.clearTempState();
+
       return newState;
     },
 
@@ -45,6 +49,11 @@ function getHandlers(prevState, newState) {
       return newState;
     },
 
+    clearTempState() {
+      newState.tempState = null;
+      return newState;
+    },
+
     //
 
     toStage({ stageKey }) {
@@ -54,7 +63,41 @@ function getHandlers(prevState, newState) {
 
     advanceStages({ number }) {
       newState.stage = pickFurtherItem(OSKL, prevState.stage, number);
+
+      this.clearTempState();
+
       return newState;
+    },
+
+    replaceTempState({ newTempState }) {
+      newState.tempState = newTempState;
+      return newState;
+    },
+
+    mergeTempState({ partialTempState }) {
+      if (
+        !isEqual(Object.keys(partialTempState), Object.keys(newState.tempState))
+      )
+        throw Error(
+          "The specified partialTempState contains keys not existing in the tempState"
+        );
+
+      newState.tempState = merge(newState.tempState, partialTempState);
+      return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.miscellaneous;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }

@@ -24,6 +24,13 @@ export default function reducer(prevState = defaultState.population, action) {
     case TYPES.SET_RECRUITS:
       return handlers.setRecruits(action.params);
 
+    case TYPES.CLEAR:
+      return handlers.clear();
+    case TYPES.REPLACE:
+      return handlers.replace(action.params);
+    case TYPES.MERGE:
+      return handlers.merge(action.params);
+
     default:
       throw unhandledActionError(STATE_NAME, action.type);
   }

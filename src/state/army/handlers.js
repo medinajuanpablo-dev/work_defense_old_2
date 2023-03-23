@@ -1,6 +1,7 @@
-import { camelCase } from "lodash";
+import { camelCase, merge } from "lodash";
 
 import { exists, sliceByIndexes } from "@static/functions";
+import defaultState from "@state/defaultState";
 
 import { MISC, MIK } from "@static/contexts/miscellaneous";
 import { BATTLE } from "@static/contexts/battle";
@@ -240,6 +241,20 @@ function getHandlers(prevState, newState) {
       }
 
       return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.army;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }

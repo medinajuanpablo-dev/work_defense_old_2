@@ -65,14 +65,17 @@ const DEFAULT_GENERAL_STATE = {
       risks: mapValues(MISC.ACTIVE_ZONES, () => 0),
       dangerZones: [],
       attacks: {},
+      fullInvasionForce: [],
     },
     liberations: {},
     occupations: {},
   },
 
   miscellaneous: {
+    tempo: 1,
     stage: MIK.STAGES.DAWN,
     previousGS: null,
+    tempState: null,
   },
 
   population: {
@@ -104,6 +107,7 @@ export default (() => {
   var dgs = DEFAULT_GENERAL_STATE;
 
   //Misc
+  dgs.miscellaneous.tempo = 30;
   dgs.miscellaneous.stage = MIK.STAGES.SIGHTING;
 
   //Buildings
@@ -286,6 +290,7 @@ export default (() => {
  * @property {OccupationsState} occupations Current state of occupied zones.
  *
  * @typedef InvasionDefenseState
+ * @property { Array<SoldierState> } fullInvasionForce Full invaders force.
  * @property {{ [activeZoneKey: string]: number }} risks Current risk of being attacked of each active zone.
  * @property {Array<string>} dangerZones Current zones likely to be attacked.
  * @property {{ [attackedZoneKey: string]: AttackState }} attacks Current attack state of each attacked zone.
@@ -303,8 +308,10 @@ export default (() => {
 
 /** Miscellaneous State types
  * @typedef MiscellaneousState
+ * @property {number} tempo Current tempo number.
  * @property {string} stage Current stage of the current tempo.
  * @property {GeneralState} previousGS The previous GS saved for undo.
+ * @property {any} tempState The temporal state of the current stage that will be used to update the GS when saving, and also to prevent state from changing on-refresh.
  */
 
 /** Population State types

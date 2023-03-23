@@ -1,3 +1,7 @@
+import { merge } from "lodash";
+
+import defaultState from "@state/defaultState";
+
 import { PPK } from "@static/contexts/population";
 
 /**
@@ -49,6 +53,20 @@ function getHandlers(prevState, newState) {
       newState.count[PPK.OCCS.RECRUIT] = newCount;
       newState.count.total += difference;
       return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.population;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }

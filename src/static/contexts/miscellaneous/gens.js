@@ -54,13 +54,28 @@ export const KEYS = {
 /**The amount of previous general states that can be saved recursively. This doesn't include the current gs. */
 export const PREVIOUS_GS_MAX_DEEPNESS = 1;
 
-/**Name of each zone. */
+/**Zones attackable by the invaders and that can be assigned soldiers for defense.
+ * The Command zone and the Free zone aren't active zones, the rest are. */
 export const ACTIVE_ZONES = {
   [KEYS.ZONES.COMMERCE]: "Commerce",
   [KEYS.ZONES.EXPEDITION]: "Expedition",
   [KEYS.ZONES.FARMING]: "Farming",
   [KEYS.ZONES.MINING]: "Mining",
+  [KEYS.ZONES.RECRUITMENT]: "Recruitment",
+  [KEYS.ZONES.RESIDENTIAL]: "Residential",
+  [KEYS.ZONES.STORAGE]: "Storage",
+  [KEYS.ZONES.ARMAMENT]: "Armament",
+};
+
+/**Zones containing buildings and that will be shown as a little scheme/map in the interface. */
+export const REAL_ZONES = {
+  [KEYS.ZONES.COMMERCE]: "Commerce",
+  [KEYS.ZONES.EXPEDITION]: "Expedition",
+  [KEYS.ZONES.FARMING]: "Farming",
+  [KEYS.ZONES.MINING]: "Mining",
+
   [KEYS.ZONES.COMMAND]: "Command",
+
   [KEYS.ZONES.RECRUITMENT]: "Recruitment",
   [KEYS.ZONES.RESIDENTIAL]: "Residential",
   [KEYS.ZONES.STORAGE]: "Storage",

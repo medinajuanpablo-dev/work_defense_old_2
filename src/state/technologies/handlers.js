@@ -1,3 +1,7 @@
+import { merge } from "lodash";
+
+import defaultState from "@state/defaultState";
+
 import { TECHS } from "@static/contexts/technologies";
 
 /**
@@ -115,6 +119,20 @@ function getHandlers(prevState, newState) {
     setTree({ techsTree }) {
       newState.tree = techsTree;
       return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.technologies;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }

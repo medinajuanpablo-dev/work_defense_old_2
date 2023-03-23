@@ -130,27 +130,27 @@ export default {
       title: "More specifically",
       body: "The CE level determines both the minimum amount of damage the soldier can deal in an attack and the minimum defense the soldier can put when receiving an attack. However, this minimum can NOT be higher that the maximum provided by the soldier's gear.",
     },
+    {
+      title: "Power",
+      body: "A soldier's power is a number that somewhat indicates it's fighting capacity, combining both it's CE level and it's gear. The broader the difference in power, the more likely the higher-power soldier/force will win the fight.",
+    },
   ],
   [MIK.STAGES.SIGHTING]: [
     {
       title: "Basics",
-      body: "This Stage you receive intel reporting the risk of each zone to be attacked by an invasion force in the following Defense Stage. It's just a review stage; no actions to be performed.",
+      body: "This Stage you receive intel reporting the risk of each zone to be attacked by an invasion force in the following Defense Stage. It's just a review stage; no actions to be performed. The Command Zone (at the center) can't be targeted by the invaders",
     },
     {
       title: "Enemy force and power",
-      body: "You can't know the enemy force composition by any means, but your intel always reports the aproximated total Power of all invasion forces combined.",
+      body: "You can't know the enemy force composition by any means, but your intel always reports the total Power of all invasion forces combined.",
     },
     {
       title: "Multiple attacks",
-      body: "Invaders will make between 1 and 3 attacks to different zones, which need to be defended separatedly. In case of multiple attacks, the invaders will split their forces.",
+      body: "Invaders will make between 1 and 3 attacks to different zones, which need to be defended separatedly. In case of multiple attacks, the invaders will divide their forces (not necessarily even).",
     },
     {
       title: "Risk of attack",
-      body: "Your quick intel agents can't tell for sure which zones will be attacked. They only report the risk of each zone of being attacked, which is a probability.",
-    },
-    {
-      title: "Scouting",
-      body: "To get more precise reports about which zones will be attacked and the power of the force of each attack, you must send Scouting Expeditions (see Scouting Stage).",
+      body: "Your quick-intel agents can't tell for sure which zones will be attacked, nor the Power of each attack. They only report the risk of each zone of being attacked, which is a probability.",
     },
   ],
 };

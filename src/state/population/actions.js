@@ -11,6 +11,8 @@ export const TYPES = mapValues({
   ADD_OCCUPATION_PEOPLE: 0, SET_OCCUPATION_PEOPLE: 0, REMOVE_OCCUPATION_PEOPLE: 0,
   SET_RECRUITS: 0, CLEAR_RECRUITS: 0,
 
+  CLEAR: 0, REPLACE: 0, MERGE: 0,
+
 }, (v, k) => `${STATE_NAME.toUpperCase()}_${k}` );
 
 /**@type {PopulationActions} */
@@ -34,6 +36,16 @@ const ACTION_CREATORS = {
     type: TYPES.SET_RECRUITS,
     params: { recruitsLevels },
   }),
+
+  clear: () => ({ type: TYPES.CLEAR }),
+  replace: (newState) => ({
+    type: TYPES.REPLACE,
+    params: { newState },
+  }),
+  merge: (partialState) => ({
+    type: TYPES.MERGE,
+    params: { partialState },
+  }),
 };
 
 export default ACTION_CREATORS;
@@ -46,4 +58,8 @@ export default ACTION_CREATORS;
  * @property {(occupationKey: string, amount: number) => any} removeOccupationPeople Removes the specified amount of people from the specified occupation.
  * @property {(occupationKey: string, amount: number) => any} setOccupationPeople Sets the specified amount of people to the specified occupation.
  * @property {(recruitsLevels: number[]) => any} setRecruits Sets the ordered recruits levels.
+ *
+ * @property {() => any} clear Resets this state.
+ * @property {(newState: import("@state/defaultState").InvasionState) => any} replace Completely replaces this state with the specified `newState`.
+ * @property {(partialState: import("@state/defaultState").InvasionState) => any} merge Deeply merges the specified `partialState` into the existing state.
  */

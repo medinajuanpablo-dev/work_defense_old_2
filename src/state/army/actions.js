@@ -13,6 +13,7 @@ export const TYPES = mapValues({
   FORM_UNIT: 0, DISSOLVE_UNIT: 0, ADD_UNIT_FORCE: 0, REMOVE_UNIT_FORCE: 0, SET_UNIT_FORCE: 0, ASSIGN_FORCE_TO_UNIT: 0, REASSIGN_FORCE_FROM_UNIT: 0, SET_UNIT_PROTOCOL: 0, //Units actions.
   SET_SOLDIERS: 0,
   
+  CLEAR: 0, REPLACE: 0, MERGE: 0,
 
 }, (v, k) => `${STATE_NAME.toUpperCase()}_${k}` );
 
@@ -95,6 +96,16 @@ const ACTION_CREATORS = {
     type: TYPES.SET_SOLDIERS,
     params: { completeSoldiers },
   }),
+
+  clear: () => ({ type: TYPES.CLEAR }),
+  replace: (newState) => ({
+    type: TYPES.REPLACE,
+    params: { newState },
+  }),
+  merge: (partialState) => ({
+    type: TYPES.MERGE,
+    params: { partialState },
+  }),
 };
 
 export default ACTION_CREATORS;
@@ -123,6 +134,10 @@ export default ACTION_CREATORS;
  * @property {(unitKey: string, protocol: RetreatProtocolState) => any} setUnitProtocol Sets the battle protocol of the Liberation Unit at the specified index.
  * @property {(originZoneKey: string, destinationZoneKey: string, soldiersIndexes: number[]) => any} reassignDefense Moves the soldiers at the specified indexes from the origin zone defense force to the destination zone defense force.
  * @property {(completeSoldiers: CompleteSoldierState[]) => any} setSoldiers Sets the specified complete soldiers to their corresponding soldier state.
+ *
+ * @property {() => any} clear Resets this state.
+ * @property {(newState: import("@state/defaultState").InvasionState) => any} replace Completely replaces this state with the specified `newState`.
+ * @property {(partialState: import("@state/defaultState").InvasionState) => any} merge Deeply merges the specified `partialState` into the existing state.
  */
 
 /**

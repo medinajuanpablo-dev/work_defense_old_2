@@ -32,7 +32,7 @@ function BuildingsSection() {
       <div className={STYLES.buildingsListCt}>
         {Object.keys(BUILDINGS_KEYS_BY_ZONE).map((z) => (
           <React.Fragment key={z}>
-            <p className={STYLES.zoneName}>{MISC.ACTIVE_ZONES[z]} Zone</p>
+            <p className={STYLES.zoneName}>{MISC.REAL_ZONES[z]} Zone</p>
 
             {BUILDINGS_KEYS_BY_ZONE[z].map((b) => (
               <React.Fragment key={b}>
@@ -78,7 +78,7 @@ const STYLES = {
 
 /**An object of `zoneKey: [...buildingsPlacedThereKeys]` fields */
 const BUILDINGS_KEYS_BY_ZONE = (() => {
-  var result = mapValues(MISC.ACTIVE_ZONES, () => []);
+  var result = mapValues(MISC.REAL_ZONES, () => []);
 
   Object.keys(BUILDINGS.BY_BUILDING).forEach((b) =>
     result[BUILDINGS.BY_BUILDING[b].PLACEMENT_ZONE].push(b)

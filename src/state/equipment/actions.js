@@ -13,6 +13,8 @@ export const TYPES = mapValues({
   ADD_ORDER: 0, CANCEL_ORDER: 0, FINISH_ORDER: 0,
   SET_ALL_STORED: 0, SET_ALL_ORDERS: 0,
 
+  CLEAR: 0, REPLACE: 0, MERGE: 0,
+
 }, (v, k) => `${STATE_NAME.toUpperCase()}_${k}` );
 
 /**@type {EquipmentActions} */
@@ -61,6 +63,20 @@ const ACTION_CREATORS = {
     type: TYPES.SET_ALL_ORDERS,
     params: { newOrderedEquipment },
   }),
+
+  clear: () => ({ type: TYPES.CLEAR }),
+  replace: (newState) => ({
+    type: TYPES.REPLACE,
+    params: { newState },
+  }),
+  merge: (partialState) => ({
+    type: TYPES.MERGE,
+    params: { partialState },
+  }),
+
+  CLEAR: 0,
+  REPLACE: 0,
+  MERGE: 0,
 };
 
 export default ACTION_CREATORS;
@@ -80,4 +96,8 @@ export default ACTION_CREATORS;
  * @property {(typeKey: string, rank: number) => any} finishOrder Removes the craft order of the specified equipment type and rank, and adds the equipment as stored.
  * @property {(newStoredEquipment: import("../defaultState").OrderedEquipmentState) => any} setAllStored Set all stored equipment.
  * @property {(newOrderedEquipment: import("../defaultState").OrderedEquipmentState) => any} setAllOrders Set all ordered equipment.
+ *
+ * @property {() => any} clear Resets this state.
+ * @property {(newState: import("@state/defaultState").InvasionState) => any} replace Completely replaces this state with the specified `newState`.
+ * @property {(partialState: import("@state/defaultState").InvasionState) => any} merge Deeply merges the specified `partialState` into the existing state.
  */

@@ -1,3 +1,7 @@
+import { merge } from "lodash";
+
+import defaultState from "@state/defaultState";
+
 /**
  * @param {import("../defaultState").AllBuildingsState} prevState
  * @param {import("../defaultState").AllBuildingsState} newState
@@ -66,6 +70,20 @@ function getHandlers(prevState, newState) {
     unpayBill({ buildingKey }) {
       newState[buildingKey].occupantsBillPaid = false;
       return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.buildings;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }

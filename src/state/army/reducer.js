@@ -52,6 +52,13 @@ export default function reducer(prevState = defaultState.army, action) {
     case TYPES.SET_SOLDIERS:
       return handlers.setSoldiers(action.params);
 
+    case TYPES.CLEAR:
+      return handlers.clear();
+    case TYPES.REPLACE:
+      return handlers.replace(action.params);
+    case TYPES.MERGE:
+      return handlers.merge(action.params);
+
     default:
       throw unhandledActionError(STATE_NAME, action.type);
   }

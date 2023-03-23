@@ -1,4 +1,6 @@
-import defaultState from "../defaultState";
+import { merge } from "lodash";
+
+import defaultState from "@state/defaultState";
 
 /**
  * @param {import("../defaultState").InterfaceState} prevState
@@ -25,6 +27,20 @@ function getHandlers(prevState, newState) {
     setVisibleSubMenu({ subMenuKey }) {
       newState.visibleMenu.subMenu = subMenuKey;
       return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.interface;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }

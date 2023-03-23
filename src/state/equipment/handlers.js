@@ -1,3 +1,7 @@
+import { merge } from "lodash";
+
+import defaultState from "@state/defaultState";
+
 /**
  * @param {import("../defaultState").EquipmentState} prevState
  * @param {import("../defaultState").EquipmentState} newState
@@ -100,6 +104,20 @@ function getHandlers(prevState, newState) {
     setAllOrders({ newOrderedEquipment }) {
       newState.orders = newOrderedEquipment;
       return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.equipment;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }

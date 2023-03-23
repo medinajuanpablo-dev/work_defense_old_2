@@ -16,6 +16,8 @@ export const TYPES = mapValues({
   ADD_POINTS: 0, REMOVE_POINTS: 0, SET_POINTS: 0,
   SET_TREE: 0,
 
+  CLEAR: 0, REPLACE: 0, MERGE: 0,
+
 }, (v, k) => `${STATE_NAME.toUpperCase()}_${k}` );
 
 /**@type {TechnologiesActions} */
@@ -66,6 +68,16 @@ const ACTION_CREATORS = {
     type: TYPES.SET_TREE,
     params: { techsTree },
   }),
+
+  clear: () => ({ type: TYPES.CLEAR }),
+  replace: (newState) => ({
+    type: TYPES.REPLACE,
+    params: { newState },
+  }),
+  merge: (partialState) => ({
+    type: TYPES.MERGE,
+    params: { partialState },
+  }),
 };
 
 export default ACTION_CREATORS;
@@ -87,4 +99,8 @@ export default ACTION_CREATORS;
  * @property {(amount: number) => any} removePoints Remove a certain amount of research points.
  * @property {(amount: number) => any} setPoints Set the remaining research points to the specified amount.
  * @property {(techsTree) => any} setTree Set the whole technologies tree state.
+ *
+ * @property {() => any} clear Resets this state.
+ * @property {(newState: import("@state/defaultState").InvasionState) => any} replace Completely replaces this state with the specified `newState`.
+ * @property {(partialState: import("@state/defaultState").InvasionState) => any} merge Deeply merges the specified `partialState` into the existing state.
  */

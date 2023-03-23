@@ -10,6 +10,8 @@ export const TYPES = mapValues({
   //Parameterized Actions
   SET_LEVEL: 0, LEVEL_UP: 0, LEVEL_DOWN: 0, SET_UPGRADING: 0, PAY_BILL: 0, UNPAY_BILL: 0, 
 
+  CLEAR: 0, REPLACE: 0, MERGE: 0,
+
 }, (v, k) => `${STATE_NAME.toUpperCase()}_${k}` );
 
 /**@type {BuildingsActions} */
@@ -45,6 +47,16 @@ const ACTION_CREATORS = {
     type: TYPES.UNPAY_BILL,
     params: { buildingKey },
   }),
+
+  clear: () => ({ type: TYPES.CLEAR }),
+  replace: (newState) => ({
+    type: TYPES.REPLACE,
+    params: { newState },
+  }),
+  merge: (partialState) => ({
+    type: TYPES.MERGE,
+    params: { partialState },
+  }),
 };
 
 export default ACTION_CREATORS;
@@ -63,4 +75,8 @@ export default ACTION_CREATORS;
  * @property {(buildingKey: string, upgrading: boolean) => any} setUpgrading Set the building as currently being upgraded.
  * @property {(buildingKey: string) => any} payBill Set the specified building bill as paid.
  * @property {(buildingKey: string) => any} unpayBill Set the specified building bill as unpaid.
+ *
+ * @property {() => any} clear Resets this state.
+ * @property {(newState: import("@state/defaultState").InvasionState) => any} replace Completely replaces this state with the specified `newState`.
+ * @property {(partialState: import("@state/defaultState").InvasionState) => any} merge Deeply merges the specified `partialState` into the existing state.
  */

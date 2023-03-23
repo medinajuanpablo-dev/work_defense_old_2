@@ -41,11 +41,24 @@ export default function reducer(
       return handlers.toLast();
     case TYPES.NOTHING:
       return handlers.nothing();
+    case TYPES.CLEAR_TEMP_STATE:
+      return handlers.clearTempState();
 
     case TYPES.TO_STAGE:
       return handlers.toStage(action.params);
     case TYPES.ADVANCE_STAGES:
       return handlers.advanceStages(action.params);
+    case TYPES.REPLACE_TEMP_STATE:
+      return handlers.replaceTempState(action.params);
+    case TYPES.MERGE_TEMP_STATE:
+      return handlers.mergeTempState(action.params);
+
+    case TYPES.CLEAR:
+      return handlers.clear();
+    case TYPES.REPLACE:
+      return handlers.replace(action.params);
+    case TYPES.MERGE:
+      return handlers.merge(action.params);
 
     default:
       throw unhandledActionError(STATE_NAME, action.type);

@@ -38,6 +38,13 @@ export default function reducer(prevState = defaultState.equipment, action) {
     case TYPES.SET_ALL_ORDERS:
       return handlers.setAllOrders(action.params);
 
+    case TYPES.CLEAR:
+      return handlers.clear();
+    case TYPES.REPLACE:
+      return handlers.replace(action.params);
+    case TYPES.MERGE:
+      return handlers.merge(action.params);
+
     default:
       throw unhandledActionError(STATE_NAME, action.type);
   }

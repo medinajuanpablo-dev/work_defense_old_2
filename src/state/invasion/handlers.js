@@ -1,3 +1,5 @@
+import { merge } from "lodash";
+
 import defaultState from "@state/defaultState";
 
 import { BATTLE } from "@static/contexts/battle";
@@ -35,6 +37,11 @@ function getHandlers(prevState, newState) {
       return newState;
     },
 
+    setInvasionForce({ invasionForce }) {
+      newState.defense.fullInvasionForce = invasionForce;
+      return newState;
+    },
+
     addAttack({ attackedZoneKey, attackForce, attackProtocol }) {
       newState.defense.attacks[attackedZoneKey] = {
         enemyDivision: {
@@ -60,6 +67,20 @@ function getHandlers(prevState, newState) {
     setOccupation({ occupiedZoneKey, occupationData }) {
       newState.occupations[occupiedZoneKey] = occupationData;
       return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.invasion;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }

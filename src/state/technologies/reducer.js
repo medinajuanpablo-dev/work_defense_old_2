@@ -42,6 +42,13 @@ export default function reducer(prevState = defaultState.technologies, action) {
     case TYPES.SET_TREE:
       return handlers.setTree(action.params);
 
+    case TYPES.CLEAR:
+      return handlers.clear();
+    case TYPES.REPLACE:
+      return handlers.replace(action.params);
+    case TYPES.MERGE:
+      return handlers.merge(action.params);
+
     default:
       throw unhandledActionError(STATE_NAME, action.type);
   }

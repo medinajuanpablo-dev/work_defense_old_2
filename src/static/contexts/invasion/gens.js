@@ -18,7 +18,7 @@ export const KEYS = {
 };
 
 /**Amount of _simultaneous_ occupations to declare the game over. */
-export const OCCUPATIONS_TO_LOSE = 4;
+export const OCCUPATIONS_TO_LOSE = 3;
 
 /**Discrete risk levels for users.
  * **WARNING**: These must be ordered from the highest `minRisk` to the lowest! */

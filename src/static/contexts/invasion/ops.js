@@ -12,20 +12,20 @@ import { MISC } from "../miscellaneous";
  * @param {number} tempo The current tempo.
  */
 //prettier-ignore
-export function sights(tempo) {
+export function getSights(tempo) {
   checkRequiredValues([{ tempo, type: "number" }]);
 
   if (tempo <= FIRST_INVASION_TEMPO)
     return {
       temposUntilInvasion: FIRST_INVASION_TEMPO - tempo,
-      commingInvasion: 1,
+      invasionNumber: 1,
     };
 
   const temposSinceFirstInvasion = tempo - FIRST_INVASION_TEMPO;
 
   return {
     temposUntilInvasion: tempo % TEMPOS_FOR_EACH_INVASION,
-    commingInvasion: 1 + Math.floor((1 + temposSinceFirstInvasion) / TEMPOS_FOR_EACH_INVASION),
+    invasionNumber: 1 + Math.floor((1 + temposSinceFirstInvasion) / TEMPOS_FOR_EACH_INVASION),
   };
 }
 
@@ -33,7 +33,7 @@ export function sights(tempo) {
  * Creates an enemy soldier for the specified invasion number.
  * @param {number} invasionNumber
  */
-export function createEnemySoldier(invasionNumber) {
+function createEnemySoldier(invasionNumber) {
   checkRequiredValues([{ invasionNumber, type: "number" }]);
 
   const { CE_LEVEL_PER_INVASION: CE_LEVEL, GEAR_PER_INVASION: GEAR } =
@@ -50,7 +50,7 @@ export function createEnemySoldier(invasionNumber) {
  * Creates the enemy force for the specified invasion number.
  * @param {number} invasionNumber
  */
-export function createEnemyForce(invasionNumber) {
+export function createInvasionForce(invasionNumber) {
   checkRequiredValues([{ invasionNumber, type: "number" }]);
 
   const amount = miscOps.randomIncrease(INVADERS, invasionNumber);
@@ -76,7 +76,7 @@ export function enemiesMenace(force) {
  * Tells the number of attacks for the specified invasion number.
  * @param {number} invasionNumber
  */
-export function attacksAmount(invasionNumber) {
+function attacksAmount(invasionNumber) {
   checkRequiredValues([{ invasionNumber, type: "number" }]);
 
   const FIA = FIRST_INVASIONS_ATTACKS;
@@ -91,7 +91,8 @@ export function attacksAmount(invasionNumber) {
 }
 
 /**
- * Calculates each zone's risk of being attacked in the specified number of invasion.
+ * Calculates each zone's risk of being attacked in the specified number of invasion, and the number of
+ * danger zones (which tells the number of attacks).
  * @param {number} invasionNumber
  */
 export function risksFor(invasionNumber) {
@@ -288,16 +289,6 @@ function operateZonesRisks({
   operation,
   maxRiskPieceParams,
 }) {
-  checkRequiredValues([
-    [{ points, invasionNumber, operation }, "n", "n", "mustBe:take,give"],
-    { zonesRisks, fieldsType: "number" },
-    { operatingZonesKeys, itemsType: "string" },
-    {
-      maxRiskPieceParams,
-      someFields: ["BASE", "DECREASE_PER_INVASION", "LOWER_CAP"],
-    },
-  ]);
-
   const mrpp = maxRiskPieceParams;
   const maxRiskPiece = capped(
     mrpp.BASE - invasionNumber * mrpp.DECREASE_PER_INVASION,

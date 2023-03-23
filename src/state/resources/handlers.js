@@ -1,3 +1,7 @@
+import { merge } from "lodash";
+
+import defaultState from "@state/defaultState";
+
 /**
  * @param {import("../defaultState").ResourcesState} prevState
  * @param {import("../defaultState").ResourcesState} newState
@@ -27,6 +31,20 @@ function getHandlers(prevState, newState) {
     setResource({ resourceKey, amount }) {
       newState.stored[resourceKey] = amount;
       return newState;
+    },
+
+    //
+
+    clear() {
+      return defaultState.resources;
+    },
+
+    replace({ newState: specifiedNewState }) {
+      return specifiedNewState;
+    },
+
+    merge({ partialState }) {
+      return merge(newState, partialState);
     },
   };
 }
